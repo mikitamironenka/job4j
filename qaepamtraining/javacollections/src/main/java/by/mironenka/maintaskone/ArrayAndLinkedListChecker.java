@@ -1,4 +1,4 @@
-package by.mironenka.maintaskone.arraylistversion;
+package by.mironenka.maintaskone;
 
 import by.mironenka.maintaskone.model.Human;
 
