@@ -33,7 +33,6 @@ public class DummyBotTest {
     public void whenUnknownBot() {
 
         DummyBot bot = new DummyBot();
-
         assertThat(
                 bot.answer("Сколько будет 2 + 2?"),
                 is("Это ставит меня в тупик. Задайте другой вопрос.")
