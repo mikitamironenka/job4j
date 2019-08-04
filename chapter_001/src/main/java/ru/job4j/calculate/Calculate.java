@@ -12,7 +12,6 @@ public class Calculate {
      * @param second second addend
      */
     public static void add(double first, double second) {
-
         double result = first + second;
         System.out.println(first + " + " + second + " = " + result);
     }
@@ -23,7 +22,6 @@ public class Calculate {
      * @param second subtrahend
      */
     public static void subTrack(double first, double second) {
-
         double result = first - second;
         System.out.println(first + " - " + second + " = " + result);
     }
@@ -34,7 +32,6 @@ public class Calculate {
      * @param second first multiplier
      */
     public static void sub(double first, double second) {
-
         double result = first * second;
         System.out.println(first + " * " + second + " = " + result);
     }
@@ -45,7 +42,6 @@ public class Calculate {
      * @param second divider
      */
     public static void div(double first, double second) {
-
         double result = first / second;
         System.out.println(first + " : " + second + " = " + result);
     }
@@ -56,11 +52,9 @@ public class Calculate {
      * @param args - args
      */
     public static void main(String[] args) {
-
         add(1, 1);
         div(4, 2);
         sub(2, 1);
         subTrack(10, 5);
-
     }
 }
