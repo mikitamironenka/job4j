@@ -10,6 +10,7 @@ public class SqMaxTest {
     @Test
     public void whenMaxFirst() {
 
+
         int result = SqMax.max(4, 3, 2, 1);
         assertThat(result, is(4));
     }
