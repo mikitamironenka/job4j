@@ -8,14 +8,14 @@ import static org.junit.Assert.*;
 public class EndWithTest {
 
     @Test
-    public void whenStartWithPrefixThenTrue() {
+    public void whenEndsWithSuffixThenTrue() {
         EndsWith word = new EndsWith();
-        boolean result = word.endsWith("Hello", "lo");
+        boolean result = word.endsWith("Hello", "ello");
         assertThat(result, is(true));
     }
 
     @Test
-    public void whenNotStartWithPrefixThenFalse() {
+    public void whenNotEndsWithSuffixThenFalse() {
         EndsWith word = new EndsWith();
         boolean result = word.endsWith("Hello", "la");
         assertThat(result, is(false));
