@@ -5,8 +5,8 @@ public class MatrixCheck {
     public boolean mono(boolean[][] data) {
         boolean result = true;
 
-        if(data.length == 2) {
-            if(data[0][0] != data[1][1] || data[0][1] != data[1][0]) {
+        if (data.length == 2) {
+            if (data[0][0] != data[1][1] || data[0][1] != data[1][0]) {
                 result = false;
             }
         } else {

@@ -19,8 +19,8 @@ public class FindLoop {
 
     public int indexOf(int[] data, int el, int start, int finish) {
         int rst = -1; // если элемента нет в массиве, то возвращаем -1.
-        for(int i = start; i < finish; i++) {
-            if(data[i] == el) {
+        for (int i = start; i < finish; i++) {
+            if (data[i] == el) {
                 rst = i;
             }
         }
@@ -32,8 +32,8 @@ public class FindLoop {
         int temp;
         for (int i = 0; i < data.length; i++) {
             int minIndex = i;
-            for(int j = i; j < data.length; j++) {
-                if(data[j] < data[minIndex]) {
+            for (int j = i; j < data.length; j++) {
+                if (data[j] < data[minIndex]) {
                     minIndex = j;
                 }
             }

@@ -11,8 +11,8 @@ public class EndsWith {
         boolean result = true;
         char[] pst = post.toCharArray();
         char[] wrd = word.toCharArray();
-        for(int i = wrd.length - pst.length; i < wrd.length ; i++) {
-            if(wrd[i] != pst[i - 1]) {
+        for (int i = wrd.length - pst.length; i < wrd.length; i++) {
+            if (wrd[i] != pst[i - 1]) {
                 result = false;
             }
         }

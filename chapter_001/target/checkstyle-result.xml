@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="6.11.2">
+<file name="C:\projects\job4j\chapter_001\src\main\java\ru\job4j\array\ArrayChar.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\main\java\ru\job4j\array\ArrayDuplicate.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\main\java\ru\job4j\array\Check.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\main\java\ru\job4j\array\EndsWith.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\main\java\ru\job4j\array\FindLoop.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\main\java\ru\job4j\array\Matrix.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\main\java\ru\job4j\array\MatrixCheck.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\main\java\ru\job4j\array\package-info.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\main\java\ru\job4j\array\Square.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\main\java\ru\job4j\array\Turn.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\main\java\ru\job4j\calculate\Calculate.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\main\java\ru\job4j\calculate\package-info.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\main\java\ru\job4j\calculator\Fit.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\main\java\ru\job4j\condition\DummyBot.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\main\java\ru\job4j\condition\Max.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\main\java\ru\job4j\condition\MultiMax.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\main\java\ru\job4j\condition\Point.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\main\java\ru\job4j\condition\SqArea.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\main\java\ru\job4j\condition\SqMax.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\main\java\ru\job4j\condition\Triangle.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\main\java\ru\job4j\converter\Converter.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\main\java\ru\job4j\loop\Board.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\main\java\ru\job4j\loop\Counter.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\main\java\ru\job4j\loop\Factorial.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\main\java\ru\job4j\loop\Fitness.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\main\java\ru\job4j\loop\Mortgage.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\main\java\ru\job4j\loop\PrimeNumber.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\main\java\ru\job4j\Main.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\test\java\ru\job4j\array\ArrayCharTest.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\test\java\ru\job4j\array\ArrayDuplicateTest.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\test\java\ru\job4j\array\CheckTest.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\test\java\ru\job4j\array\EndWithTest.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\test\java\ru\job4j\array\FindLoopTest.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\test\java\ru\job4j\array\MatrixCheckTest.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\test\java\ru\job4j\array\MatrixTest.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\test\java\ru\job4j\array\SquareTest.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\test\java\ru\job4j\array\TurnTest.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\test\java\ru\job4j\calculator\FitTest.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\test\java\ru\job4j\condition\DummyBotTest.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\test\java\ru\job4j\condition\MaxTest.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\test\java\ru\job4j\condition\MultiMaxTest.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\test\java\ru\job4j\condition\PointTest.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\test\java\ru\job4j\condition\SqAreaTest.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\test\java\ru\job4j\condition\SqMaxTest.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\test\java\ru\job4j\condition\TriangleTest.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\test\java\ru\job4j\converter\ConverterTest.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\test\java\ru\job4j\loop\BoardTest.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\test\java\ru\job4j\loop\CounterTest.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\test\java\ru\job4j\loop\FactorialTest.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\test\java\ru\job4j\loop\FitnessTest.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\test\java\ru\job4j\loop\MortgageTest.java">
+</file>
+<file name="C:\projects\job4j\chapter_001\src\test\java\ru\job4j\loop\PrimeNumberTest.java">
+</file>
+</checkstyle>
