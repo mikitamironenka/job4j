@@ -21,4 +21,11 @@ public class EndWithTest {
         assertThat(result, is(false));
     }
 
+    @Test
+    public void whenLongWordEndsWithSuffixThenTrue() {
+        EndsWith word = new EndsWith();
+        boolean result = word.endsWith("ыфыфыфыфыфыыфффыыф", "фыыф");
+        assertThat(result, is(true));
+    }
+
 }
