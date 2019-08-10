@@ -5,28 +5,26 @@ package ru.job4j.array;
  */
 public class FindLoop {
 
-
     public int indexOf(int[] data, int el) {
-        int rst = -1; // если элемента нет в массиве, то возвращаем -1.
+        int result = -1; // если элемента нет в массиве, то возвращаем -1.
         for (int index = 0; index < data.length; index++) {
             if (data[index] == el) {
-                rst = index;
+                result = index;
                 break;
             }
         }
-        return rst;
+        return result;
     }
 
     public int indexOf(int[] data, int el, int start, int finish) {
-        int rst = -1; // если элемента нет в массиве, то возвращаем -1.
+        int result = -1; // если элемента нет в массиве, то возвращаем -1.
         for (int i = start; i < finish; i++) {
             if (data[i] == el) {
-                rst = i;
+                result = i;
             }
         }
-        return rst;
+        return result;
     }
-
 
     public int[] sort(int[] data) {
         int temp;

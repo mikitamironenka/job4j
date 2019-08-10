@@ -3,19 +3,19 @@ package ru.job4j.loop;
 public class PrimeNumber {
 
     public int calc(int finish) {
-        int count = 0;
+        int out = 0;
         for (int i = 2; i <= finish; i++) {
-            int countTemp = 0;
+            int in = 0;
             for (int j = 2; j <= i; j++) {
                 if (i % j == 0) {
-                    countTemp++;
+                    in++;
                 }
             }
-            if (countTemp == 1) {
-                count++;
+            if (in == 1) {
+                out++;
             }
         }
-        return count;
+        return out;
     }
 
     public boolean isSimple(int num) {
