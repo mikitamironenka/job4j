@@ -7,3 +7,4 @@ I started java course in 2019 and I will finish it this year.
 some changes branch task 165639.
 Объединение зафиксированных изменений.
 Объединение зафиксированных изменений. #2.
+some changes in hotfix branch.
