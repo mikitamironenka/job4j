@@ -33,4 +33,15 @@ public class PointTest {
         Point second = new Point(2, 2);
         second.info();
     }
+
+    @Test
+    public void whenZeroAndTwoThenTwo() {
+        Point first = new Point(0, 0, 0);
+        Point second = new Point(0, 0, 2);
+        double result = first.distance3d(second);
+        first.info();
+        second.info();
+        System.out.println(String.format("Result is %s", result));
+        assertThat(result, is(2D));
+    }
 }

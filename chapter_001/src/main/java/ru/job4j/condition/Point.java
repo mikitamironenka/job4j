@@ -10,10 +10,11 @@ public class Point {
     private int x;
 
     /**
-     * И это поле объекта. Оно доступно только конкретному объекту.
+     *это поле объекта. Оно доступно только конкретному объекту.
      */
     private int y;
 
+    private int z;
     /**
      * Конструктор, который принимает начальное состояние объекта "точка"
      * @param first координата x
@@ -24,23 +25,22 @@ public class Point {
         this.y = second;
     }
 
+    public Point(int x, int y, int z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+
     public double distance(Point that) {
         return sqrt(pow(this.x - that.x, 2) + pow(this.y - that.y, 2));
     }
 
-    public void info() {
-        System.out.println(String.format("Point[%s, %s]", this.x, this.y));
+    public double distance3d(Point that) {
+        return sqrt(pow(that.x - this.x, 2) + pow(that.y - this.y, 2) + pow(that.z - this.z, 2));
     }
 
-//    public static void main(String[] args) {
-//        double result = distance(0, 0, 2, 0);
-//        System.out.println("result (0, 0) to (2, 0) " + result);
-//        result = distance(0, 0, 2, 2);
-//        System.out.println("result (0, 0) to (2, 2) " + result);
-//        result = distance(1, 2, 5, 7);
-//        System.out.println("result (1, 2) to (5, 7) " + result);
-//        result = distance(-1, -2, 2, 2);
-//        System.out.println("result (-1, -2) to (2, 2) " + result);
-//    }
+    public void info() {
+        System.out.println(String.format("Point[%s, %s, %s]", this.x, this.y, this.z));
+    }
 
 }
