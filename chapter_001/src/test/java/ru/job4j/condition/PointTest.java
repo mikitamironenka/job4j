@@ -3,27 +3,34 @@ package ru.job4j.condition;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+
 public class PointTest {
 
     @Test
-    public void distanceOne() {
-
-        int x1 = 0, x2 = 0, y1 = 2, y2 = 0;
-        double expectedDistance = 2.0;
-        double out = Point.distance(x1, x2, y1, y2);
-
-        Assert.assertEquals(expectedDistance, out, 0);
-
+    public void whenZeroAndTenThenTen() {
+        Point first = new Point(0, 0);
+        Point second = new Point(0, 10);
+        double result = first.distance(second);
+        first.info();
+        second.info();
+        System.out.println(String.format("Result is %s", result));
+        assertThat(result, is(10D));
     }
 
     @Test
-    public void distanceTwo() {
+    public void whenCheckItself() {
+        Point point = new Point(0, 0);
+        double result = point.distance(point);
+        assertThat(result, is(0D));
+    }
 
-        int x1 = -1, x2 = -2, y1 = 2, y2 = 2;
-        double expectedDistance = 5.0;
-        double out = Point.distance(x1, x2, y1, y2);
-
-        Assert.assertEquals(expectedDistance, out, 0);
-
+    @Test
+    public void whenShowInfo() {
+        Point first = new Point(1, 1);
+        first.info();
+        Point second = new Point(2, 2);
+        second.info();
     }
 }
