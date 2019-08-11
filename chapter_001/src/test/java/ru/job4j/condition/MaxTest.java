@@ -28,4 +28,32 @@ public class MaxTest {
         assertThat(result, is(2));
     }
 
+    @Test
+    public void whenMax3To2To1Then3() {
+        Max max = new Max();
+        int result = max.maxFromThree(1, 3, 2);
+        assertThat(result, is(3));
+    }
+
+    @Test
+    public void whenMax3To3To1Then3() {
+        Max max = new Max();
+        int result = max.maxFromThree(3, 3, 2);
+        assertThat(result, is(3));
+    }
+
+    @Test
+    public void whenMax4To3To2Then1() {
+        Max max = new Max();
+        int result = max.maxFromFour(4, 3, 3, 2);
+        assertThat(result, is(4));
+    }
+
+    @Test
+    public void whenMax4then4() {
+        Max max = new Max();
+        int result = max.maxFromFour(4, 4, 4, 4);
+        assertThat(result, is(4));
+    }
+
 }

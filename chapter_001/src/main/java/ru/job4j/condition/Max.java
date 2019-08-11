@@ -6,4 +6,16 @@ public class Max {
         int result = left >= right ? left : right;
         return result;
     }
+
+    public int maxFromThree(int first, int second, int third) {
+        int max = max(second, third);
+        int result = first >= max ? first : max;
+        return result;
+    }
+
+    public int maxFromFour(int first, int second, int third, int fourth) {
+        int max = maxFromThree(second, third, fourth);
+        int result = first >= max ? first : max;
+        return result;
+    }
 }
