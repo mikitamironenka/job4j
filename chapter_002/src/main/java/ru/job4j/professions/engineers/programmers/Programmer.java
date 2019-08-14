@@ -20,7 +20,7 @@ public class Programmer extends Engineer {
         return level;
     }
 
-    public boolean makeCode(){
+    public boolean makeCode() {
         return false;
     }
 }

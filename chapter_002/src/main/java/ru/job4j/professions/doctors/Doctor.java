@@ -24,5 +24,4 @@ public class Doctor extends Profession {
         Diagnose result = null;
         return result;
     }
-
 }

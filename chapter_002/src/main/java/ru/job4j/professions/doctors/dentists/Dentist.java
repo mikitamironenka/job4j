@@ -10,5 +10,5 @@ public class Dentist extends Doctor {
         return clinic;
     }
 
-    public void makeTooth(Tooth tooth){}
+    public void makeTooth(Tooth tooth) { }
 }

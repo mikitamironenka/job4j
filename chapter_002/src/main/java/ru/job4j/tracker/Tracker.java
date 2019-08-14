@@ -14,6 +14,7 @@ package ru.job4j.tracker;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -28,7 +29,6 @@ public class Tracker {
      */
     private int position = 0;
 
-
     /**
      * Generates unique key for new item.
      * Так как у заявки нет уникальности полей, имени и описание. Для идентификации нам нужен уникальный ключ.
@@ -37,11 +37,11 @@ public class Tracker {
     private String generateId() {
         //Реализовать метод генерации.
         String result;
-        int random = (int)(Math.random() * 1000 + 1);
+        int random = (int) (Math.random() * 1000 + 1);
         Date date = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         String strDate = dateFormat.format(date);
-        result = String.format("%04d %s",random,strDate);
+        result = String.format("%04d %s", random, strDate);
         return result;
     }
 
@@ -78,16 +78,12 @@ public class Tracker {
      * @param item item
      * @return true or false
      */
-    public boolean replace(String id, Item item){
+    public boolean replace(String id, Item item) {
         boolean result = false;
-        for (Item temp : this.items) {
-            if (temp.getId().equals(id)) {
-                temp.setId(item.getId());
-                temp.setName(item.getName());
-                temp.setDecs(item.getDecs());
-                temp.setTime(item.getTime());
+        for (int i = 0; i < this.position; i++) {
+            if (this.items[i].getId().equals(id)) {
+                this.items[i] = item;
                 result = true;
-                break;
             }
         }
         return result;
@@ -98,17 +94,18 @@ public class Tracker {
      * @param id id of item to delete
      * @return boolean true or false
      */
-    public boolean delete(String id){
+    public boolean delete(String id) {
         boolean result = false;
         int index = 0;
-        for (int i = 0; i < this.items.length; i++) {
+        for (int i = 0; i < this.position; i++) {
             if (this.items[i].getId().equals(id)) {
                 index = i;
                 result = true;
+                System.arraycopy(this.items, index + 1, this.items, index, this.items.length - 1 - index);
+                this.position--;
                 break;
             }
         }
-        System.arraycopy(this.items, index + 1, this.items, index, this.items.length - 1 - index);
         return result;
     }
 
@@ -116,8 +113,8 @@ public class Tracker {
      * Gets all items
      * @return Item[]
      */
-    public Item[] findAll(){
-        return this.items;
+    public Item[] findAll() {
+        return Arrays.copyOf(this.items, this.position);
     }
 
     /**
@@ -125,15 +122,16 @@ public class Tracker {
      * @param key - name of the item
      * @return Item
      */
-    public Item findByName(String key) {
-        Item result = null;
-        for (Item item : this.items) {
-            if(item.getName().equals(key)) {
-                result = item;
-                break;
+    public Item[] findByName(String key) {
+        Item[] result = new Item[this.position];
+        int count = 0;
+        for (int i = 0; i < this.position; i++) {
+            if (this.items[i].getName().equals(key)) {
+                result[count] = this.items[i];
+                count++;
             }
         }
-        return result;
+        return Arrays.copyOf(result, count);
     }
 
 }
