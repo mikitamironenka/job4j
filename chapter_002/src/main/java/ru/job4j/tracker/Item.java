@@ -9,10 +9,17 @@ public class Item {
     private String decs;
     private long time;
 
+
     public Item(String name, String decs, long time) {
         this.name = name;
         this.decs = decs;
         this.time = time;
+    }
+
+    public Item(String name, String desc) {
+        this.name = name;
+        this.decs = desc;
+        this.time = System.currentTimeMillis();
     }
 
     public String getId() {
@@ -69,11 +76,9 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item{"
-                + "id='" + id + '\''
+        return "id='" + id + '\''
                 + ", name='" + name + '\''
                 + ", decs='" + decs + '\''
-                + ", time=" + time
-                + '}';
+                + ", time=" + time;
     }
 }
