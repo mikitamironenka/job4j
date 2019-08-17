@@ -4,10 +4,12 @@
 #target directory
 **/target
 
+target/
+
 # Log file
 *.log
 
-.idea
+**/.idea
 
 *.iml
 
