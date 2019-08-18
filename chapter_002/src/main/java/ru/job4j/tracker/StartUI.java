@@ -87,7 +87,7 @@ public class StartUI {
     }
 
     private void findByName() {
-        String name = this.input.ask("Enter id of the item to find");
+        String name = this.input.ask("Enter name of the item to find");
         Item[] items = this.tracker.findByName(name);
         if (items.length > 0) {
             for (Item item : items) {

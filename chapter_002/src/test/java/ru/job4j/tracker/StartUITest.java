@@ -1,11 +1,34 @@
 package ru.job4j.tracker;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 public class StartUITest {
+
+    // поле содержит дефолтный вывод в консоль.
+    private final PrintStream stdout = System.out;
+    // буфер для результата.
+    private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+    @Before
+    public void loadOutput() {
+        System.out.println("execute before method");
+        System.setOut(new PrintStream(this.out));
+    }
+
+    @After
+    public void backOutput() {
+        System.setOut(this.stdout);
+        System.out.println("execute after method");
+    }
+
 
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
@@ -36,5 +59,97 @@ public class StartUITest {
         Input input = new StubInput(new String[]{"3", item.getId(), "6"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findAll().length, is(0));
+    }
+
+    @Test
+    public void whenShowMenuThenShowMenu() {
+        Tracker tracker = new Tracker();
+        Input input = new StubInput(new String[]{"6"});
+        StartUI startUI = new StartUI(input, tracker);
+        startUI.init();
+        assertThat(
+                new String(out.toByteArray()),
+                is(
+                        new StringBuilder()
+                                .append(showMenu())
+                                .toString()
+                )
+        );
+    }
+
+    @Test
+    public void whenFindAllItemThenShowAll() {
+        Tracker tracker = new Tracker();
+        Item item1 = tracker.add(new Item("test name", "desc"));
+        Item item2 = tracker.add(new Item("test name", "desc"));
+        Input input = new StubInput(new String[]{"1", "6"});
+        StartUI startUI = new StartUI(input, tracker);
+        startUI.init();
+        assertThat(
+                new String(out.toByteArray()),
+                is(
+                        new StringBuilder()
+                                .append(showMenu())
+                                .append("------------ Все созданые заявки --------------" + System.lineSeparator())
+                                .append(item1.toString() + System.lineSeparator())
+                                .append(item2.toString() + System.lineSeparator())
+                                .append(showMenu())
+                                .toString()
+                )
+        );
+    }
+
+    @Test
+    public void whenFindItemByNameThenShowItems() {
+        Tracker tracker = new Tracker();
+        Item item1 = tracker.add(new Item("test name", "desc"));
+        Item item2 = tracker.add(new Item("test name", "desc"));
+        Input input = new StubInput(new String[]{"5", item1.getName(), "6"});
+        StartUI startUI = new StartUI(input, tracker);
+        startUI.init();
+        assertThat(
+                new String(out.toByteArray()),
+                is(
+                        new StringBuilder()
+                                .append(showMenu())
+                                .append(item1.toString() + System.lineSeparator())
+                                .append(item2.toString() + System.lineSeparator())
+                                .append(showMenu())
+                                .toString()
+                )
+        );
+    }
+
+    @Test
+    public void whenFindItemByIDThenShowItems() {
+        Tracker tracker = new Tracker();
+        Item item1 = tracker.add(new Item("test name", "desc"));
+        Item item2 = tracker.add(new Item("test name", "desc"));
+        Input input = new StubInput(new String[]{"4", item1.getId(), "6"});
+        StartUI startUI = new StartUI(input, tracker);
+        startUI.init();
+        assertThat(
+                new String(out.toByteArray()),
+                is(
+                        new StringBuilder()
+                                .append(showMenu())
+                                .append(item1.toString() + System.lineSeparator())
+                                .append(showMenu())
+                                .toString()
+                )
+        );
+    }
+
+    private static String showMenu() {
+        return new StringBuilder()
+        .append("Menu. Make your choice:" + System.lineSeparator())
+        .append("0. Add new Item" + System.lineSeparator())
+        .append("1. Show all items" + System.lineSeparator())
+        .append("2. Edit item" + System.lineSeparator())
+        .append("3. Delete item" + System.lineSeparator())
+        .append("4. Find item by Id" + System.lineSeparator())
+        .append("5. Find items by name" + System.lineSeparator())
+        .append("6. Exit Program" + System.lineSeparator())
+        .toString();
     }
 }
