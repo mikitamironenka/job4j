@@ -98,12 +98,22 @@ public class StartUI {
 
     private void findById() {
         String id = this.input.ask("Enter id of the item to find");
-        System.out.println(this.tracker.findById(id).toString());
+        Item item = this.tracker.findById(id);
+        if (!item.equals(null)) {
+            System.out.println(item.toString());
+        } else {
+            System.out.println("The item wasn't fonded");
+        }
     }
 
     private void deleteItem() {
         String id = this.input.ask("Enter id of the item to delete");
-        this.tracker.delete(id);
+        boolean result = this.tracker.delete(id);
+        if (result == true) {
+            System.out.format("The item %s was deleted " + System.lineSeparator(), id);
+        } else {
+            System.out.format("The item %s wasn't deleted " + System.lineSeparator(), id);
+        }
     }
 
     private void editItem() {
@@ -112,7 +122,14 @@ public class StartUI {
         String description = this.input.ask("Enter the new description of the item");
         Item item = new Item(name, description);
         item.setId(this.tracker.findById(id).getId());
-        this.tracker.replace(id, item);
+        boolean result = this.tracker.replace(id, item);
+        if (result == true) {
+            System.out.format("The item %s after editing is %s %s" + System.lineSeparator(), id,
+                    this.tracker.findById(id).getName(),
+                    this.tracker.findById(id).getDecs());
+        } else {
+            System.out.println("The item wasn't editing");
+        }
     }
 
     private void showAll() {
@@ -131,7 +148,7 @@ public class StartUI {
         String desc = this.input.ask("Введите описание заявки :");
         Item item = new Item(name, desc);
         this.tracker.add(item);
-        System.out.println("------------ Новая заявка : " + item.getId() + "-----------");
+        System.out.format("------------ Новая заявка : %s-----------", item.getId());
     }
 
     private void showMenu() {
