@@ -85,7 +85,7 @@ public class StartUI {
     }
 
     private void findByName() {
-        String name = this.input.ask("Enter id of the item to find");
+        String name = this.input.ask("Enter name of the item to find");
         Item[] items = this.tracker.findByName(name);
         if (items.length > 0) {
             for (Item item : items) {
@@ -98,22 +98,30 @@ public class StartUI {
 
     private void findById() {
         String id = this.input.ask("Enter id of the item to find");
+<<<<<<< HEAD
         Item item = this.tracker.findById(id);
         if (!item.equals(null)) {
             System.out.println(item.toString());
         } else {
             System.out.println("The item wasn't fonded");
         }
+=======
+        System.out.println(this.tracker.findById(id).toString());
+>>>>>>> task_165651
     }
 
     private void deleteItem() {
         String id = this.input.ask("Enter id of the item to delete");
+<<<<<<< HEAD
         boolean result = this.tracker.delete(id);
         if (result == true) {
             System.out.format("The item %s was deleted " + System.lineSeparator(), id);
         } else {
             System.out.format("The item %s wasn't deleted " + System.lineSeparator(), id);
         }
+=======
+        this.tracker.delete(id);
+>>>>>>> task_165651
     }
 
     private void editItem() {
