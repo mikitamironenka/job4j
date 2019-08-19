@@ -18,6 +18,8 @@ target/
 
 target
 
+.idea
+
 *.iml
 *.xml
 
