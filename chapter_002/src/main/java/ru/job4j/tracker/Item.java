@@ -38,7 +38,7 @@ public class Item {
         this.name = name;
     }
 
-    public String getDecs() {
+    public String getDesc() {
         return decs;
     }
 
