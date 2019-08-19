@@ -4,11 +4,18 @@ import ru.job4j.tracker.Input;
 import ru.job4j.tracker.Item;
 import ru.job4j.tracker.Tracker;
 
-public class ShowAll implements UserAction {
+public class ShowItems implements UserAction {
+
+    private final int key;
+    private final String info;
+    public ShowItems(int key, String info) {
+        this.key = key;
+        this.info = info;
+    }
 
     @Override
     public int key() {
-        return Keys.SHOW_ALL.getKey();
+        return key;
     }
 
     @Override
@@ -20,7 +27,7 @@ public class ShowAll implements UserAction {
 
     @Override
     public String info() {
-        return "Show all created items";
+        return (key + 1) + ". " + info;
     }
 
 }

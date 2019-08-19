@@ -6,9 +6,16 @@ import ru.job4j.tracker.Tracker;
 
 public class AddItem implements UserAction{
 
+    private final int key;
+    private final String info;
+    public AddItem(int key, String info) {
+        this.key = key;
+        this.info = info;
+    }
+
     @Override
     public int key() {
-        return Keys.ADD.getKey();
+        return key;
     }
 
     @Override
@@ -25,6 +32,6 @@ public class AddItem implements UserAction{
 
     @Override
     public String info() {
-        return "Add new Item.";
+        return (key + 1) + ". " + info;
     }
 }
