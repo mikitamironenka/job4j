@@ -22,8 +22,6 @@ package ru.job4j.tracker;
 //При выборе пункта меню 4, программа должна запросить у пользователя id заявки,
 // после этого отобразить найденную заявку на экране.
 
-import java.util.Scanner;
-
 public class StartUI {
 
     /**
@@ -87,37 +85,51 @@ public class StartUI {
     }
 
     private void findByName() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter id of the item to find");
-        String name = scanner.nextLine();
-        System.out.println(this.tracker.findById(name).toString());
+        String name = this.input.ask("Enter id of the item to find");
+        Item[] items = this.tracker.findByName(name);
+        if (items.length > 0) {
+            for (Item item : items) {
+                System.out.println(item.toString());
+            }
+        } else {
+            System.out.println("Items not found");
+        }
     }
 
     private void findById() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter id of the item to find");
-        String id = scanner.nextLine();
-        System.out.println(this.tracker.findById(id).toString());
+        String id = this.input.ask("Enter id of the item to find");
+        Item item = this.tracker.findById(id);
+        if (!item.equals(null)) {
+            System.out.println(item.toString());
+        } else {
+            System.out.println("The item wasn't fonded");
+        }
     }
 
     private void deleteItem() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter id of the to delete");
-        String id = scanner.nextLine();
-        this.tracker.delete(id);
+        String id = this.input.ask("Enter id of the item to delete");
+        boolean result = this.tracker.delete(id);
+        if (result == true) {
+            System.out.format("The item %s was deleted " + System.lineSeparator(), id);
+        } else {
+            System.out.format("The item %s wasn't deleted " + System.lineSeparator(), id);
+        }
     }
 
     private void editItem() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter id of the item to edit");
-        String id = scanner.nextLine();
-        System.out.println("Enter the new name of the item");
-        String name = scanner.nextLine();
-        System.out.println("Enter the new description of the item");
-        String description = scanner.nextLine();
+        String id = this.input.ask("Enter id of the item to edit");
+        String name = this.input.ask("Enter the new name of the item");
+        String description = this.input.ask("Enter the new description of the item");
         Item item = new Item(name, description);
         item.setId(this.tracker.findById(id).getId());
-        this.tracker.replace(id, item);
+        boolean result = this.tracker.replace(id, item);
+        if (result == true) {
+            System.out.format("The item %s after editing is %s %s" + System.lineSeparator(), id,
+                    this.tracker.findById(id).getName(),
+                    this.tracker.findById(id).getDecs());
+        } else {
+            System.out.println("The item wasn't editing");
+        }
     }
 
     private void showAll() {
@@ -128,7 +140,7 @@ public class StartUI {
     }
 
     /**
-     * Метод реализует добавленяи новый заявки в хранилище.
+     * Метод реализует добавление новой заявки в хранилище.
      */
     private void createItem() {
         System.out.println("------------ Добавление новой заявки --------------");
@@ -136,7 +148,7 @@ public class StartUI {
         String desc = this.input.ask("Введите описание заявки :");
         Item item = new Item(name, desc);
         this.tracker.add(item);
-        System.out.println("------------ Новая заявка : " + item.getId() + "-----------");
+        System.out.format("------------ Новая заявка : %s-----------", item.getId());
     }
 
     private void showMenu() {
