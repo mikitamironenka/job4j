@@ -12,6 +12,8 @@ package ru.job4j.tracker;
 //получение заявки по id - public Item findById(String id);
 //5. На все методы необходимо написать тесты.
 
+import ru.job4j.tracker.model.Item;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -64,7 +66,7 @@ public class Tracker {
     public Item findById(String id) {
         Item result = null;
         for (int i = 0; i < this.position; i++) {
-            if (this.items[i].getId().equals(id)) {
+            if (this.items[i] != null && this.items[i].getId().equals(id)) {
                 result = this.items[i];
                 break;
             }

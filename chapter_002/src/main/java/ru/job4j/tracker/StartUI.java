@@ -22,22 +22,14 @@ package ru.job4j.tracker;
 //При выборе пункта меню 4, программа должна запросить у пользователя id заявки,
 // после этого отобразить найденную заявку на экране.
 
+import ru.job4j.tracker.input.ConsoleInput;
+import ru.job4j.tracker.input.Input;
+import ru.job4j.tracker.input.ValidateInput;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class StartUI {
-
-    /**
-     * Константа меню для добавления новой заявки.
-     */
-    private static final String ADD = "0";
-    private static final String SHOW_ALL = "1";
-    private static final String EDIT = "2";
-    private static final String DELETE = "3";
-    private static final String FIND_BY_ID = "4";
-    private static final String FIND_BY_NAME = "5";
-
-    /**
-     * Константа для выхода из цикла.
-     */
-    private static final String EXIT = "6";
     /**
      * Получение данных от пользователя.
      */
@@ -63,98 +55,23 @@ public class StartUI {
      */
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
+        List<Integer> ranges = new ArrayList<>();
         menu.fillActions();
+        for (int i = 0; i < menu.getActionsLength(); i++) {
+            ranges.add(i);
+        }
         do {
             menu.show();
-            menu.select(Integer.valueOf(input.ask("select:")));
+            menu.select(input.ask("select:", ranges));
         } while (!"y".equals(this.input.ask("Exit?(y): ")));
     }
 
-    private void findByName() {
-        String name = this.input.ask("Enter name of the item to find");
-        Item[] items = this.tracker.findByName(name);
-        if (items.length > 0) {
-            for (Item item : items) {
-                System.out.println(item.toString());
-            }
-        } else {
-            System.out.println("Items not found");
-        }
-    }
-
-    private void findById() {
-        String id = this.input.ask("Enter id of the item to find");
-        Item item = this.tracker.findById(id);
-        if (!item.equals(null)) {
-            System.out.println(item.toString());
-        } else {
-            System.out.println("The item wasn't fonded");
-        }
-        System.out.println(this.tracker.findById(id).toString());
-    }
-
-    private void deleteItem() {
-        String id = this.input.ask("Enter id of the item to delete");
-        boolean result = this.tracker.delete(id);
-        if (result == true) {
-            System.out.format("The item %s was deleted " + System.lineSeparator(), id);
-        } else {
-            System.out.format("The item %s wasn't deleted " + System.lineSeparator(), id);
-        }
-        this.tracker.delete(id);
-    }
-
-    private void editItem() {
-        String id = this.input.ask("Enter id of the item to edit");
-        String name = this.input.ask("Enter the new name of the item");
-        String description = this.input.ask("Enter the new description of the item");
-        Item item = new Item(name, description);
-        item.setId(this.tracker.findById(id).getId());
-        boolean result = this.tracker.replace(id, item);
-        if (result == true) {
-            System.out.format("The item %s after editing is %s %s" + System.lineSeparator(), id,
-                    this.tracker.findById(id).getName(),
-                    this.tracker.findById(id).getDesc());
-        } else {
-            System.out.println("The item wasn't editing");
-        }
-    }
-
-    private void showAll() {
-        System.out.println("------------ Все созданые заявки --------------");
-        for (Item item : this.tracker.findAll()) {
-            System.out.println(item.toString());
-        }
-    }
-
-    /**
-     * Метод реализует добавление новой заявки в хранилище.
-     */
-    private void createItem() {
-        System.out.println("------------ Добавление новой заявки --------------");
-        String name = this.input.ask("Введите имя заявки :");
-        String desc = this.input.ask("Введите описание заявки :");
-        Item item = new Item(name, desc);
-        this.tracker.add(item);
-        System.out.format("------------ Новая заявка : %s-----------", item.getId());
-    }
-
-    private void showMenu() {
-        System.out.println("Menu. Make your choice:");
-        System.out.println("0. Add new Item");
-        System.out.println("1. Show all items");
-        System.out.println("2. Edit item");
-        System.out.println("3. Delete item");
-        System.out.println("4. Find item by Id");
-        System.out.println("5. Find items by name");
-        System.out.println("6. Exit Program");
-    }
 
     /**
      * Запускт программы.
      * @param args
      */
     public static void main(String[] args) {
-        new StartUI(new ConsoleInput(), new Tracker()).init();
+        new StartUI(new ValidateInput(), new Tracker()).init();
     }
 }

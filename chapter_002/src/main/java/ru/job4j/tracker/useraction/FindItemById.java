@@ -1,7 +1,7 @@
 package ru.job4j.tracker.useraction;
 
-import ru.job4j.tracker.Input;
-import ru.job4j.tracker.Item;
+import ru.job4j.tracker.input.Input;
+import ru.job4j.tracker.model.Item;
 import ru.job4j.tracker.Tracker;
 
 public class FindItemById implements UserAction {
@@ -21,12 +21,11 @@ public class FindItemById implements UserAction {
     public void execute(Input input, Tracker tracker) {
         String id = input.ask("Enter id of the item to find");
         Item item = tracker.findById(id);
-        if (!item.equals(null)) {
-            System.out.println(item.toString());
+        if (item != null) {
+            System.out.format("You look for : %s %s", System.lineSeparator(), item.toString());
         } else {
             System.out.println("The item wasn't fonded");
         }
-        System.out.println(tracker.findById(id).toString());
     }
 
     @Override
