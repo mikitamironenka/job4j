@@ -40,6 +40,8 @@ public class StartUI {
      */
     private final Tracker tracker;
 
+    private boolean working = true;
+
     /**
      * Конструтор инициализирующий поля.
      * @param input ввод данных.
@@ -50,20 +52,24 @@ public class StartUI {
         this.tracker = tracker;
     }
 
+    public void stop() {
+        this.working = false;
+    }
+
     /**
      * Основой цикл программы.
      */
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         List<Integer> ranges = new ArrayList<>();
-        menu.fillActions();
+        menu.fillActions(this);
         for (int i = 0; i <= menu.getActionsLength(); i++) {
             ranges.add(i);
         }
         do {
             menu.show();
             menu.select(input.ask("select:", ranges));
-        } while (!"y".equals(this.input.ask("Exit?(y): ")));
+        } while (working);
     }
 
 

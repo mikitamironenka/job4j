@@ -1,16 +1,22 @@
 package ru.job4j.tracker.useraction;
 
+import ru.job4j.tracker.StartUI;
 import ru.job4j.tracker.input.Input;
 import ru.job4j.tracker.Tracker;
 
 public class ExitProgram extends BaseAction {
 
-    public ExitProgram(int key, String info) {
-        super(key, info);
+    private final StartUI ui;
+
+
+    public ExitProgram(final int key, final String name, StartUI ui) {
+        super(key, name);
+        this.ui = ui;
     }
 
     @Override
     public void execute(Input input, Tracker tracker) {
-        System.exit(1);
+        System.out.println("You chose exit. Good buy");
+        this.ui.stop();
     }
 }
