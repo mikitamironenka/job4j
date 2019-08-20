@@ -43,4 +43,19 @@ public class ValidateInputTest {
         );
     }
 
+    @Test
+    public void whenOutOfRangeInput() {
+        List<Integer> list =  new ArrayList<>();
+        list.add(1);
+        ValidateInput input = new ValidateInput(
+                new StubInput(new String[] {"9", "1"})
+        );
+        input.ask("Enter", list);
+        assertThat(
+                this.mem.toString(),
+                is(
+                        String.format("Please, select key from menu.%n")
+                )
+        );
+    }
 }
