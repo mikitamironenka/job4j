@@ -4,17 +4,10 @@ import ru.job4j.tracker.input.Input;
 import ru.job4j.tracker.model.Item;
 import ru.job4j.tracker.Tracker;
 
-public class FindItemById implements UserAction {
-    private final int key;
-    private final String info;
-    public FindItemById(int key, String info) {
-        this.key = key;
-        this.info = info;
-    }
+public class FindItemById extends BaseAction {
 
-    @Override
-    public int key() {
-        return key;
+    public FindItemById(int key, String info) {
+        super(key, info);
     }
 
     @Override
@@ -26,10 +19,5 @@ public class FindItemById implements UserAction {
         } else {
             System.out.println("The item wasn't fonded");
         }
-    }
-
-    @Override
-    public String info() {
-        return (key + 1) + ". " + info;
     }
 }
