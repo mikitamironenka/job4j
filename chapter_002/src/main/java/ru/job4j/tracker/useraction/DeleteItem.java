@@ -3,18 +3,10 @@ package ru.job4j.tracker.useraction;
 import ru.job4j.tracker.input.Input;
 import ru.job4j.tracker.Tracker;
 
-public class DeleteItem implements UserAction{
+public class DeleteItem extends BaseAction{
 
-    private final int key;
-    private final String info;
     public DeleteItem(int key, String info) {
-        this.key = key;
-        this.info = info;
-    }
-
-    @Override
-    public int key() {
-        return key;
+        super(key, info);
     }
 
     @Override
@@ -27,10 +19,5 @@ public class DeleteItem implements UserAction{
             System.out.format("The item %s wasn't deleted " + System.lineSeparator(), id);
         }
         tracker.delete(id);
-    }
-
-    @Override
-    public String info() {
-        return (key + 1) + ". " + info;
     }
 }
