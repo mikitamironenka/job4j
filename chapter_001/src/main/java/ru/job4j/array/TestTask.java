@@ -6,17 +6,6 @@ package ru.job4j.array;
 
 public class TestTask {
 
-    public static void main(String[] args) {
-
-        int[] ar1 = new int[]{0, 3, 7, 10, 11};
-        int[] ar2 = new int[]{1, 2, 5, 8, 20, 100, 102};
-        int[] result = createArray(ar1, ar2);
-        for (int i : result) {
-            System.out.print(i + " ");
-        }
-
-    }
-
     public static int[] createArray(int[] ar1, int[] ar2) {
         int[] result = new int[ar1.length + ar2.length];
         int i = 0, j = 0, k = 0;
