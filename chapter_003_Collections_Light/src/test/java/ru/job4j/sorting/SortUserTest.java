@@ -29,4 +29,34 @@ public class SortUserTest {
         assertThat(set, is(checked));
     }
 
+    @Test
+    public void whenSortNameLengthThenSortAscendingLength() {
+        SortUser sortUser = new SortUser();
+        User user1 = new User("Dddd", 10);
+        User user2 = new User("A", 20);
+        User user3 = new User("Bbbbbb", 5);
+        User user4 = new User("Ccc", 100);
+        User user5 = new User("Ccc", 80);
+        User user6 = new User("Ccc", 75);
+        List<User> list = new ArrayList<>(List.of(user1, user2, user3, user4, user5, user6));
+        List<User> result = sortUser.sortNameLength(list);
+        List<User> checked = new ArrayList<>(List.of(user2, user4, user5, user6, user1, user3));
+        assertThat(result, is(checked));
+    }
+
+    @Test
+    public void whenSortAllFields() {
+        SortUser sortUser = new SortUser();
+        User user1 = new User("Dddd", 10);
+        User user2 = new User("A", 20);
+        User user3 = new User("Bbbbbb", 5);
+        User user4 = new User("Ccc", 100);
+        User user5 = new User("Ccc", 80);
+        User user6 = new User("Ccc", 75);
+        List<User> list = new ArrayList<>(List.of(user1, user2, user3, user4, user5, user6));
+        List<User> result = sortUser.sortByAllFields(list);
+        List<User> checked = new ArrayList<>(List.of(user2, user3, user6, user5, user4, user1));
+        assertThat(result, is(checked));
+    }
+
 }

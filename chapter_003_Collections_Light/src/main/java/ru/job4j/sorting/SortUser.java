@@ -1,12 +1,14 @@
 package ru.job4j.sorting;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 //В классе SortUser написать метод public Set<User> sort (List<User>),
 // который будет возвращать TreeSet пользователей, отсортированных по возрасту в порядке возрастания.
+// public List<User> sortNameLength (List<User>) - в этом методе необходимо определить Comparator
+// для метода Collections.sort и отсортировать List<User> по длине имени.
+//public List<User> sortByAllFields (List<User>) - в этом методе необходимо определить Comparator
+// для метода Collections.sort и отсортировать List<User> по обоим полям,
+// сначала сортировка по имени в лексикографическом порядке, потом по возрасту.
 
 public class SortUser {
 
@@ -18,25 +20,25 @@ public class SortUser {
         return set;
     }
 
-    public static void main(String[] args) {
+    public List<User> sortNameLength(List<User> list) {
+        Collections.sort(list, new Comparator<User>() {
+            @Override
+            public int compare(User o1, User o2) {
+                return Integer.valueOf(o1.getName().length())
+                        .compareTo(Integer.valueOf(o2.getName().length()));
+            }
+        });
+        return list;
+    }
 
-        User user1 = new User("D", 10);
-        User user2 = new User("A", 20);
-        User user3 = new User("B", 5);
-        User user4 = new User("C", 100);
-        List<User> list = new ArrayList<>(List.of(user1, user2, user3, user4));
-        SortUser sortUser = new SortUser();
-        Set<User> set = sortUser.sort(list);
-        Set<User> set2 = sortUser.sort(list);
-        set2.add(user1);
-        set2.add(user2);
-        set2.add(user3);
-        set2.add(user4);
-        for (User user : set2) {
-            System.out.println(user.toString());
-        }
-        for (User user : set) {
-            System.out.println(user.toString());
-        }
+    public List<User> sortByAllFields(List<User> list) {
+        Collections.sort(list, new Comparator<User>() {
+            @Override
+            public int compare(User o1, User o2) {
+                final int result = o1.getName().compareTo(o2.getName());
+                return result != 0 ? result : Integer.compare(o1.getAge(), o2.getAge());
+            }
+        });
+        return list;
     }
 }
