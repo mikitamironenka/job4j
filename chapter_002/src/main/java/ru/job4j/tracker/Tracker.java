@@ -16,16 +16,16 @@ import ru.job4j.tracker.model.Item;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
 public class Tracker {
 
     /**
      * Array for storage items
      */
-    private Item[] items = new Item[100];
+//    private Item[] items = new Item[100];
+    private List<Item> items = new ArrayList<>();
+
     /**
      * Cell's position for new Item.
      */
@@ -53,7 +53,8 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items[this.position++] = item;
+//        this.items[this.position++] = item;
+        this.items.add(item);
         return item;
     }
 
@@ -65,9 +66,15 @@ public class Tracker {
      */
     public Item findById(String id) {
         Item result = null;
-        for (int i = 0; i < this.position; i++) {
-            if (this.items[i] != null && this.items[i].getId().equals(id)) {
-                result = this.items[i];
+//        for (int i = 0; i < this.position; i++) {
+//            if (this.items[i] != null && this.items[i].getId().equals(id)) {
+//                result = this.items[i];
+//                break;
+//            }
+//        }
+        for (Item item : this.items) {
+            if (item != null && item.getId().equals(id)) {
+                result = item;
                 break;
             }
         }
@@ -82,9 +89,9 @@ public class Tracker {
      */
     public boolean replace(String id, Item item) {
         boolean result = false;
-        for (int i = 0; i < this.position; i++) {
-            if (this.items[i].getId().equals(id)) {
-                this.items[i] = item;
+        for (int i = 0; i < this.items.size(); i++) {
+            if (this.items.get(i).getId().equals(id)) {
+                this.items.set(i, item);
                 result = true;
             }
         }
@@ -99,15 +106,24 @@ public class Tracker {
     public boolean delete(String id) {
         boolean result = false;
         int index = 0;
-        for (int i = 0; i < this.position; i++) {
-            if (this.items[i].getId().equals(id)) {
-                index = i;
+//        for (int i = 0; i < this.position; i++) {
+//            if (this.items[i].getId().equals(id)) {
+//                index = i;
+//                result = true;
+//                System.arraycopy(this.items, index + 1, this.items, index, this.items.length - 1 - index);
+//                this.position--;
+//                break;
+//            }
+//        }
+
+        for (Item temp : this.items) {
+            if (temp.getId().equals(id)) {
+                items.remove(temp);
                 result = true;
-                System.arraycopy(this.items, index + 1, this.items, index, this.items.length - 1 - index);
-                this.position--;
                 break;
             }
         }
+
         return result;
     }
 
@@ -115,8 +131,9 @@ public class Tracker {
      * Gets all items
      * @return Item[]
      */
-    public Item[] findAll() {
-        return Arrays.copyOf(this.items, this.position);
+    public List<Item> findAll() {
+//        return Arrays.copyOf(this.items, this.position);
+        return this.items;
     }
 
     /**
@@ -124,16 +141,21 @@ public class Tracker {
      * @param key - name of the item
      * @return Item
      */
-    public Item[] findByName(String key) {
-        Item[] result = new Item[this.position];
-        int count = 0;
-        for (int i = 0; i < this.position; i++) {
-            if (this.items[i].getName().equals(key)) {
-                result[count] = this.items[i];
-                count++;
+    public List<Item> findByName(String key) {
+        List<Item> result = new ArrayList<>();
+//        int count = 0;
+//        for (int i = 0; i < this.position; i++) {
+//            if (this.items[i].getName().equals(key)) {
+//                result[count] = this.items[i];
+//                count++;
+//            }
+//        }
+        for (Item temp : this.items) {
+            if (temp.getName().equals(key)) {
+                result.add(temp);
             }
         }
-        return Arrays.copyOf(result, count);
+        return result;
     }
 
 }

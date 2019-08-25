@@ -3,6 +3,9 @@ package ru.job4j.tracker;
 import org.junit.Test;
 import ru.job4j.tracker.model.Item;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
@@ -31,9 +34,9 @@ public class TrackerTest {
         tracker.add(item2);
         tracker.add(item3);
         tracker.delete(item2.getId());
-        Item[] checked = new Item[2];
-        checked[0] = item1;
-        checked[1] = item3;
+        List<Item> checked = new ArrayList<>();
+        checked.add(item1);
+        checked.add(item3);
         assertThat(tracker.findAll(), is(checked));
     }
 
@@ -56,10 +59,10 @@ public class TrackerTest {
         Item item2 = new Item("test1", "testDescription2", created);
         tracker.add(item1);
         tracker.add(item2);
-        Item[] checked = new Item[2];
-        checked[0] = item1;
-        checked[1] = item2;
-        Item[] result = tracker.findByName("test1");
+        List<Item> checked = new ArrayList<>();
+        checked.add(item1);
+        checked.add(item2);
+        List<Item> result = tracker.findByName("test1");
         assertThat(result, is(checked));
     }
 }

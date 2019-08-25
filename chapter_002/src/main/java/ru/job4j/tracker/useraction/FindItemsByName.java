@@ -4,6 +4,8 @@ import ru.job4j.tracker.input.Input;
 import ru.job4j.tracker.model.Item;
 import ru.job4j.tracker.Tracker;
 
+import java.util.List;
+
 public class FindItemsByName extends BaseAction{
 
     public FindItemsByName(int key, String info) {
@@ -13,8 +15,8 @@ public class FindItemsByName extends BaseAction{
     @Override
     public void execute(Input input, Tracker tracker) {
         String name = input.ask("Enter name of the item to find");
-        Item[] items = tracker.findByName(name);
-        if (items.length > 0) {
+        List<Item> items = tracker.findByName(name);
+        if (items.size() > 0) {
             for (Item item : items) {
                 System.out.println(item.toString());
             }
