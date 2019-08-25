@@ -16,16 +16,15 @@ import ru.job4j.tracker.model.Item;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
 public class Tracker {
 
     /**
      * Array for storage items
      */
-    private Item[] items = new Item[100];
+//    private Item[] items = new Item[100];
+    private List<Item> items = new ArrayList(100);
     /**
      * Cell's position for new Item.
      */
@@ -53,7 +52,9 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items[this.position++] = item;
+//        this.items[this.position++] = item;
+        this.items.add(item);
+        this.position++;
         return item;
     }
 
@@ -66,8 +67,8 @@ public class Tracker {
     public Item findById(String id) {
         Item result = null;
         for (int i = 0; i < this.position; i++) {
-            if (this.items[i] != null && this.items[i].getId().equals(id)) {
-                result = this.items[i];
+            if (this.items.get(i) != null && this.items.get(i).getId().equals(id)) {
+                result = this.items.get(i);
                 break;
             }
         }
@@ -83,8 +84,8 @@ public class Tracker {
     public boolean replace(String id, Item item) {
         boolean result = false;
         for (int i = 0; i < this.position; i++) {
-            if (this.items[i].getId().equals(id)) {
-                this.items[i] = item;
+            if (this.items.get(i).getId().equals(id)) {
+                this.items.set(i, item);
                 result = true;
             }
         }
@@ -100,10 +101,10 @@ public class Tracker {
         boolean result = false;
         int index = 0;
         for (int i = 0; i < this.position; i++) {
-            if (this.items[i].getId().equals(id)) {
+            if (this.items.get(i).getId().equals(id)) {
                 index = i;
                 result = true;
-                System.arraycopy(this.items, index + 1, this.items, index, this.items.length - 1 - index);
+                System.arraycopy(this.items, index + 1, this.items, index, this.items.size() - 1 - index);
                 this.position--;
                 break;
             }
@@ -115,8 +116,8 @@ public class Tracker {
      * Gets all items
      * @return Item[]
      */
-    public Item[] findAll() {
-        return Arrays.copyOf(this.items, this.position);
+    public List<Item> findAll() {
+        return List.copyOf(this.items, this.position);
     }
 
     /**
