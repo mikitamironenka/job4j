@@ -19,7 +19,6 @@ public class ConvertListToArray {
 //            for (int elem : array) {
 //                if (count < list.size()) {
 //                    elem = list.get(count);
-//                    System.out.println(elem);
 //                    count++;
 //                } else {
 //                    elem = 0;
