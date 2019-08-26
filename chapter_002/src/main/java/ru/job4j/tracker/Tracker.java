@@ -116,13 +116,24 @@ public class Tracker {
 //            }
 //        }
 
-        for (Item temp : this.items) {
+//        for (Item temp : this.items) {
+//            if (temp.getId().equals(id)) {
+//                items.remove(temp);
+//                result = true;
+//                break;
+//            }
+//        }
+//
+        Iterator iterator = this.items.iterator();
+        while (iterator.hasNext()) {
+            Item temp = (Item)iterator.next();
             if (temp.getId().equals(id)) {
-                items.remove(temp);
+                this.items.remove(temp);
                 result = true;
                 break;
             }
         }
+
 
         return result;
     }
