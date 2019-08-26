@@ -12,32 +12,16 @@ import java.util.List;
 public class ConvertListToArray {
 
     public int[][] toArray(List<Integer> list, int rows) {
-        int cells = rows;
+        int cells = list.size() % rows == 0 ? rows : list.size() / rows + 1;
         int[][] twoDArray = new int[rows][cells];
-
-        int count = 0;
-//        for (int[] array : twoDArray) {
-//            for (int elem : array) {
-//                if (count < list.size()) {
-//                    elem = list.get(count);
-//                    System.out.println(elem);
-//                    count++;
-//                } else {
-//                    elem = 0;
-//                    count++;
-//                }
-//            }
-//        }
-        for (int i = 0; i < twoDArray.length; i++) {
-            for (int j = 0; j < twoDArray[i].length; j++) {
-                if (count < list.size()) {
-                    twoDArray[i][j] = list.get(count);
-                    count++;
-                } else {
-                    twoDArray[i][j] = 0;
-                    count++;
-                }
+        int i = 0, j = 0;
+        for (int num : list) {
+            if (j == cells) {
+                j = 0;
+                i++;
             }
+            twoDArray[i][j] = num;
+            j++;
         }
         return twoDArray;
     }
@@ -53,5 +37,10 @@ public class ConvertListToArray {
         }
 
         return result;
+    }
+
+    public static void main(String[] args) {
+
+        System.out.println(7 / 3);
     }
 }
