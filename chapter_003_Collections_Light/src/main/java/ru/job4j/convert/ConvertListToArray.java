@@ -27,20 +27,12 @@ public class ConvertListToArray {
     }
 
     public List<Integer> convert (List<int[]> list) {
-
         List<Integer> result = new ArrayList<>();
-
         for (int[] arr : list) {
             for (int num : arr) {
                 result.add(num);
             }
         }
-
         return result;
-    }
-
-    public static void main(String[] args) {
-
-        System.out.println(7 / 3);
     }
 }
