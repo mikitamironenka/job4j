@@ -105,16 +105,13 @@ public class Tracker {
      */
     public boolean delete(String id) {
         boolean result = false;
-        int index = 0;
-//        for (int i = 0; i < this.position; i++) {
-//            if (this.items[i].getId().equals(id)) {
-//                index = i;
-//                result = true;
-//                System.arraycopy(this.items, index + 1, this.items, index, this.items.length - 1 - index);
-//                this.position--;
-//                break;
-//            }
-//        }
+        for (int i = 0; i < this.position; i++) {
+            if (this.items.get(i).getId().equals(id)) {
+                this.items.remove(i);
+                result = true;
+                break;
+            }
+        }
 
 //        for (Item temp : this.items) {
 //            if (temp.getId().equals(id)) {
@@ -124,15 +121,15 @@ public class Tracker {
 //            }
 //        }
 //
-        Iterator iterator = this.items.iterator();
-        while (iterator.hasNext()) {
-            Item temp = (Item)iterator.next();
-            if (temp.getId().equals(id)) {
-                this.items.remove(temp);
-                result = true;
-                break;
-            }
-        }
+//        Iterator iterator = this.items.iterator();
+//        while (iterator.hasNext()) {
+//            Item temp = (Item)iterator.next();
+//            if (temp.getId().equals(id)) {
+//                this.items.remove(temp);
+//                result = true;
+//                break;
+//            }
+//        }
 
 
         return result;
