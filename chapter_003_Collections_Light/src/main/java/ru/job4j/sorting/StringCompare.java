@@ -24,16 +24,14 @@ public class StringCompare implements Comparator<String> {
 
         for (int i = 0; i < length; i++) {
             int temp = Character.compare(leftChars[i], rightChars[i]);
-            if (temp == 0) {
-                continue;
-            } else {
+            if (temp != 0) {
                 result = temp;
                 break;
             }
         }
-        if (result == 0 && leftChars.length < rightChars.length) {
+        if (result == 0 && Integer.compare(leftChars.length, rightChars.length) < 0) {
             result = -1;
-        } else if (result == 0 && leftChars.length > rightChars.length) {
+        } else if (result == 0 && Integer.compare(leftChars.length, rightChars.length) > 0) {
             result = 1;
         }
         return result;
