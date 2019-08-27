@@ -38,32 +38,16 @@ public class ConvertListToArray {
                 j = 0;
             }
         }
-
-
-//        for (int i = 0; i < twoDArray.length; i++) {
-//            for (int j = 0; j < twoDArray[i].length; j++) {
-//                if (count < list.size()) {
-//                    twoDArray[i][j] = list.get(count);
-//                    count++;
-//                } else {
-//                    twoDArray[i][j] = 0;
-//                    count++;
-//                }
-//            }
-//        }
         return twoDArray;
     }
 
     public List<Integer> convert (List<int[]> list) {
-
         List<Integer> result = new ArrayList<>();
-
         for (int[] arr : list) {
             for (int num : arr) {
                 result.add(num);
             }
         }
-
         return result;
     }
 }
