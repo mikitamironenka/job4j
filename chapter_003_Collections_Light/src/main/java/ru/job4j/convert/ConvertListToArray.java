@@ -12,13 +12,7 @@ import java.util.List;
 public class ConvertListToArray {
 
     public int[][] toArray(List<Integer> list, int rows) {
-        int cells;
-        if (list.size() % rows == 0) {
-            cells = rows;
-        } else {
-            cells = list.size() / rows + 1;
-        }
-
+        int cells = list.size() % rows == 0 ? rows : list.size() / rows + 1;
         int[][] twoDArray = new int[rows][cells];
 
         int count = 0, i = 0, j = 0;
@@ -37,6 +31,8 @@ public class ConvertListToArray {
             if (j == cells - 1) {
                 j = 0;
             }
+            twoDArray[i][j] = num;
+            j++;
         }
         return twoDArray;
     }
