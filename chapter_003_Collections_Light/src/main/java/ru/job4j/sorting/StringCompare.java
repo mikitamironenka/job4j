@@ -28,6 +28,7 @@ public class StringCompare implements Comparator<String> {
                 continue;
             } else {
                 result = temp;
+                break;
             }
         }
         if (result == 0 && leftChars.length < rightChars.length) {
@@ -36,12 +37,5 @@ public class StringCompare implements Comparator<String> {
             result = 1;
         }
         return result;
-    }
-
-    public static void main(String[] args) {
-        StringCompare stringCompare = new StringCompare();
-        String left = "aaa";
-        String right= "aab";
-        stringCompare.compare(left, right);
     }
 }

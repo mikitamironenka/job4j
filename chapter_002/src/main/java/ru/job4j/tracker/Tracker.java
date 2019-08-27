@@ -23,13 +23,7 @@ public class Tracker {
     /**
      * Array for storage items
      */
-//    private Item[] items = new Item[100];
     private List<Item> items = new ArrayList<>();
-
-    /**
-     * Cell's position for new Item.
-     */
-    private int position = 0;
 
     /**
      * Generates unique key for new item.
@@ -37,7 +31,6 @@ public class Tracker {
      * @return Unique key.
      */
     private String generateId() {
-        //Реализовать метод генерации.
         String result;
         int random = (int) (Math.random() * 1000 + 1);
         Date date = Calendar.getInstance().getTime();
@@ -53,7 +46,6 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(this.generateId());
-//        this.items[this.position++] = item;
         this.items.add(item);
         return item;
     }
@@ -66,12 +58,6 @@ public class Tracker {
      */
     public Item findById(String id) {
         Item result = null;
-//        for (int i = 0; i < this.position; i++) {
-//            if (this.items[i] != null && this.items[i].getId().equals(id)) {
-//                result = this.items[i];
-//                break;
-//            }
-//        }
         for (Item item : this.items) {
             if (item != null && item.getId().equals(id)) {
                 result = item;
@@ -105,33 +91,13 @@ public class Tracker {
      */
     public boolean delete(String id) {
         boolean result = false;
-        for (int i = 0; i < this.position; i++) {
+        for (int i = 0; i < this.items.size(); i++) {
             if (this.items.get(i).getId().equals(id)) {
                 this.items.remove(i);
                 result = true;
                 break;
             }
         }
-
-//        for (Item temp : this.items) {
-//            if (temp.getId().equals(id)) {
-//                items.remove(temp);
-//                result = true;
-//                break;
-//            }
-//        }
-//
-//        Iterator iterator = this.items.iterator();
-//        while (iterator.hasNext()) {
-//            Item temp = (Item)iterator.next();
-//            if (temp.getId().equals(id)) {
-//                this.items.remove(temp);
-//                result = true;
-//                break;
-//            }
-//        }
-
-
         return result;
     }
 
@@ -140,7 +106,6 @@ public class Tracker {
      * @return Item[]
      */
     public List<Item> findAll() {
-//        return Arrays.copyOf(this.items, this.position);
         return this.items;
     }
 
@@ -151,13 +116,6 @@ public class Tracker {
      */
     public List<Item> findByName(String key) {
         List<Item> result = new ArrayList<>();
-//        int count = 0;
-//        for (int i = 0; i < this.position; i++) {
-//            if (this.items[i].getName().equals(key)) {
-//                result[count] = this.items[i];
-//                count++;
-//            }
-//        }
         for (Item temp : this.items) {
             if (temp.getName().equals(key)) {
                 result.add(temp);
@@ -165,5 +123,4 @@ public class Tracker {
         }
         return result;
     }
-
 }
