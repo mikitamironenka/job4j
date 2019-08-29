@@ -13,7 +13,7 @@ public class UpdateItem extends BaseAction {
     @Override
     public void execute(Input input, Tracker tracker) {
         String id = input.ask("Enter id of the item to edit");
-        if(tracker.findById(id) == null) {
+        if (tracker.findById(id) == null) {
             System.out.println("Your entered the wrong id or item doesn't exist");
         } else {
             String name = input.ask("Enter the new name of the item");
@@ -21,7 +21,7 @@ public class UpdateItem extends BaseAction {
             Item item = new Item(name, description);
             item.setId(tracker.findById(id).getId());
             boolean result = tracker.replace(id, item);
-            if (result == true) {
+            if (result) {
                 System.out.format("The item %s after editing is %s %s" + System.lineSeparator(), id,
                         tracker.findById(id).getName(),
                         tracker.findById(id).getDesc());

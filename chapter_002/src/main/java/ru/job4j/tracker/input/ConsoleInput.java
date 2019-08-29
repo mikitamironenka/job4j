@@ -19,13 +19,13 @@ public class ConsoleInput implements Input {
     public int ask(String question, List<Integer> range) {
         int key = Integer.valueOf(this.ask(question));
         boolean exist = false;
-        for (int value : range){
-            if (value == key){
+        for (int value : range) {
+            if (value == key) {
                 exist = true;
                 break;
             }
         }
-        if (!exist){
+        if (!exist) {
             throw new MenuOutException("out of menu range");
         }
         return key;

@@ -4,7 +4,7 @@ import ru.job4j.tracker.input.Input;
 import ru.job4j.tracker.model.Item;
 import ru.job4j.tracker.Tracker;
 
-public class AddItem extends BaseAction{
+public class AddItem extends BaseAction {
 
     public AddItem(int key, String info) {
         super(key, info);

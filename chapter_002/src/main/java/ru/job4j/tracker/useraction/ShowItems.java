@@ -12,6 +12,7 @@ public class ShowItems extends BaseAction {
 
     @Override
     public void execute(Input input, Tracker tracker) {
+        System.out.println("------------ Все созданые заявки --------------");
         for (Item item : tracker.findAll()) {
             System.out.println(item.toString());
         }

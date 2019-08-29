@@ -72,11 +72,11 @@ public class Logic {
         for (int i = 0; i < table.length; i++) {
             int countOneInRow = 0;
             int countOneInColumn = 0;
-            for(int j = 0; j < table.length; j++) {
-                if(table[i][j] == 1) {
+            for (int j = 0; j < table.length; j++) {
+                if (table[i][j] == 1) {
                     countOneInRow++;
                 }
-                if(table[j][i] == 1) {
+                if (table[j][i] == 1) {
                     countOneInColumn++;
                 }
             }

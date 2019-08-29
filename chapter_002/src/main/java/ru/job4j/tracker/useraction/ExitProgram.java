@@ -16,7 +16,6 @@ public class ExitProgram extends BaseAction {
 
     @Override
     public void execute(Input input, Tracker tracker) {
-        System.out.println("You chose exit. Good buy");
         this.ui.stop();
     }
 }

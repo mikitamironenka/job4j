@@ -18,11 +18,11 @@ public class PhoneDictionary {
      */
     public List<Person> find(String key) {
         List<Person> result = new ArrayList<>();
-        for(Person person : this.persons) {
-            if(person.getName().contains(key) ||
-                    person.getSurname().contains(key) ||
-                    person.getPhone().contains(key) ||
-                    person.getAddress().contains(key)) {
+        for (Person person : this.persons) {
+            if (person.getName().contains(key)
+                    || person.getSurname().contains(key)
+                    || person.getPhone().contains(key)
+                    || person.getAddress().contains(key)) {
                 result.add(person);
             }
         }

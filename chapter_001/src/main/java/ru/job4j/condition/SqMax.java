@@ -7,18 +7,17 @@ public class SqMax {
         if (first > second) {
             if (first > third) {
                 if (first > forth) {
-                    result = first;
+                    return first;
                 }
             }
         }
         if (second > third) {
             if (second > forth) {
-                result = second;
+                return second;
             }
         }
         if (third > forth) {
-
-            result = third;
+            return third;
         }
         return result;
 //                int result = first;

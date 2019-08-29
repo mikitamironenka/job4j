@@ -19,7 +19,7 @@ public class BishopBlackTest {
     public void whenCallCopyThenPositionTheSame() {
 
         BishopBlack bishopBlack = new BishopBlack(Cell.C8);
-        BishopBlack result = (BishopBlack)bishopBlack.copy(Cell.C7);
+        BishopBlack result = (BishopBlack) bishopBlack.copy(Cell.C7);
         assertThat(result.position(), is(Cell.C7));
     }
 

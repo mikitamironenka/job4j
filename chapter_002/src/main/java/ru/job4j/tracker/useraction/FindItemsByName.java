@@ -6,7 +6,7 @@ import ru.job4j.tracker.Tracker;
 
 import java.util.List;
 
-public class FindItemsByName extends BaseAction{
+public class FindItemsByName extends BaseAction {
 
     public FindItemsByName(int key, String info) {
         super(key, info);

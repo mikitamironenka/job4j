@@ -15,21 +15,11 @@ public class ConvertListToArray {
         int cells = list.size() % rows == 0 ? rows : list.size() / rows + 1;
         int[][] twoDArray = new int[rows][cells];
 
-        int count = 0, i = 0, j = 0;
+        int i = 0, j = 0;
         for (int num : list) {
-            if (count < list.size()) {
-                twoDArray[i][j] = num;
-                i++;
-                j++;
-                count++;
-            } else {
-                twoDArray[i][j] = 0;
-                i++;
-                j++;
-                count++;
-            }
-            if (j == cells - 1) {
+            if (j == cells) {
                 j = 0;
+                i++;
             }
             twoDArray[i][j] = num;
             j++;
@@ -37,7 +27,7 @@ public class ConvertListToArray {
         return twoDArray;
     }
 
-    public List<Integer> convert (List<int[]> list) {
+    public List<Integer> convert(List<int[]> list) {
         List<Integer> result = new ArrayList<>();
         for (int[] arr : list) {
             for (int num : arr) {

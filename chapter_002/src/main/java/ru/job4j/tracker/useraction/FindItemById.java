@@ -15,7 +15,7 @@ public class FindItemById extends BaseAction {
         String id = input.ask("Enter id of the item to find");
         Item item = tracker.findById(id);
         if (item != null) {
-            System.out.format("You look for : %s %s", System.lineSeparator(), item.toString());
+            System.out.format("%s%s", item.toString(), System.lineSeparator());
         } else {
             System.out.println("The item wasn't fonded");
         }

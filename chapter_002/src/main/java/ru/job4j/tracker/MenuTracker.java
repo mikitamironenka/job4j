@@ -60,13 +60,14 @@ public class MenuTracker {
      * @param key ключ операции
      */
     public void select(int key) {
-        this.actions.get(key - 1).execute(this.input, this.tracker);
+        this.actions.get(key).execute(this.input, this.tracker);
     }
 
     /**
      * Метод выводит на экран меню.
      */
     public void show() {
+        System.out.println("Menu. Make your choice:");
         for (UserAction action : this.actions) {
             if (action != null) {
                 System.out.println(action.info());

@@ -22,7 +22,7 @@ public class StubInput implements Input {
      * Поле считает количество вызовом метода ask.
      * При каждом вызове надо передвинуть указатель на новое число.
      */
-    private int position;
+    private int position = 0;
 
     public StubInput(final String[] value) {
         this.value = value;
@@ -38,22 +38,26 @@ public class StubInput implements Input {
      */
     @Override
     public String ask(String question) {
-        return this.value[this.position++];
+        String result =  this.value[this.position];
+        if (this.value.length > this.position) {
+            position++;
+        }
+        return result;
     }
 
     @Override
     public int ask(String question, List<Integer> range) {
         int key = Integer.valueOf(this.ask(question));
         boolean exist = false;
-        for (int value : range){
-            if (value == key){
+        for (int value : range) {
+            if (value == key) {
                 exist = true;
                 break;
             }
         }
-        if (exist){
+        if (exist) {
             return key;
-        }else{
+        } else {
             throw new MenuOutException("out of menu range");
         }
     }

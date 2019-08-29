@@ -25,12 +25,12 @@ public class ValidateInput implements Input {
             try {
                 value = this.input.ask(question, range);
                 invalid = false;
-            } catch(MenuOutException moe) {
+            } catch (MenuOutException moe) {
                 System.out.println("Please, select key from menu.");
-            } catch(NumberFormatException nfe) {
+            } catch (NumberFormatException nfe) {
                 System.out.println("Please, enter validate data again.");
             }
-        } while(invalid);
+        } while (invalid);
         return value;
     }
 }
