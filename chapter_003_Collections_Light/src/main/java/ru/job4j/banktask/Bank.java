@@ -18,7 +18,7 @@ public class Bank {
      * @param user
      */
     public void addUser(User user) {
-        this.store.put(user, new ArrayList<Account>());
+        this.store.putIfAbsent(user, new ArrayList<Account>());
     }
 
     /**
@@ -79,28 +79,17 @@ public class Bank {
      */
     public boolean transferMoney(String srcPassport, String srcRequisite, String dstPassport, String dstRequisite, double amount) {
         boolean result;
-        User srcUser = getUserFromMapByPassword(srcPassport);
-        User dstUser = getUserFromMapByPassword(dstPassport);
-        Account srcAccount;
-        Account dstAccount;
-        if (srcUser != null && dstUser != null) {
-            srcAccount = getAccountByRequisite(srcUser, srcRequisite);
-            dstAccount = getAccountByRequisite(dstUser, dstRequisite);
-        } else {
-            System.out.println("The users aren't exist");
-            return false;
-        }
-        if (!this.store.get(srcUser).contains(srcAccount)) {
+        Account srcAccount = getAccountByPassportAndRequisite(srcPassport, srcRequisite);
+        Account dstAccount = getAccountByPassportAndRequisite(dstPassport, dstRequisite);;
+        if (srcAccount == null) {
             result = false;
-        } else if (this.store.get(srcUser).get(this.store.get(srcUser).indexOf(srcAccount)).getValue() < amount) {
+        } else if (srcAccount.getValue() < amount) {
             result = false;
         } else {
-            int indexOfSrcAccount = this.store.get(srcUser).indexOf(srcAccount);
-            int indexOfDstAccount = this.store.get(dstUser).indexOf(dstAccount);
-            double moneyOnSrcAccount = this.store.get(srcUser).get(indexOfSrcAccount).getValue();
-            double moneyOnDstAccount = this.store.get(dstUser).get(indexOfDstAccount).getValue();
-            this.store.get(srcUser).get(indexOfSrcAccount).setValue(moneyOnSrcAccount - amount);
-            this.store.get(dstUser).get(indexOfDstAccount).setValue(moneyOnDstAccount + amount);
+            double moneyOnSrcAccount = srcAccount.getValue();
+            double moneyOnDstAccount = dstAccount.getValue();
+            srcAccount.setValue(moneyOnSrcAccount - amount);
+            dstAccount.setValue(moneyOnDstAccount + amount);
             result = true;
         }
         return result;
@@ -125,5 +114,22 @@ public class Bank {
             }
         }
         return account;
+    }
+
+    private Account getAccountByPassportAndRequisite(String passport, String requisite) {
+        Account result = null;
+        User user = null;
+        List<User> users = new ArrayList<User>(store.keySet());
+        for (User tmp : users) {
+            if (tmp.getPassport().equals(passport)) {
+                user = tmp;
+            }
+        }
+        for (Account account : this.store.get(user)) {
+            if (account.getRequisites().equals(requisite)) {
+                result = account;
+            }
+        }
+        return result;
     }
 }
