@@ -9,6 +9,7 @@ import ru.job4j.tracker.model.Item;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.function.Consumer;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -19,6 +20,15 @@ public class StartUITest {
     private final PrintStream stdout = System.out;
     // буфер для результата.
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+    private final Consumer<String> output = new Consumer<String>() {
+        private final PrintStream stdout = new PrintStream(out);
+        @Override
+        public void accept(String s) {
+            stdout.println(s);
+        }
+    };
+
 
     @Before
     public void loadOutput() {
@@ -50,8 +60,9 @@ public class StartUITest {
         //создаём StubInput с последовательностью действий(производим замену заявки)
         Input input = new StubInput(new String[]{"2", item.getId(), "test replace", "заменили заявку", "6"});
         // создаём StartUI и вызываем метод init()
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, output).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
+//        assertThat(tracker.findById(item.getId()).getName(), is("test replace"));
         assertThat(tracker.findById(item.getId()).getName(), is("test replace"));
     }
 
@@ -60,7 +71,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
         Input input = new StubInput(new String[]{"3", item.getId(), "6"});
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, output).init();
         assertThat(tracker.findAll().size(), is(0));
     }
 
@@ -68,7 +79,7 @@ public class StartUITest {
     public void whenShowMenuThenShowMenu() {
         Tracker tracker = new Tracker();
         Input input = new StubInput(new String[]{"6"});
-        StartUI startUI = new StartUI(input, tracker);
+        StartUI startUI = new StartUI(input, tracker, output);
         startUI.init();
         assertThat(
                 new String(out.toByteArray()),
@@ -86,7 +97,7 @@ public class StartUITest {
         Item item1 = tracker.add(new Item("test name", "desc"));
         Item item2 = tracker.add(new Item("test name", "desc"));
         Input input = new StubInput(new String[]{"1", "6"});
-        StartUI startUI = new StartUI(input, tracker);
+        StartUI startUI = new StartUI(input, tracker, output);
         startUI.init();
         assertThat(
                 new String(out.toByteArray()),
@@ -108,10 +119,11 @@ public class StartUITest {
         Item item1 = tracker.add(new Item("test name", "desc"));
         Item item2 = tracker.add(new Item("test name", "desc"));
         Input input = new StubInput(new String[]{"5", item1.getName(), "6"});
-        StartUI startUI = new StartUI(input, tracker);
+        StartUI startUI = new StartUI(input, tracker, output);
         startUI.init();
         assertThat(
-                new String(out.toByteArray()),
+//                new String(out.toByteArray()),
+                this.output.toString(),
                 is(
                         new StringBuilder()
                                 .append(showMenu())
@@ -129,14 +141,15 @@ public class StartUITest {
         Item item1 = tracker.add(new Item("test name", "desc"));
         Item item2 = tracker.add(new Item("test name", "desc"));
         Input input = new StubInput(new String[]{"4", item1.getId(), "6"});
-        StartUI startUI = new StartUI(input, tracker);
+        StartUI startUI = new StartUI(input, tracker, output);
         startUI.init();
         assertThat(
-                new String(out.toByteArray()),
+//                new String(out.toByteArray()),
+                this.output.toString(),
                 is(
                         new StringBuilder()
                                 .append(showMenu())
-                                .append(item1.toString() + System.lineSeparator())
+                                .append(item1.toString() + System.lineSeparator() + System.lineSeparator())
                                 .append(showMenu())
                                 .toString()
                 )

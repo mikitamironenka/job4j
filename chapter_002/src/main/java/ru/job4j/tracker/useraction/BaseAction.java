@@ -1,5 +1,7 @@
 package ru.job4j.tracker.useraction;
 
+import java.util.function.Consumer;
+
 public abstract class BaseAction implements UserAction {
 
     private final int key;
