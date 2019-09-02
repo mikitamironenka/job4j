@@ -1,17 +1,14 @@
-package ru.job4j.calculate;
+package ru.job4j.lambda;
 
-/**
- * Calculate.
- * @author Mikita Mironenka (m.mironenka@gmail.com)
- */
-public class Calculate {
+public class MathUtil {
+
 
     /**
      * Addition
      * @param first first addend
      * @param second second addend
      */
-    public double add(double first, double second) {
+    public static double add(double first, double second) {
         return first + second;
     }
 
