@@ -27,6 +27,11 @@ public class StartUITest {
         public void accept(String s) {
             stdout.println(s);
         }
+
+        @Override
+        public String toString() {
+            return out.toString();
+        }
     };
 
 
@@ -82,7 +87,8 @@ public class StartUITest {
         StartUI startUI = new StartUI(input, tracker, output);
         startUI.init();
         assertThat(
-                new String(out.toByteArray()),
+//                new String(out.toByteArray()),
+                this.output.toString(),
                 is(
                         new StringBuilder()
                                 .append(showMenu())
@@ -100,7 +106,8 @@ public class StartUITest {
         StartUI startUI = new StartUI(input, tracker, output);
         startUI.init();
         assertThat(
-                new String(out.toByteArray()),
+//                new String(out.toByteArray()),
+                this.output.toString(),
                 is(
                         new StringBuilder()
                                 .append(showMenu())
