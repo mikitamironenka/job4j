@@ -26,10 +26,10 @@ public class Profiles {
                 .stream()
                 //get stream with addresses
                 .map(Profile::getAddress)
-                //get distinct elements
-                .distinct()
                 //sorted them in city field
                 .sorted(Comparator.comparing(Address::getCity))
+                //get distinct elements
+                .distinct()
                 //collect it to list
                 .collect(Collectors.toList());
         return result;
