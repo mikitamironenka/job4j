@@ -1,5 +1,6 @@
 package ru.job4j.addressbook;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
@@ -9,52 +10,46 @@ import static org.junit.Assert.*;
 
 public class PhoneDictionaryTest {
 
+    private PhoneDictionary phones;
+
+    @Before
+    public void init() {
+        phones = new PhoneDictionary();
+        var name = "Petr";
+        var surname = "Arsentev";
+        var phone = "534872";
+        var city = "Bryansk";
+        phones.add(
+                new Person(name, surname, phone, city)
+        );
+    }
+
     @Test
     public void whenFindByName() {
-        PhoneDictionary phones = new PhoneDictionary();
-        phones.add(
-                new Person("Petr", "Arsentev", "534872", "Bryansk")
-        );
         List<Person> persons = phones.find("Petr");
         assertThat(persons.iterator().next().getSurname(), is("Arsentev"));
     }
 
     @Test
     public void whenFindBySurname() {
-        PhoneDictionary phones = new PhoneDictionary();
-        phones.add(
-                new Person("Petr", "Arsentev", "534872", "Bryansk")
-        );
         List<Person> persons = phones.find("Arsentev");
         assertThat(persons.iterator().next().getSurname(), is("Arsentev"));
     }
 
     @Test
     public void whenFindByPhone() {
-        PhoneDictionary phones = new PhoneDictionary();
-        phones.add(
-                new Person("Petr", "Arsentev", "534872", "Bryansk")
-        );
         List<Person> persons = phones.find("534872");
         assertThat(persons.iterator().next().getSurname(), is("Arsentev"));
     }
 
     @Test
     public void whenFindByAddress() {
-        PhoneDictionary phones = new PhoneDictionary();
-        phones.add(
-                new Person("Petr", "Arsentev", "534872", "Bryansk")
-        );
         List<Person> persons = phones.find("Bryansk");
         assertThat(persons.iterator().next().getSurname(), is("Arsentev"));
     }
 
     @Test
     public void whenFindBySuffix() {
-        PhoneDictionary phones = new PhoneDictionary();
-        phones.add(
-                new Person("Petr", "Arsentev", "534872", "Bryansk")
-        );
         List<Person> persons = phones.find("nsk");
         assertThat(persons.iterator().next().getSurname(), is("Arsentev"));
     }

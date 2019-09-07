@@ -22,8 +22,8 @@ public class PriorityQueue {
         if (tasks.size() == 0) {
             tasks.add(task);
         } else {
-            int index = 0;
-            int i = 0;
+            var index = 0;
+            var i = 0;
             while (iterator.hasNext()) {
                 Task temp = (Task) iterator.next();
                 if (task.getPriority() < temp.getPriority()) {
