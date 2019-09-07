@@ -12,14 +12,15 @@ import java.util.stream.Collectors;
 public class Converter {
 
     public Map<String, Student> convertListToMap(List<Student> list) {
-        return
-                list
+        final Map<String, Student> collect = list
                 .stream()
                 .collect(Collectors.toMap(
                         e -> e.getSurname(),
                         e -> e,
                         (a1, a2) -> a1
                 ));
+        return
+                collect;
     }
 
 }
