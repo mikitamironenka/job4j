@@ -21,11 +21,18 @@ public class SortUserTest {
         List<User> list = new ArrayList<>(List.of(user1, user2, user3, user4));
         SortUser sortUser = new SortUser();
         Set<User> set = sortUser.sort(list);
-        Set<User> checked = new TreeSet<>();
-        checked.add(user1);
-        checked.add(user2);
-        checked.add(user3);
-        checked.add(user4);
+//        Set<User> checked = new TreeSet<>();
+//        checked.add(user1);
+//        checked.add(user2);
+//        checked.add(user3);
+//        checked.add(user4);
+        Set<User> checked  = Set.of(
+                user1,
+                user2,
+                user3,
+                user4
+        );
+
         assertThat(set, is(checked));
     }
 
