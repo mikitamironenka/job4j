@@ -1,9 +1,7 @@
-package ru.job4j.banktask;
+package ru.job4j.banktaskwithstream;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Bank {
 
@@ -39,8 +37,6 @@ public class Bank {
         if (user != null) {
             this.store.get(user).add(account);
         }
-
-        
     }
 
     /**
@@ -50,9 +46,7 @@ public class Bank {
      */
     public void deleteAccountFromUser(String passport, Account account) {
         User user = getUserFromMapByPassword(passport);
-        if (user != null) {
-            this.store.get(user).remove(account);
-        }
+        this.store.get(user).removeIf(a -> a.equals(account));
     }
 
     /**
@@ -61,14 +55,11 @@ public class Bank {
      * @return list of user's accounts
      */
     public List<Account> getUserAccounts(String passport) {
-        List<Account> result = new ArrayList<>();
-        User user = getUserFromMapByPassword(passport);
-        if (user != null) {
-            for (Account account : this.store.get(user)) {
-                result.add(account);
-            }
-        }
-        return result;
+               List<Account> list = this.store.get(getUserFromMapByPassword(passport))
+                .stream()
+                .filter(a -> a != null)
+                .collect(Collectors.toList());
+        return list;
     }
 
     /**
@@ -98,40 +89,25 @@ public class Bank {
     }
 
     private User getUserFromMapByPassword(String passport) {
-        User user = null;
-        List<User> users = new ArrayList<User>(store.keySet());
-        for (User tmp : users) {
-            if (tmp.getPassport().equals(passport)) {
-                user = tmp;
-            }
-        }
+        List<User> users = new ArrayList<>(store.keySet());
+        User user = users.stream()
+                .filter(p -> p.getPassport().equals(passport))
+                .findFirst()
+                .orElse(null);
         return user;
     }
 
     private Account getAccountByRequisite(User user, String requisite) {
-        Account account = null;
-        for (Account tmp : this.store.get(user)) {
-            if (tmp.getRequisites().equals(requisite)) {
-                account = tmp;
-            }
-        }
+        Account account = this.store.get(user).stream()
+                .filter(p -> p.getRequisites().equals(requisite))
+                .findFirst()
+                .orElse(null);
         return account;
     }
 
     private Account getAccountByPassportAndRequisite(String passport, String requisite) {
-        Account result = null;
-        User user = null;
-        List<User> users = new ArrayList<User>(store.keySet());
-        for (User tmp : users) {
-            if (tmp.getPassport().equals(passport)) {
-                user = tmp;
-            }
-        }
-        for (Account account : this.store.get(user)) {
-            if (account.getRequisites().equals(requisite)) {
-                result = account;
-            }
-        }
+        User user = getUserFromMapByPassword(passport);
+        Account result = getAccountByRequisite(user, requisite);
         return result;
     }
 }

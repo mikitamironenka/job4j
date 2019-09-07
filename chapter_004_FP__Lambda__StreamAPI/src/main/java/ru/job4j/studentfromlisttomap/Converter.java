@@ -15,10 +15,10 @@ public class Converter {
         return
                 list
                 .stream()
-                .distinct()
                 .collect(Collectors.toMap(
                         e -> e.getSurname(),
-                        e -> e
+                        e -> e,
+                        (a1, a2) -> a1
                 ));
     }
 
