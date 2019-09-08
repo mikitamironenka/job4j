@@ -34,7 +34,7 @@ public class SchoolTest {
         checked = List.of(
                 new Student(1),
                 new Student(20));
-        assertThat(result, is (checked));
+        assertThat(result, is(checked));
     }
 
     @Test
@@ -45,7 +45,7 @@ public class SchoolTest {
         checked = List.of(
                 new Student(51),
                 new Student(60));
-        assertThat(result, is (checked));
+        assertThat(result, is(checked));
     }
 
     @Test
@@ -56,7 +56,7 @@ public class SchoolTest {
         checked = List.of(
                 new Student(80),
                 new Student(90));
-        assertThat(result, is (checked));
+        assertThat(result, is(checked));
     }
 
 }

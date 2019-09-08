@@ -24,32 +24,47 @@ public class Logic3T {
     }
 
     public boolean isWinnerX() {
-        return this.fillBy(Figure3T::hasMarkX, 0, 0, 1, 0) ||
-                this.fillBy(Figure3T::hasMarkX, 0, 0, 0, 1) ||
-
-                this.fillBy(Figure3T::hasMarkX, 0, 1, 1, 0) ||
-                this.fillBy(Figure3T::hasMarkX, 1, 0, 0, 1) ||
-
-                this.fillBy(Figure3T::hasMarkX, 0, 2, 1, 0) ||
-                this.fillBy(Figure3T::hasMarkX, 2, 0, 0, 1) ||
-
-                this.fillBy(Figure3T::hasMarkX, 0,0, 1, 1) ||
-                this.fillBy(Figure3T::hasMarkX, this.table.length - 1 , 0, -1, 1);
-
+        boolean result = false;
+        result = checkerX();
+        if (this.fillBy(Figure3T::hasMarkX, 0, 0, 1, 1)
+                || this.fillBy(Figure3T::hasMarkX, this.table.length - 1, 0, -1, 1)) {
+            result = true;
+        }
+        return result;
     }
 
     public boolean isWinnerO() {
-        return this.fillBy(Figure3T::hasMarkO, 0, 0, 1, 0) ||
-                this.fillBy(Figure3T::hasMarkO, 0, 0, 0, 1) ||
+        boolean result = false;
+        result = checkerO();
+        if (this.fillBy(Figure3T::hasMarkO, 0, 0, 1, 1)
+                || this.fillBy(Figure3T::hasMarkO, this.table.length - 1, 0, -1, 1)) {
+            result = true;
+        }
+        return result;
+    }
 
-                this.fillBy(Figure3T::hasMarkO, 0, 1, 1, 0) ||
-                this.fillBy(Figure3T::hasMarkO, 1, 0, 0, 1) ||
+    private boolean checkerX() {
+        boolean result = false;
+        for (var i = 0; i != this.table.length; i++) {
+            if (this.fillBy(Figure3T::hasMarkX, 0, i, 1, 0)
+                    || this.fillBy(Figure3T::hasMarkX, i, 0, 0, 1)
+            ) {
+                result = true;
+            }
+        }
+        return result;
+    }
 
-                this.fillBy(Figure3T::hasMarkO, 0, 2, 1, 0) ||
-                this.fillBy(Figure3T::hasMarkO, 2, 0, 0, 1) ||
-
-                this.fillBy(Figure3T::hasMarkO, 0,0, 1, 1) ||
-                this.fillBy(Figure3T::hasMarkO, this.table.length - 1, 0, -1, 1);
+    private boolean checkerO() {
+        boolean result = false;
+        for (var i = 0; i != this.table.length; i++) {
+            if (this.fillBy(Figure3T::hasMarkO, 0, i, 1, 0)
+                    || this.fillBy(Figure3T::hasMarkO, i, 0, 0, 1)
+            ) {
+                result = true;
+            }
+        }
+        return result;
     }
 
     public boolean hasGap() {
