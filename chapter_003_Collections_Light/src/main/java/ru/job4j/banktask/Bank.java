@@ -82,7 +82,7 @@ public class Bank {
     public boolean transferMoney(String srcPassport, String srcRequisite, String dstPassport, String dstRequisite, double amount) {
         boolean result;
         Account srcAccount = getAccountByPassportAndRequisite(srcPassport, srcRequisite);
-        Account dstAccount = getAccountByPassportAndRequisite(dstPassport, dstRequisite);;
+        Account dstAccount = getAccountByPassportAndRequisite(dstPassport, dstRequisite);
         if (srcAccount == null) {
             result = false;
         } else if (srcAccount.getValue() < amount) {
