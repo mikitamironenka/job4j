@@ -33,7 +33,7 @@ public class CoffeeMachine {
                 }
             }
         }
-        int [] result = new int[list.size()];
+        int[] result = new int[list.size()];
         for (int i = 0; i < list.size(); i++) {
             result[i] = list.get(i);
         }
@@ -43,7 +43,7 @@ public class CoffeeMachine {
 
     public static void main(String[] args) {
 
-        int [] res = changes(50, 22);
+        int[] res = changes(50, 22);
         for (int i = 0; i < res.length; i++) {
             System.out.println(res[i]);
         }
