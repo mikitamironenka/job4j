@@ -14,7 +14,7 @@ public class IteratorFor2DArrayTest {
     private Iterator<Integer> it;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         it = new MatrixIterator(new int[][]{{1, 2, 3}, {4, 5, 6}});
     }
 

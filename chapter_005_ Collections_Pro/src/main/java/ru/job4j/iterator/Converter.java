@@ -28,11 +28,11 @@ public class Converter {
 
             private void selectCurrentIterator() {
 
-                if(currentIterator != null && currentIterator.hasNext()) {
+                if (currentIterator != null && currentIterator.hasNext()) {
                     return;
                 }
                 currentIterator = null;
-                while(it.hasNext()) {
+                while (it.hasNext()) {
                     Iterator<Integer> nextIterator = it.next();
                     if (nextIterator.hasNext()) {
                         currentIterator = nextIterator;

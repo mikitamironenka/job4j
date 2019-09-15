@@ -16,8 +16,12 @@ public class Profile {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Profile profile = (Profile) o;
         return Objects.equals(address, profile.address);
     }

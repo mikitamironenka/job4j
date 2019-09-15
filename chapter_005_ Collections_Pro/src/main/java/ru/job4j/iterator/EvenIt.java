@@ -25,12 +25,12 @@ public class EvenIt implements Iterator<Integer> {
 
     @Override
     public Integer next() {
-        while(index < numbers.length) {
+        while (index < numbers.length) {
             int num = numbers[index];
             index++;
             if ((num % 2) == 0) {
                 return num;
-            } else if (!hasNext()){
+            } else if (!hasNext()) {
                 throw new NoSuchElementException();
             }
         }

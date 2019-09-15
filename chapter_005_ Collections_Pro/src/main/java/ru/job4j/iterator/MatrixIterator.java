@@ -31,10 +31,8 @@ public class MatrixIterator implements Iterator<Integer> {
         return row < value.length && column < value[row].length;
     }
 
-    private void resetIndexes()
-    {
-        if (column == value[row].length)
-        {
+    private void resetIndexes() {
+        if (column == value[row].length) {
             column = 0;
             row++;
         }
