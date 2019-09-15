@@ -36,4 +36,9 @@ public class EvenIt implements Iterator<Integer> {
         }
         return null;
     }
+
+    @Override
+    public void remove() {
+        throw new UnsupportedOperationException();
+    }
 }

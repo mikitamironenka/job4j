@@ -40,6 +40,11 @@ public class Converter {
                     }
                 }
             }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException();
+            }
         };
     }
 }
