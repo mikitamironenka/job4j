@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class SimpleArray<T> implements Iterable{
+public class SimpleArray<T> implements Iterable {
 
     Object[] objects;
     int index = 0;
@@ -25,6 +25,9 @@ public class SimpleArray<T> implements Iterable{
         this.objects = new Object[size];
     }
 
+    public int getSize() {
+        return this.objects.length;
+    }
     public void add(T model) {
         this.objects[this.index++] = model;
     }
@@ -35,17 +38,17 @@ public class SimpleArray<T> implements Iterable{
 
     public void remove(int index) {
         this.objects[index] = null;
-//        for (int i = index; i < this.objects.length - 1; i++) {
-//            this.objects[i] = this.objects[i + 1];
-//        }
+        for (int i = index; i < this.objects.length - 1; i++) {
+            this.objects[i] = this.objects[i + 1];
+        }
 
-        this.objects = Arrays.stream(this.objects)
-                .filter(p -> p != null)
-                .toArray(Object[] :: new);
+//        this.objects = Arrays.stream(this.objects)
+//                .filter(p -> p != null)
+//                .toArray(Object[] :: new);
     }
 
     public T get(int index) {
-       return (T)this.objects[index];
+       return (T) this.objects[index];
     }
 
     @Override
@@ -62,8 +65,7 @@ public class SimpleArray<T> implements Iterable{
             public Object next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
-                }
-                else {
+                } else {
                     return objects[currentIndex++];
                 }
              }
