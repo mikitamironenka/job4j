@@ -28,7 +28,7 @@ public class MatrixIterator implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        return row < value.length && column < value[row].length;
+        return this.row != this.value.length;
     }
 
     private void resetIndexes() {
@@ -40,18 +40,11 @@ public class MatrixIterator implements Iterator<Integer> {
 
     @Override
     public Integer next() {
-        while (row < value.length) {
-            while (column < value[row].length) {
-                int irr = value[row][column];
-                column++;
-                resetIndexes();
-                return irr;
-            }
-            row++;
-        }
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        return null;
+        int next = value[row][column++];
+        resetIndexes();
+        return next;
     }
 }
