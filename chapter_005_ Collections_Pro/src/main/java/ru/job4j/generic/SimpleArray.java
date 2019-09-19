@@ -18,8 +18,8 @@ import java.util.NoSuchElementException;
 
 public class SimpleArray<T> implements Iterable {
 
-    Object[] objects;
-    int index = 0;
+    private Object[] objects;
+    private int index = 0;
 
     public SimpleArray(int size) {
         this.objects = new Object[size];
@@ -28,6 +28,7 @@ public class SimpleArray<T> implements Iterable {
     public int getSize() {
         return this.objects.length;
     }
+
     public void add(T model) {
         this.objects[this.index++] = model;
     }
