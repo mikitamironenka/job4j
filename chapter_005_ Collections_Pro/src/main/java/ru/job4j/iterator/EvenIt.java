@@ -25,20 +25,25 @@ public class EvenIt implements Iterator<Integer> {
 
     @Override
     public Integer next() {
-        while (index < numbers.length) {
+        Integer result = null;
+        if (!hasNext()){
+            throw new NoSuchElementException();
+        }
+        while(index < numbers.length) {
             int num = numbers[index];
             index++;
             if ((num % 2) == 0) {
-                return num;
-            } else if (!hasNext()) {
-                throw new NoSuchElementException();
+                result = num;
+                break;
             }
         }
-        return null;
+        return result;
     }
 
     @Override
     public void remove() {
         throw new UnsupportedOperationException();
     }
+
+
 }
