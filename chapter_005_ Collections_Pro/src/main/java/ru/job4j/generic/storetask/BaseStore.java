@@ -2,7 +2,7 @@ package ru.job4j.generic.storetask;
 
 import ru.job4j.generic.SimpleArray;
 
-public abstract class BaseStore<T extends Base> implements Store {
+public abstract class BaseStore<T extends Base> implements Store<T> {
 
     private SimpleArray<Base> simpleArray;
     private int size;
@@ -46,11 +46,11 @@ public abstract class BaseStore<T extends Base> implements Store {
     }
 
     @Override
-    public Base findById(String id) {
-        Base result = null;
-        Base item;
+    public T findById(String id) {
+        T result = null;
+        T item;
         for (int i = 0; i < this.size; i++) {
-            item = this.simpleArray.get(i);
+            item = (T) this.simpleArray.get(i);
             if ((item != null) && (id.equals(item.getId()))) {
                 result = item;
                 break;
