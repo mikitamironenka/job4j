@@ -8,36 +8,26 @@ public class Converter {
     Iterator<Integer> convert(Iterator<Iterator<Integer>> it) {
         return new Iterator<Integer>() {
 
-            private Iterator<Integer> currentIterator = null;
+            private Iterator<Integer> currentIterator = it != null && it.hasNext() ? it.next() : null;
 
             @Override
             public boolean hasNext() {
                 selectCurrentIterator();
-                return (currentIterator != null && currentIterator.hasNext());
+                return currentIterator != null;
             }
 
             @Override
             public Integer next() {
-
-                selectCurrentIterator();
-                if (currentIterator == null) {
+                if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return currentIterator.next();
+                return this.currentIterator.next();
             }
 
             private void selectCurrentIterator() {
-
-                if (currentIterator != null && currentIterator.hasNext()) {
-                    return;
-                }
-                currentIterator = null;
-                while (it.hasNext()) {
-                    Iterator<Integer> nextIterator = it.next();
-                    if (nextIterator.hasNext()) {
-                        currentIterator = nextIterator;
-                        break;
-                    }
+                if (this.currentIterator != null && !this.currentIterator.hasNext()) {
+                    this.currentIterator = it.hasNext() ? it.next() : null;
+                    this.selectCurrentIterator();
                 }
             }
 
