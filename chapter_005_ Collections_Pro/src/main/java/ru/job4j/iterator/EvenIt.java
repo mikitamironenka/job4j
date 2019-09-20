@@ -6,43 +6,42 @@ import java.util.NoSuchElementException;
 public class EvenIt implements Iterator<Integer> {
 
     final int[] numbers;
-    private int index = 0;
+    private int index;
 
     public EvenIt(final int[] numbers) {
         this.numbers = numbers;
+        index = -1;
+        fixNext();
     }
 
     @Override
     public boolean hasNext() {
-        boolean result = false;
-        for (int i = index; i < numbers.length; i++) {
-            if (numbers[i] % 2 == 0) {
-                result = true;
-            }
-        }
-        return result;
+        return index < numbers.length;
     }
 
     @Override
     public Integer next() {
-        Integer result = null;
-        if (!hasNext()){
+        if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        while(index < numbers.length) {
-            int num = numbers[index];
-            index++;
-            if ((num % 2) == 0) {
-                result = num;
-                break;
-            }
-        }
-        return result;
+        Integer next = numbers[index];
+        fixNext();
+        return next;
     }
 
     @Override
     public void remove() {
         throw new UnsupportedOperationException();
+    }
+
+    /** Increase index to the index of the next element in numbers that
+     * is even ---or to numbers.length if there no such elements.
+     * Precondition: n < numbers.length */
+    private void fixNext() {
+        index = index + 1;
+        while (index < numbers.length && numbers[index] % 2 == 1) {
+            index = index + 1;
+        }
     }
 
 
