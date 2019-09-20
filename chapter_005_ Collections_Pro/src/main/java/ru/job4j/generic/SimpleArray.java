@@ -34,18 +34,20 @@ public class SimpleArray<T> implements Iterable {
     }
 
     public void set(int index, T model) {
+        if (index < 0 || index > this.index) {
+            System.out.println("Wrong index");
+        } else {
         this.objects[index] = model;
+        }
     }
 
     public void remove(int index) {
-        this.objects[index] = null;
-        for (int i = index; i < this.objects.length - 1; i++) {
-            this.objects[i] = this.objects[i + 1];
-        }
-
-//        this.objects = Arrays.stream(this.objects)
-//                .filter(p -> p != null)
-//                .toArray(Object[] :: new);
+        Object[] array = new Object[this.objects.length - 1];
+        int remainingElements = this.objects.length - (index + 1);
+        System.arraycopy(this.objects, 0, array, 0, index);
+        System.arraycopy(this.objects, index + 1, array, index, remainingElements);
+        this.objects = array;
+        this.index--;
     }
 
     public T get(int index) {
@@ -59,7 +61,7 @@ public class SimpleArray<T> implements Iterable {
             private int currentIndex = 0;
             @Override
             public boolean hasNext() {
-                return currentIndex < objects.length && objects[currentIndex] != null;
+                return currentIndex < index;
             }
 
             @Override
