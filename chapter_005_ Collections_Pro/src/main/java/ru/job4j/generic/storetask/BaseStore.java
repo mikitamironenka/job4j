@@ -20,28 +20,31 @@ public abstract class BaseStore<T extends Base> implements Store<T> {
     @Override
     public boolean replace(String id, Base model) {
         boolean result = false;
-        this.simpleArray.set(getIndexById(id), model);
-        if (findById(model.getId()).equals(model)) {
-            result = true;
+        int index = getIndexById(id);
+        if (index == -1) {
+            System.out.println("wrong index");
+        } else {
+            this.simpleArray.set(index, model);
+            if (findById(model.getId()).equals(model)) {
+                result = true;
+            }
         }
+
         return result;
     }
 
     @Override
     public boolean delete(String id) {
         boolean result = false;
-        this.simpleArray.remove(getIndexById(id));
-        if (findById(id) == null) {
-            result = true;
+        int index = getIndexById(id);
+        if (index == -1) {
+            System.out.println("wrong index");
+        } else {
+            this.simpleArray.remove(getIndexById(id));
+            if (findById(id) == null) {
+                result = true;
+            }
         }
-//        Base model;
-//        for (int i = 0; i < this.simpleArray.getSize(); i++) {
-//            model = this.simpleArray.get(i);
-//            if (model.getId().equals(id)) {
-//                this.simpleArray.remove(i);
-//                result = true;
-//            }
-//        }
         return result;
     }
 
@@ -60,7 +63,7 @@ public abstract class BaseStore<T extends Base> implements Store<T> {
     }
 
     public int getIndexById(String id) {
-        int result = 0;
+        int result = -1;
         Base item;
         for (int i = 0; i < this.size; i++) {
             item = this.simpleArray.get(i);
