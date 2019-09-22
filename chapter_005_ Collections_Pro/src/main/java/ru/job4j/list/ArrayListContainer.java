@@ -2,6 +2,7 @@ package ru.job4j.list;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 //Необходимо создать динамический контейнер с методами:
 //1) add(E value);
@@ -52,14 +53,13 @@ public class ArrayListContainer<E> implements Iterable<E> {
 
             @Override
             public E next() {
-                E result = null;
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                while(index < container.length) {
-                    result = (E) container[index++];
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
                 }
-                return result;
+                return (E) container[index++];
             }
         };
         return it;
