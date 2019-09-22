@@ -16,14 +16,12 @@ public class LinkedListContainer<E> implements Iterable<E> {
 
     private Node<E> first;
     private Node<E> last;
-    private Node<E> current;
     private int size = 0;
     private int modCount = 0;
 
     public LinkedListContainer() {
         first = null;
         last = null;
-        current = null;
     }
 
     public void add(E value) {
