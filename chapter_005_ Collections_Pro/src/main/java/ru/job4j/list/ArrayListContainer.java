@@ -36,7 +36,7 @@ public class ArrayListContainer<E> implements Iterable<E> {
     }
 
     public E get(int index) {
-        return (E)this.container[index];
+        return (E) this.container[index];
     }
 
     @Override
