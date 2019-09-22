@@ -17,4 +17,15 @@ public class SimpleStackTest {
         assertThat(result, is(3));
     }
 
+    @Test
+    public void whenPushPushPollPushReturnThree() {
+        SimpleStack<Integer> stack = new SimpleStack<>();
+        stack.push(1);
+        stack.push(2);
+        stack.poll();
+        stack.push(3);
+        int result = stack.poll();
+        assertThat(result, is(3));
+    }
+
 }
