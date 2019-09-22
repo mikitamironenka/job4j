@@ -4,15 +4,16 @@ public class CycleChecker {
 
     public boolean hasCycle(Node first) {
         boolean result = false;
-        Node firstNode = first;
-        Node node = firstNode.getNext();
-        while (node != null || node != firstNode) {
-            node = node.getNext();
-            if (node == firstNode) {
-                result = true;
+        Node tortoise = first;
+        Node hare = first;
+        while (hare != null || hare.getNext() != null) {
+            tortoise = tortoise.getNext();
+            hare = hare.getNext().getNext();
+            if (hare == null) {
                 break;
             }
-            if (node == null) {
+            if (tortoise == hare) {
+                result = true;
                 break;
             }
         }

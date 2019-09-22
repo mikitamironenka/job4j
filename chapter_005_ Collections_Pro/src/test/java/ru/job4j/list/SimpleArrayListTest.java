@@ -8,11 +8,11 @@ import static org.junit.Assert.*;
 
 public class SimpleArrayListTest {
 
-    private SimpleArrayList<Integer> list;
+    private SimpleList<Integer> list;
 
     @Before
     public void beforeTest() {
-        list = new SimpleArrayList<>();
+        list = new SimpleList<>();
         list.add(1);
         list.add(2);
         list.add(3);

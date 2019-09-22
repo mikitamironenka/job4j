@@ -1,6 +1,6 @@
 package ru.job4j.list;
 
-public class SimpleArrayList<E> {
+public class SimpleList<E> {
 
     private int size;
     private Node<E> first;
@@ -43,14 +43,15 @@ public class SimpleArrayList<E> {
         return this.size;
     }
 
+
     /**
      * Класс предназначен для хранения данных.
      */
-    private static class Node<E> {
-        E data;
-        Node<E> next;
+    public static class Node<E> {
+        public E data;
+        public Node<E> next;
 
-        Node(E data) {
+        public Node(E data) {
             this.data = data;
         }
     }
