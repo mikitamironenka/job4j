@@ -66,6 +66,10 @@ public class LinkedListContainer<E> implements Iterable<E> {
         return element;
     }
 
+    public int getSize() {
+        return size;
+    }
+
     @Override
     public Iterator<E> iterator() {
         Iterator it = new Iterator() {

@@ -27,4 +27,8 @@ public class SimpleStack<T> {
         list.add(value);
     }
 
+    public int getSize() {
+        return this.list.getSize();
+    }
+
 }
