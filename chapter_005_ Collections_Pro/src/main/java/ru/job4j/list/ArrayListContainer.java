@@ -52,14 +52,14 @@ public class ArrayListContainer<E> implements Iterable<E> {
 
             @Override
             public E next() {
-
+                E result = null;
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
                 while(index < container.length) {
-                    return (E) container[index++];
+                    result = (E) container[index++];
                 }
-                return null;
+                return result;
             }
         };
         return it;
