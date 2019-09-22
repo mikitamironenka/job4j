@@ -76,11 +76,7 @@ public class LinkedListContainer<E> implements Iterable<E> {
             int expectedModCount = modCount;
             Node<E> current = first;
             /**
-             * index of iterator
-             */
-            private int index = 0;
-            /**
-             * Hasnext as long as the indexes are not out of limits and not equals to null
+             * Has next as long as the indexes are not out of limits and not equals to null
              */
             @Override
             public boolean hasNext() {
@@ -89,28 +85,24 @@ public class LinkedListContainer<E> implements Iterable<E> {
 
             @Override
             public E next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                if (hasNext()) {
-                    E result = current.data;
-                    current = current.next;
-                    return result;
-                }
-                throw new NoSuchElementException("linked list.next");
+                E result = current.data;
+                current = current.next;
+                return result;
             }
         };
         return it;
     }
 
-    public static class Node<E> {
+    private static class Node<E> {
         E data;
         Node<E> next;
         Node<E> previous;
-
-        Node(E data) {
-            this.data = data;
-        }
 
         Node(E data, Node<E> previous, Node<E> next) {
             this.data = data;
