@@ -34,7 +34,7 @@ public class SimpleArray<T> implements Iterable {
     }
 
     public void set(int index, T model) {
-        if (index < 0 || index > this.index) {
+        if (!checkIndex()) {
             System.out.println("Wrong index");
         } else {
         this.objects[index] = model;
@@ -42,16 +42,30 @@ public class SimpleArray<T> implements Iterable {
     }
 
     public void remove(int index) {
-        Object[] array = new Object[this.objects.length - 1];
-        int remainingElements = this.objects.length - (index + 1);
-        System.arraycopy(this.objects, 0, array, 0, index);
-        System.arraycopy(this.objects, index + 1, array, index, remainingElements);
-        this.objects = array;
-        this.index--;
+        if (!checkIndex()) {
+            System.out.println("Wrong index");
+        } else {
+            Object[] array = new Object[this.objects.length - 1];
+            int remainingElements = this.objects.length - (index + 1);
+            System.arraycopy(this.objects, 0, array, 0, index);
+            System.arraycopy(this.objects, index + 1, array, index, remainingElements);
+            this.objects = array;
+            this.index--;
+        }
     }
 
     public T get(int index) {
-       return (T) this.objects[index];
+        T result = null;
+        if (!checkIndex()) {
+            System.out.println("Wrong index");
+        } else {
+            result = (T) this.objects[index];
+        }
+        return result;
+    }
+
+    private boolean checkIndex() {
+        return index < 0 || index > this.index;
     }
 
     @Override
