@@ -26,7 +26,7 @@ public class LinkedListContainer<E> implements Iterable<E> {
         current = null;
     }
 
-    void add(E value) {
+    public void add(E value) {
         Node<E> l = last;
         Node<E> newNode = new Node<E>(value, l, null);
         last = newNode;
@@ -38,13 +38,32 @@ public class LinkedListContainer<E> implements Iterable<E> {
         size++;
     }
 
-    E get(int index) {
+    public E get(int index) {
         Node<E> node = first;
         for (int i = 0; i < index; i++) {
             node = node.next;
         }
 
         return node.data;
+    }
+
+    public E removeLast() {
+        Node<E> l = last;
+        Node<E> previous = l.previous;
+        if (l == null) {
+            throw new NoSuchElementException();
+        }
+        E element = l.data;
+        l.data = null;
+        l.previous = null;
+        last = previous;
+        if (last == null) {
+            first = null;
+        } else {
+            previous.next = null;
+        }
+        size--;
+        return element;
     }
 
     @Override
