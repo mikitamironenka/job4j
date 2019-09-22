@@ -16,7 +16,7 @@ public class SimpleStack<T> {
      * @return T element.
      */
     public T poll() {
-        return list.removeLast();
+        return this.list.removeLast();
     }
 
     /**
@@ -24,7 +24,7 @@ public class SimpleStack<T> {
      * @param value
      */
     public void push(T value) {
-        list.add(value);
+        this.list.add(value);
     }
 
     public int getSize() {

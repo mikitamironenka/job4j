@@ -46,7 +46,7 @@ public class SimpleQueue<T> {
         }
     }
 
-    public void push(T value){
+    public void push(T value) {
         this.added.push(value);
    }
 
