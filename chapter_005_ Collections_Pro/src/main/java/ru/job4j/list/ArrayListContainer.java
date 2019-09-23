@@ -43,6 +43,20 @@ public class ArrayListContainer<E> implements Iterable<E> {
         return elements;
     }
 
+    public boolean isContains(E e) {
+        boolean result = false;
+        for (int i = 0; i < this.elements; i++) {
+            if (this.container[i].equals(e)) {
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    public Object[] getContainer() {
+        return container;
+    }
+
     @Override
     public Iterator iterator() {
         Iterator it = new Iterator() {
@@ -78,5 +92,14 @@ public class ArrayListContainer<E> implements Iterable<E> {
         System.arraycopy(this.container, 0, newArray, 0, this.container.length);
         this.container = newArray;
         modCount++;
+    }
+
+    public static void main(String[] args) {
+        ArrayListContainer<Integer> list = new ArrayListContainer<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        System.out.println(list.isContains(2));
+        System.out.println(list.isContains(4));
     }
 }

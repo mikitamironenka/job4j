@@ -13,7 +13,9 @@ public class SimpleSetTwo<E> implements Iterable{
     }
 
     public void add(E e) {
-        list.add(e);
+        if (!this.list.isContains(e)) {
+            this.list.add(e);
+        }
     }
 
     public ArrayListContainer<E> getList() {
