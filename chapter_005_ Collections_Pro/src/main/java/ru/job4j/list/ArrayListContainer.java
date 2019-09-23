@@ -39,6 +39,25 @@ public class ArrayListContainer<E> implements Iterable<E> {
         return (E) this.container[index];
     }
 
+    public int getElements() {
+        return elements;
+    }
+
+    public boolean isContains(E e) {
+        boolean result = false;
+        for (int i = 0; i < this.elements; i++) {
+            if (e.equals(this.container[i])) {
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
+
+    public Object[] getContainer() {
+        return container;
+    }
+
     @Override
     public Iterator iterator() {
         Iterator it = new Iterator() {
