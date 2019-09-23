@@ -93,13 +93,4 @@ public class ArrayListContainer<E> implements Iterable<E> {
         this.container = newArray;
         modCount++;
     }
-
-    public static void main(String[] args) {
-        ArrayListContainer<Integer> list = new ArrayListContainer<>();
-        list.add(1);
-        list.add(2);
-        list.add(3);
-        System.out.println(list.isContains(2));
-        System.out.println(list.isContains(4));
-    }
 }
