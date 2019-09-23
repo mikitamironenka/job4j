@@ -4,7 +4,7 @@ import ru.job4j.list.ArrayListContainer;
 
 import java.util.Iterator;
 
-public class SimpleSetTwo<E> implements Iterable{
+public class SimpleSetTwo<E> implements Iterable {
 
     private ArrayListContainer<E> list;
 

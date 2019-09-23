@@ -12,7 +12,6 @@ package ru.job4j.generic;
 //Также, реализуйте интерфейс Iterable<T> - метод iterator() возвращает итератор, предназначенный для обхода данной структуры.
 //Объект должен принимать количество ячеек. Структура не должна быть динамической. Если идет переполнение надо выкинуть ошибку.
 
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -34,7 +33,7 @@ public class SimpleArray<T> implements Iterable {
     }
 
     public void set(int index, T model) {
-        if (!checkIndex()) {
+        if (!isIndexRight(index)) {
             System.out.println("Wrong index");
         } else {
         this.objects[index] = model;
@@ -42,7 +41,7 @@ public class SimpleArray<T> implements Iterable {
     }
 
     public void remove(int index) {
-        if (!checkIndex()) {
+        if (!isIndexRight(index)) {
             System.out.println("Wrong index");
         } else {
             Object[] array = new Object[this.objects.length - 1];
@@ -56,7 +55,7 @@ public class SimpleArray<T> implements Iterable {
 
     public T get(int index) {
         T result = null;
-        if (!checkIndex()) {
+        if (!isIndexRight(index)) {
             System.out.println("Wrong index");
         } else {
             result = (T) this.objects[index];
@@ -64,8 +63,12 @@ public class SimpleArray<T> implements Iterable {
         return result;
     }
 
-    private boolean checkIndex() {
-        return index < 0 || index > this.index;
+    public boolean isIndexRight(int index) {
+        return index >= 0 && index < this.index;
+    }
+
+    public int getIndex() {
+        return this.index;
     }
 
     @Override
