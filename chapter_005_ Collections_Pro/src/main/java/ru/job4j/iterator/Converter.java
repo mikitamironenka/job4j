@@ -26,7 +26,7 @@ public class Converter {
 
             private void selectCurrentIterator() {
                 while (!this.currentIterator.hasNext() && it.hasNext()) {
-                    this.currentIterator = it.hasNext() ? it.next() : null;
+                    this.currentIterator = it.next();
                 }
             }
 
