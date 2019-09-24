@@ -48,6 +48,7 @@ public class ArrayListContainer<E> implements Iterable<E> {
         for (int i = 0; i < this.elements; i++) {
             if (this.container[i].equals(e)) {
                 result = true;
+                break;
             }
         }
         return result;
