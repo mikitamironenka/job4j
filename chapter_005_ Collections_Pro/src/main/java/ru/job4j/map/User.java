@@ -37,4 +37,10 @@ public class User {
                 + ", birthday=" + birthday.getTime()
                 + '}';
     }
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, children, birthday);
+    }
 }
