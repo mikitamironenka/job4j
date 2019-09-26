@@ -15,12 +15,15 @@ public class SimpleSetTwo<E> implements Iterable {
 
     public void add(E e) {
 
-        if (e != null && !this.list.isContains(e)) {
+        if (!this.list.isContains(e)) {
             this.list.add(e);
-        } else if (e == null && nullCounter == 0) {
-            this.list.add(e);
-            nullCounter++;
         }
+//        if (e != null && !this.list.isContains(e)) {
+//            this.list.add(e);
+//        } else if (e == null && nullCounter == 0) {
+//            this.list.add(e);
+//            nullCounter++;
+//        }
     }
 
     public ArrayListContainer<E> getList() {

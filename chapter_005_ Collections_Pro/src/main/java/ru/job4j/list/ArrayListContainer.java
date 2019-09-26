@@ -3,6 +3,7 @@ package ru.job4j.list;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 //Необходимо создать динамический контейнер с методами:
 //1) add(E value);
@@ -46,7 +47,7 @@ public class ArrayListContainer<E> implements Iterable<E> {
     public boolean isContains(E e) {
         boolean result = false;
         for (int i = 0; i < this.elements; i++) {
-            if (e.equals(this.container[i])) {
+            if (Objects.equals(this.container[i], e)) {
                 result = true;
                 break;
             }
