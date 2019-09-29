@@ -12,12 +12,12 @@ package ru.job4j.map;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class SimpleMap<K, V> implements Iterable{
+public class SimpleMap<K, V> implements Iterable {
 
     private Entry<K, V>[] buckets;
     private static final int DEFAULT_CAPACITY = 16;
     private int size = 0;
-    private final double LOAD_FACTOR = 0.75;
+    private final double loadFactor = 0.75;
     private int threshold;
     /**
      * Default constructor is initialized with default capacity
@@ -28,7 +28,7 @@ public class SimpleMap<K, V> implements Iterable{
 
     public SimpleMap(int capacity) {
         this.buckets = new Entry[capacity];
-        this.threshold = (int) (capacity * LOAD_FACTOR);
+        this.threshold = (int) (capacity * loadFactor);
     }
 
     /**
@@ -49,7 +49,7 @@ public class SimpleMap<K, V> implements Iterable{
      * @param key
      */
     private void ifKeyIsNull(K key) {
-        if(key == null) {
+        if (key == null) {
             throw new IllegalArgumentException("key cant be null");
         }
     }
@@ -58,7 +58,7 @@ public class SimpleMap<K, V> implements Iterable{
         Entry<K, V>[] newBuckets = new Entry[newCapacity];
         transfer(newBuckets);
         this.buckets = newBuckets;
-        this.threshold = (int) (newCapacity * LOAD_FACTOR);
+        this.threshold = (int) (newCapacity * loadFactor);
     }
 
     private void transfer(Entry<K, V>[] newBuckets) {
@@ -106,7 +106,7 @@ public class SimpleMap<K, V> implements Iterable{
     public boolean delete(K key) {
         boolean result = false;
         Entry<K, V> bucket = buckets[getIndex(key)];
-        if (bucket.getKey().equals(key) && key!= null) {
+        if (bucket.getKey().equals(key) && key != null) {
             buckets[getIndex(key)] = null;
             result = true;
             size--;

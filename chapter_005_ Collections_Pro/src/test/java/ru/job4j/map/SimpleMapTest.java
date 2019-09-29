@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class SimpleMapTest {
 
     @Test
-    public void whenAddElementThenShouldReturnTrue(){
+    public void whenAddElementThenShouldReturnTrue() {
 
         SimpleMap<Integer, Integer> myMap = new SimpleMap<>();
         myMap.insert(1, 1);
@@ -24,7 +24,7 @@ public class SimpleMapTest {
     }
 
     @Test
-    public void whenDeleteElementThenShouldReturnTrue(){
+    public void whenDeleteElementThenShouldReturnTrue() {
 
         SimpleMap<Integer, Integer> myMap = new SimpleMap<>();
         myMap.insert(1, 1);
@@ -38,7 +38,7 @@ public class SimpleMapTest {
     }
 
     @Test
-    public void whenIterateElementThenShouldReturnNext(){
+    public void whenIterateElementThenShouldReturnNext() {
 
         SimpleMap<Integer, Integer> myMap = new SimpleMap<>();
         myMap.insert(1, 1);
