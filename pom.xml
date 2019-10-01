@@ -17,6 +17,7 @@
         <module>chapter_003_Collections_Light</module>
         <module>chapter_004_FP__Lambda__StreamAPI</module>
         <module>chapter_005_ Collections_Pro</module>
+        <module>chapter_006_IO</module>
 
     </modules>
 
