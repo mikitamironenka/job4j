@@ -1,4 +1,4 @@
-package ru.job4j.readconfig;
+package ru.job4j.io;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

@@ -1,6 +1,7 @@
 package ru.job4j.readconfig;
 
 import org.junit.Test;
+import ru.job4j.io.Config;
 
 import java.io.File;
 import java.util.HashMap;
