@@ -56,8 +56,12 @@ public class Analizy {
                 }
             }
 
-        try (PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
-            for (String string : this.list) {
+        writeToFile(this.list, target);
+    }
+
+    private void writeToFile(List<String> list, String fileName) {
+        try (PrintWriter out = new PrintWriter(new FileOutputStream(fileName))) {
+            for (String string : list) {
                 out.print(string);
             }
         } catch (Exception e) {
