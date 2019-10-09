@@ -38,11 +38,4 @@ public class Search {
         return result;
     }
 
-    public static void main(String[] args) {
-        List<String> exts = List.of("java", "xml");
-        Search search = new Search();
-        List<File> res = search.files("C:\\projects\\job4j", exts);
-        res.forEach(System.out :: println);
-         res.forEach(o -> System.out.println(o.toString()));
-    }
 }
