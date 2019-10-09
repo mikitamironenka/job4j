@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
@@ -16,14 +15,14 @@ public class SearchTest {
     public void whenGetFilesWithExsts() throws IOException {
         List<String> exts = List.of("txt");
         Search search = new Search();
+        String path = "src/test/java/ru/job4j/io/tmpdir";
+        File file = new File(path);
+        String sourcePath = file.getAbsolutePath();
 
-        String parent = System.getProperty("java.io.tmpdir");
-        boolean newFile = new File(parent, "text.txt").createNewFile();
-        List<File> res = search.files(parent, exts);
-        List<File> checked = new ArrayList<>();
-        checked.add(new File("text.txt"));
-        res.stream().forEach(o -> System.out.println(o.getName()));
-//        assertThat(res, is(checked));
+        List<File> res = search.files(sourcePath, exts);
+        assertThat(res.get(0).getName(), is("file.txt"));
+        assertThat(res.get(1).getName(), is("filetwo.txt"));
+        assertThat(res.size(), is(2));
     }
 
 }
