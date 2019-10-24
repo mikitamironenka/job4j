@@ -1,0 +1,22 @@
+Client : hg
+Bot    : good morning
+Client : dkfj
+Bot    : are you feeling all write?
+Client : dkfjkdj
+Bot    : go away
+Client : vndjn
+Bot    : good morning
+Client : djfhdj
+Bot    : go away
+Client : fdjfh
+Bot    : hello
+Client : стоп
+Client : оровар
+Client : аовра
+Client : аовр
+Client : продолжить
+Bot    : how are you doing?
+Client : аовар
+Bot    : are you feeling all write?
+Client : закончить
+Bot    : good morning
