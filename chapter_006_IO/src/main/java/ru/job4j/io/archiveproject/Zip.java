@@ -9,7 +9,7 @@ import java.util.zip.ZipOutputStream;
 //        1. Задана директория проекта, например: c:\project\job4j\
 //        2. В качестве ключа передается  расширения файлов, которые не нужно включать в архив.
 //        3. Архив должен сохранять структуру проекта.
-//        4. Запуск проекта java -jar pack.jar -d c:\project\job4j\ -e *.java -o project.zip
+//        4. Запуск проекта java -jar pack.jar -d c:\project\job4j\   -o project.zip
 //        java -jar pack.jar - Это собранный jar.
 //        -d - directory - которую мы хотим архивировать
 //        -e - exclude - исключить файлы *.xml
