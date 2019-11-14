@@ -1,0 +1,46 @@
+Задание.
+
+1. Написать запрос получение всех продуктов с типом "СЫР"
+
+select * from product as p
+where p.type_id = 1; 
+
+2. Написать запрос получения всех продуктов, у кого в имени есть слово "мороженое"
+
+select * from product as p
+where p.name LIKE '%Молоко%'; 
+
+3. Написать запрос, который выводит все продукты, срок годности которых заканчивается в следующем месяце.
+
+select * from product as p
+where p.expired_date < '31.12.2019'; 
+
+4. Написать запрос, который выводит самый дорогой продукт.
+
+SELECT name, price
+FROM product
+WHERE price = (SELECT MAX(price) FROM product);
+
+5. Написать запрос, который выводит количество всех продуктов определенного типа.
+
+select type_id,
+count (*)
+from product
+where type_id = 1
+group by
+type_id;
+
+6. Написать запрос получение всех продуктов с типом "СЫР" и "МОЛОКО"
+
+select * from product as p
+where p.type_id = 1 or p.type_id = 2;
+
+7. Написать запрос, который выводит тип продуктов, которых осталось меньше 10 штук. 
+
+ ----
+
+8. Вывести все продукты и их тип.
+
+SELECT *
+FROM products as p INNER JOIN type as t
+ON p.type_id = t.id;
