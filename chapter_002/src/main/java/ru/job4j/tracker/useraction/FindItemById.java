@@ -1,8 +1,8 @@
 package ru.job4j.tracker.useraction;
 
+import ru.job4j.tracker.ITracker;
 import ru.job4j.tracker.input.Input;
 import ru.job4j.tracker.model.Item;
-import ru.job4j.tracker.Tracker;
 
 import java.util.function.Consumer;
 
@@ -13,7 +13,7 @@ public class FindItemById extends BaseAction {
     }
 
     @Override
-    public void execute(Input input, Tracker tracker, Consumer output) {
+    public void execute(Input input, ITracker tracker, Consumer output) {
         String id = input.ask("Enter id of the item to find");
         Item item = tracker.findById(id);
         if (item != null) {

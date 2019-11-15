@@ -8,6 +8,7 @@
     <artifactId>job4j</artifactId>
     <packaging>pom</packaging>
     <version>3.0</version>
+
     <modules>
         <module>chapter_001</module>
         <module>puzzle</module>

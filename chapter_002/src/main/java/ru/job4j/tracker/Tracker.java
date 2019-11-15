@@ -18,7 +18,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class Tracker {
+public class Tracker implements ITracker {
 
     /**
      * Array for storage items
