@@ -61,12 +61,20 @@ public class TrackerSQL implements ITracker, AutoCloseable {
 
     @Override
     public Item add(Item item) {
-        try (PreparedStatement pr = this.conn.prepareStatement("INSERT INTO " +
-                    "items(name, description, create_time) VALUES(?, ?, ?)") ) {
+        String generatedColumns[] = { "id" };
+        try (
+                PreparedStatement pr = this.conn.prepareStatement("INSERT INTO " +
+                    "items(name, description, create_time) VALUES(?, ?, ?)", generatedColumns) ) {
             pr.setString(1, item.getName());
             pr.setString(2, item.getDesc());
             pr.setTimestamp(3, new java.sql.Timestamp(item.getTime()));
             pr.executeUpdate();
+            //returning generated id and set it to item id
+            ResultSet rs = pr.getGeneratedKeys();
+            if (rs.next()) {
+                long id = rs.getLong(1);
+                item.setId(String.valueOf(id));
+            }
         } catch (SQLException e) {
             Log.error(e.getMessage(), e);
         }
@@ -82,8 +90,11 @@ public class TrackerSQL implements ITracker, AutoCloseable {
             pr.setString(2, item.getDesc());
             pr.setTimestamp(3, new java.sql.Timestamp(item.getTime()));
             pr.setInt(4, Integer.parseInt(id));
-            pr.executeUpdate();
-            result = true;
+            //returning number of affected rows
+            int affectedRows = pr.executeUpdate();
+            if (affectedRows == 1) {
+                result = true;
+            }
         } catch (SQLException e) {
             Log.error(e.getMessage(), e);
         }
@@ -96,8 +107,10 @@ public class TrackerSQL implements ITracker, AutoCloseable {
         try (PreparedStatement pr = this.conn.prepareStatement(
                 "DELETE FROM items WHERE id = ?")) {
             pr.setInt(1, Integer.parseInt(id));
-            pr.executeUpdate();
-            result = true;
+            int affectedRows = pr.executeUpdate();
+            if (affectedRows == 1) {
+                result = true;
+            }
         } catch (SQLException e) {
             Log.error(e.getMessage(), e);
         }
