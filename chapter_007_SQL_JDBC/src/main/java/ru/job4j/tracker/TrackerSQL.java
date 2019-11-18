@@ -51,7 +51,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     private void createTableIfNotExist() {
         try (PreparedStatement prItems =
                      this.conn.prepareStatement("create table if not exists items(id serial primary key," +
-                             "name varchar(200),description varchar(500),create_time timestamp);" ); ) {
+                             "name varchar(200),description varchar(500),create_time timestamp);" )) {
              prItems.execute();
         } catch (SQLException e) {
             Log.error(e.getMessage(), e);
