@@ -27,7 +27,7 @@ public class StoreSQL implements AutoCloseable {
     public StoreSQL(Config config) {
         this.config = config;
         this.url = this.config.get("url");
-        this.dbname = this.config.get("dbname");
+        this.dbname = new File(this.config.get("dbname")).getAbsolutePath();
         this.init();
     }
 
@@ -42,6 +42,7 @@ public class StoreSQL implements AutoCloseable {
     private boolean init() {
 
         try {
+            createNewDatabase(this.url + this.dbname);
             this.connect = DriverManager.getConnection(this.url + this.dbname);
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
@@ -97,6 +98,7 @@ public class StoreSQL implements AutoCloseable {
         } else {
             DatabaseMetaData meta = null;
             try {
+                this.connect = DriverManager.getConnection(dbName);
                 meta = this.connect.getMetaData();
                 meta.getDriverName();
             } catch (SQLException e) {
@@ -131,14 +133,4 @@ public class StoreSQL implements AutoCloseable {
         }
         return result;
     }
-
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String[] args) throws JAXBException {
-//        StoreSQL storeSQL = new StoreSQL(new Config());
-////        storeSQL.generate(10);
-//        StoreXML storeXML = new StoreXML(new File("D:\\magnit.xml"));
-//        storeXML.save(storeSQL.readDataFromDBToList());
-//    }
 }

@@ -14,9 +14,9 @@ import java.util.ArrayList;
 public class EntryHandler extends DefaultHandler {
 
     private ArrayList<Integer> list = new ArrayList<>();
-    private File fileForParse;
+    private String fileForParse;
 
-    public EntryHandler(File fileForParse) {
+    public EntryHandler(String fileForParse) {
         this.fileForParse = fileForParse;
     }
 
@@ -57,13 +57,13 @@ public class EntryHandler extends DefaultHandler {
         SAXParserFactory factory = SAXParserFactory.newInstance();
         SAXParser parser = factory.newSAXParser();
 
-        parser.parse(new File("D:\\magnit\\newmagnit.xml"), this);
+        parser.parse(new File(this.fileForParse), this);
         result = this.list.stream().mapToInt(Integer::intValue).sum();
         return result;
     }
 
-    public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException {
-
-        System.out.println(new EntryHandler(new File("D:\\magnit\\newmagnit.xml")).parseXmlAndCountEntryValues());
-    }
+//    public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException {
+//
+//        System.out.println(new EntryHandler("D:\\magnit\\newmagnit.xml").parseXmlAndCountEntryValues());
+//    }
 }

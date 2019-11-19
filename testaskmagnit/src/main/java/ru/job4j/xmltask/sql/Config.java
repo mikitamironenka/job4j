@@ -27,5 +27,4 @@ public class Config {
     public String get(String key) {
         return this.values.getProperty(key);
     }
-
 }
