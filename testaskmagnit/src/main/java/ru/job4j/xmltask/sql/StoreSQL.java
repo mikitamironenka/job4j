@@ -64,14 +64,29 @@ public class StoreSQL implements AutoCloseable {
             LOG.error(e.getMessage(), e);
         }
 
-        for (int i = 0; i < size; i++) {
-            try (PreparedStatement ps = this.connect.prepareStatement(insert);) {
+//        for (int i = 0; i < size; i++) {
+//            try (PreparedStatement ps = this.connect.prepareStatement(insert);) {
+//                ps.setInt(1, i);
+////                ps.executeUpdate();
+//                ps.addBatch();
+//            } catch (SQLException e) {
+//                LOG.error(e.getMessage(), e);
+//            }
+//        }
+
+        //create batch of sql queries
+        try (PreparedStatement ps = this.connect.prepareStatement(insert)) {
+            for (int i = 0; i < size; i++) {
                 ps.setInt(1, i);
-                ps.executeUpdate();
-            } catch (SQLException e) {
-                LOG.error(e.getMessage(), e);
+                ps.addBatch();
             }
+            int[] count = ps.executeBatch();
+            System.out.println("count of qsl queries is " + count.length);
+            this.connect.commit();
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
         }
+
         // create savepoint
         try {
             savepointOne = this.connect.setSavepoint("SavepointOne");
