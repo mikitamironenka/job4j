@@ -54,6 +54,9 @@ public class MainTest {
 
     @Test
     public void mainTest() throws JAXBException, IOException, SAXException, ParserConfigurationException {
+
+        long startTime = System.currentTimeMillis();
+
         //create db and generate entries
         StoreSQL storeSQL = new StoreSQL(new Config());
         storeSQL.generate(numberOfGeneratedItems);
@@ -68,5 +71,8 @@ public class MainTest {
 
         int result = new EntryHandler(newOutXmlFilePath).parseXmlAndCountEntryValues();
         assertThat(result, is(45));
+
+        long endTime = System.currentTimeMillis();
+        System.out.println("That took " + (endTime - startTime) + " milliseconds");
     }
 }

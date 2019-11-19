@@ -15,7 +15,7 @@ public class StoreSQL implements AutoCloseable {
     private final Config config;
     private final String url;
     private final String dbname;
-
+    private Savepoint savepointOne;
     private Connection connect;
 
     private static final String CREATE_TABLE_IF_NOT_EXIST =
@@ -44,31 +44,39 @@ public class StoreSQL implements AutoCloseable {
         try {
             createNewDatabase(this.url + this.dbname);
             this.connect = DriverManager.getConnection(this.url + this.dbname);
+            //set autocommit to false
+            this.connect.setAutoCommit(false);
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
         }
-        createNewDatabase(this.dbname);
+//        createNewDatabase(this.dbname);
         createTableIfNotExist();
         return this.connect != null;
     }
 
     public void generate(int size) {
 
-        final String sql = "INSERT INTO accounts (number) VALUES(?);";
-        final String deleteRecords = "DELETE FROM accounts;";
-        try (PreparedStatement psDelete = this.connect.prepareStatement(deleteRecords) ) {
+        final String insert = "INSERT INTO accounts (number) VALUES(?);";
+        final String delete = "DELETE FROM accounts;";
+        try (PreparedStatement psDelete = this.connect.prepareStatement(delete) ) {
             psDelete.executeUpdate();
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
         }
 
         for (int i = 0; i < size; i++) {
-            try (PreparedStatement ps = this.connect.prepareStatement(sql);) {
+            try (PreparedStatement ps = this.connect.prepareStatement(insert);) {
                 ps.setInt(1, i);
                 ps.executeUpdate();
             } catch (SQLException e) {
                 LOG.error(e.getMessage(), e);
             }
+        }
+        // create savepoint
+        try {
+            savepointOne = this.connect.setSavepoint("SavepointOne");
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -92,8 +100,7 @@ public class StoreSQL implements AutoCloseable {
 
         File file = new File(dbName);
         //check is db already exist
-        if(file.exists())
-        {
+        if (file.exists()) {
             System.out.print("This database name already exists");
         } else {
             DatabaseMetaData meta = null;
@@ -132,5 +139,19 @@ public class StoreSQL implements AutoCloseable {
             LOG.error(e.getMessage(), e);
         }
         return result;
+    }
+
+    public void insert(int value) throws SQLException {
+        String insertOne = "INSERT INTO accounts (number) VALUES(?);";
+        try (PreparedStatement ps = this.connect.prepareStatement(insertOne);) {
+            ps.setInt(1, value);
+            ps.executeUpdate();
+            //create commit after changing of db
+            this.connect.commit();
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
+            //make rollback to savePoint after exception
+            this.connect.rollback(savepointOne);
+        }
     }
 }
