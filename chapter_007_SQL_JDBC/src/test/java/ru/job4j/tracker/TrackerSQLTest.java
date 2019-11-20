@@ -20,16 +20,20 @@ public class TrackerSQLTest {
         assertThat(sql.init(), is(true));
     }
 
-    public Connection init() {
-        try (InputStream in = TrackerSQL.class.getClassLoader().getResourceAsStream("app.properties")) {
+    public static Connection init() {
+        try (InputStream in = TrackerSQL.class.getClassLoader().getResourceAsStream("db.properties")) {
             Properties config = new Properties();
             config.load(in);
-            Class.forName(config.getProperty("driver-class-name"));
+            String driver = config.getProperty("driver-class-name");
+            String url = config.getProperty("url");
+            String username = config.getProperty("username");
+            String pass = config.getProperty("password");
+            System.out.println(driver + " " + url + " " + username + " " + pass);
+            Class.forName(driver);
             return DriverManager.getConnection(
-                    config.getProperty("url"),
-                    config.getProperty("username"),
-                    config.getProperty("password")
-
+                    "jdbc:postgresql://localhost:5432/tracker",
+                    config.getProperty(username),
+                    config.getProperty(pass)
             );
         } catch (Exception e) {
             throw new IllegalStateException(e);
@@ -38,7 +42,7 @@ public class TrackerSQLTest {
 
     @Test
     public void createItem() throws SQLException {
-        try (TrackerSQL tracker = new TrackerSQL(ConnectionRollback.create(this.init()))) {
+        try (TrackerSQL tracker = new TrackerSQL(ConnectionRollback.create(TrackerSQLTest.init()))) {
             tracker.add(new Item("name", "desc"));
             assertThat(tracker.findByName("name").size(), is(1));
         }

@@ -1,13 +1,13 @@
 package ru.job4j.jdbc;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import java.sql.*;
 
 public class SQLStorage {
 
-    private static final Logger LOG = LoggerFactory.getLogger(SQLStorage.class);
+    private static final Logger LOG = LogManager.getLogger(SQLStorage.class);
 
     public static void main(String[] args) {
 

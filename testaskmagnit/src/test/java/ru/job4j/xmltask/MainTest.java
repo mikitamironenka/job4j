@@ -14,11 +14,14 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+
 public class MainTest {
 
     private static String xslSchemeFilePath;
 
-    private int numberOfGeneratedItems = 1000000;
+    private int numberOfGeneratedItems = 10;
     private static String outXmlFileName;
     private static String newOutXmlFileName;
     private static String xslScheme;
@@ -67,7 +70,7 @@ public class MainTest {
                 new File(xslSchemeFilePath));
 
         int result = new EntryHandler(newOutXmlFilePath).parseXmlAndCountEntryValues();
-//        assertThat(result, is(45));
+        assertThat(result, is(45));
 
         long endTime = System.currentTimeMillis();
         System.out.println("That took " + (endTime - startTime) + " milliseconds");

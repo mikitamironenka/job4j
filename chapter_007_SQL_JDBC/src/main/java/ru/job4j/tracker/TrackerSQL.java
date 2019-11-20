@@ -1,7 +1,7 @@
 package ru.job4j.tracker;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import ru.job4j.tracker.model.Item;
 
 import java.io.InputStream;
@@ -20,7 +20,7 @@ import java.util.Properties;
 
 public class TrackerSQL implements ITracker, AutoCloseable {
 
-    private static final Logger LOG = LoggerFactory.getLogger(TrackerSQL.class);
+    private static final Logger LOG = LogManager.getLogger(TrackerSQL.class);
 
     private Connection conn;
 
