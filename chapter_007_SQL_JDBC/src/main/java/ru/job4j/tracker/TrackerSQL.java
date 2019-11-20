@@ -20,9 +20,13 @@ import java.util.Properties;
 
 public class TrackerSQL implements ITracker, AutoCloseable {
 
-    private static final Logger Log = LoggerFactory.getLogger(TrackerSQL.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TrackerSQL.class);
 
     private Connection conn;
+
+    public TrackerSQL(Connection connection) {
+        this.conn = connection;
+    }
 
     public TrackerSQL() {
         init();
@@ -50,21 +54,20 @@ public class TrackerSQL implements ITracker, AutoCloseable {
 
     private void createTableIfNotExist() {
         try (PreparedStatement prItems =
-                     this.conn.prepareStatement("create table if not exists items(id serial primary key," +
-                             "name varchar(200),description varchar(500),create_time timestamp);" )) {
+                     this.conn.prepareStatement("create table if not exists items(id serial primary key,"
+                             + "name varchar(200),description varchar(500),create_time timestamp);")) {
              prItems.execute();
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
     }
 
 
     @Override
     public Item add(Item item) {
-        String generatedColumns[] = { "id" };
-        try (
-                PreparedStatement pr = this.conn.prepareStatement("INSERT INTO " +
-                    "items(name, description, create_time) VALUES(?, ?, ?)", generatedColumns) ) {
+        String[] generatedColumns = {"id"};
+        try (PreparedStatement pr = this.conn.prepareStatement("INSERT INTO "
+                + "items(name, description, create_time) VALUES(?, ?, ?)", generatedColumns)) {
             pr.setString(1, item.getName());
             pr.setString(2, item.getDesc());
             pr.setTimestamp(3, new java.sql.Timestamp(item.getTime()));
@@ -76,7 +79,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
                 item.setId(String.valueOf(id));
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
         return item;
     }
@@ -85,7 +88,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     public boolean replace(String id, Item item) {
         boolean result = false;
         try (PreparedStatement pr = this.conn.prepareStatement(
-                "UPDATE items SET name = ?, description = ?, create_time = ? WHERE id = ?") ) {
+                "UPDATE items SET name = ?, description = ?, create_time = ? WHERE id = ?")) {
             pr.setString(1, item.getName());
             pr.setString(2, item.getDesc());
             pr.setTimestamp(3, new java.sql.Timestamp(item.getTime()));
@@ -96,7 +99,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
                 result = true;
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
         return result;
     }
@@ -104,15 +107,14 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     @Override
     public boolean delete(String id) {
         boolean result = false;
-        try (PreparedStatement pr = this.conn.prepareStatement(
-                "DELETE FROM items WHERE id = ?")) {
+        try (PreparedStatement pr = this.conn.prepareStatement("DELETE FROM items WHERE id = ?")) {
             pr.setInt(1, Integer.parseInt(id));
             int affectedRows = pr.executeUpdate();
             if (affectedRows == 1) {
                 result = true;
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
         return result;
     }
@@ -128,7 +130,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
                 result.add(item);
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
         return result;
     }
@@ -145,7 +147,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
                 result.add(item);
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
         return result;
     }
@@ -153,7 +155,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     @Override
     public Item findById(String id) {
         Item result = null;
-        try (PreparedStatement pr = this.conn.prepareStatement("SELECT * FROM items WHERE id = ?") ) {
+        try (PreparedStatement pr = this.conn.prepareStatement("SELECT * FROM items WHERE id = ?")) {
             pr.setInt(1, Integer.parseInt(id));
             ResultSet rs = pr.executeQuery();
             if (rs.next()) {
@@ -161,7 +163,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
                         rs.getString("description"), rs.getTimestamp("create_time").getTime());
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
         return result;
     }

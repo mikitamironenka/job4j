@@ -74,7 +74,7 @@ public class Analize {
         int changed;
         int deleted;
 
-        public Info() {}
+        public Info() { }
 
         public int getAdded() {
             return added;

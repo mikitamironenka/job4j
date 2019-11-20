@@ -47,7 +47,7 @@ public class Zip {
     public void zip() {
         List<File> listFiles = Arrays.asList(new File(this.source).listFiles());
         String fileExt;
-        try (ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(this.target)) ) {
+        try (ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(this.target))) {
             for (File file : listFiles) {
                 if (file.isDirectory()) {
                     zipDirectory(file, file.getName(), zos);

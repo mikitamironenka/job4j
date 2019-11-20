@@ -32,7 +32,7 @@ public class Args {
 
     public Map<String, String> validate(String[] ar) {
         Map<String, String> result = new HashMap<>();
-        for(int i = 1; i < ar.length; i = i + 2) {
+        for (int i = 1; i < ar.length; i = i + 2) {
             int k = i;
             result.put(ar[k - 1], ar[i]);
         }

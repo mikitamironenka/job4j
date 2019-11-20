@@ -39,6 +39,6 @@ public class MainSearchTest {
     public void whenSearchWithFileMask() {
         String[] arguments = new String[]{"-d", sourcePath, "-n", "*.txt", "-m", "-o", outPutPath};
         List<String> result = new MainSearch(new Args(arguments)).init();
-        assertThat(result.get(1), is("filetwo.txt"));
+        assertThat(result.get(1), is("log.txt"));
     }
 }

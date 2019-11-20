@@ -1,6 +1,5 @@
 package ru.job4j.testtask;
 
-import org.hamcrest.core.Is;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -8,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class AnalizeTest {
 
@@ -34,7 +33,7 @@ public class AnalizeTest {
         previous.get(0).setName("111");
         int result = analize.newUsers(previous, current);
         Assert.assertThat(result, is(2));
-        assertThat(Analize.User.edited, is(1));
+        assertThat(Analize.User.edited, is(2));
     }
 
     @Test

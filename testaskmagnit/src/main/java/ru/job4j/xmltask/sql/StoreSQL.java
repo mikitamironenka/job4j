@@ -58,7 +58,7 @@ public class StoreSQL implements AutoCloseable {
 
         final String insert = "INSERT INTO accounts (number) VALUES(?);";
         final String delete = "DELETE FROM accounts;";
-        try (PreparedStatement psDelete = this.connect.prepareStatement(delete) ) {
+        try (PreparedStatement psDelete = this.connect.prepareStatement(delete)) {
             psDelete.executeUpdate();
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);

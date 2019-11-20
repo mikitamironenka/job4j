@@ -21,8 +21,8 @@ public class SearchTest {
 
         List<File> res = search.files(sourcePath, exts);
         assertThat(res.get(0).getName(), is("file.txt"));
-        assertThat(res.get(1).getName(), is("filetwo.txt"));
-        assertThat(res.size(), is(2));
+        assertThat(res.get(1).getName(), is("log.txt"));
+        assertThat(res.size(), is(3));
     }
 
 }

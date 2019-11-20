@@ -27,18 +27,9 @@ public class ConvertXSQT {
                     new StreamSource(source),
                     new StreamResult(dest));
             System.out.print("complete");
-        } catch(TransformerException e) {
+        } catch (TransformerException e) {
             LOG.error(e.getMessage(), e);
         }
 
     }
-
-//    public static void main(String[] args) {
-//
-//        ConvertXSQT convertXSQT = new ConvertXSQT();
-//        convertXSQT.convert(new File("D:\\magnit\\magnit.xml"), new File("D:\\magnit\\newmagnit.xml"),
-//                new File("D:\\magnit\\accounts.xsl"));
-//
-//    }
-
 }

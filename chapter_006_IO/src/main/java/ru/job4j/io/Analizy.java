@@ -36,9 +36,8 @@ public class Analizy {
         return this.list;
     }
 
-    public void unavailable(String source, String target) throws IOException{
-        try (BufferedReader reader = new BufferedReader(new FileReader(source)) )
-            {
+    public void unavailable(String source, String target) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(source))) {
                 String st;
                 boolean isAvailable = true;
                 String code;
