@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
 
 import static org.hamcrest.core.Is.is;
@@ -31,9 +32,9 @@ public class TrackerSQLTest {
             System.out.println(driver + " " + url + " " + username + " " + pass);
             Class.forName(driver);
             return DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/tracker",
-                    config.getProperty(username),
-                    config.getProperty(pass)
+                    url,
+                    username,
+                    pass
             );
         } catch (Exception e) {
             throw new IllegalStateException(e);
@@ -41,10 +42,40 @@ public class TrackerSQLTest {
     }
 
     @Test
-    public void createItem() throws SQLException {
+    public void whenCreateItem() throws SQLException {
         try (TrackerSQL tracker = new TrackerSQL(ConnectionRollback.create(TrackerSQLTest.init()))) {
-            tracker.add(new Item("name", "desc"));
-            assertThat(tracker.findByName("name").size(), is(1));
+
+            Item item = tracker.add(new Item("name", "desc"));
+            assertThat(tracker.findById(item.getId()), is(item));
         }
     }
+
+    @Test
+    public void whenDeleteItem() throws SQLException {
+        try (TrackerSQL tracker = new TrackerSQL(ConnectionRollback.create(TrackerSQLTest.init()))) {
+
+            Item item1 = tracker.add(new Item("name1", "desc"));
+            Item item2 = tracker.add(new Item("name2", "desc"));
+            boolean result  = tracker.delete(item1.getId());
+            assertThat(result, is(true));
+        }
+    }
+
+
+
+    @Test
+    public void whenFindAll() throws SQLException {
+        try (TrackerSQL tracker = new TrackerSQL(ConnectionRollback.create(TrackerSQLTest.init()))) {
+
+            Item item = tracker.add(new Item("name1", "desc"));
+            Item item2 = tracker.add(new Item("name2", "desc"));
+            Item item3 = tracker.add(new Item("name3", "desc"));
+
+            List<Item> checked = List.of(item, item2, item3);
+            List<Item> result = tracker.findAll();
+
+            assertThat(result, is(checked));
+        }
+    }
+
 }

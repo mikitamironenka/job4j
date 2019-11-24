@@ -26,7 +26,7 @@
         <db.url>jdbc:postgresql://localhost:5432/tracker</db.url>
         <db.driver>org.postgresql.Driver</db.driver>
         <db.username>postgres</db.username>
-        <db.pass>postgres</db.pass>
+        <db.pass>password</db.pass>
         <resourcespath>resources</resourcespath>
     </properties>
 
@@ -37,7 +37,7 @@
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <version>3.6.2</version>
                 <configuration>
-                    <changeLogFile>${resourcespath}/db/master.xml</changeLogFile>
+                    <changeLogFile>resources/db/master.xml</changeLogFile>
                     <url>${db.url}</url>
                     <driver>${db.driver}</driver>
                     <username>${db.username}</username>

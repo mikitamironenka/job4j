@@ -33,7 +33,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     }
 
     public boolean init() {
-        try (InputStream in = TrackerSQL.class.getClassLoader().getResourceAsStream("app.properties")) {
+        try (InputStream in = TrackerSQL.class.getClassLoader().getResourceAsStream("db.properties")) {
             Properties properties = new Properties();
             properties.load(in);
             Class.forName("org.postgresql.Driver");
@@ -54,8 +54,8 @@ public class TrackerSQL implements ITracker, AutoCloseable {
 
     private void createTableIfNotExist() {
         try (PreparedStatement prItems =
-                     this.conn.prepareStatement("create table if not exists items(id serial primary key,"
-                             + "name varchar(200),description varchar(500),create_time timestamp);")) {
+                     this.conn.prepareStatement("CREATE TABLE IF NOT EXISTS items(id serial primary key,"
+                             + "name varchar(200), description varchar(500), create_time timestamp);")) {
              prItems.execute();
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
@@ -113,6 +113,17 @@ public class TrackerSQL implements ITracker, AutoCloseable {
             if (affectedRows == 1) {
                 result = true;
             }
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return result;
+    }
+
+    public boolean deleteByName(String name) {
+        boolean result = false;
+        try (PreparedStatement pr = this.conn.prepareStatement("DELETE FROM items WHERE name = ?;")) {
+            pr.setString(1, name);
+            result = true;
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
         }
