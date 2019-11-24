@@ -27,7 +27,7 @@
         <db.driver>org.postgresql.Driver</db.driver>
         <db.username>postgres</db.username>
         <db.pass>password</db.pass>
-        <resourcespath>resources</resourcespath>
+        <resourcespath>src/main/resources</resourcespath>
     </properties>
 
     <build>
@@ -37,7 +37,7 @@
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <version>3.6.2</version>
                 <configuration>
-                    <changeLogFile>resources/db/master.xml</changeLogFile>
+                    <changeLogFile>${resourcespath}/db/master.xml</changeLogFile>
                     <url>${db.url}</url>
                     <driver>${db.driver}</driver>
                     <username>${db.username}</username>
