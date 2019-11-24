@@ -8,8 +8,6 @@ services:
 
 before_install:
   - psql -c 'create database tracker;' -U postgres
-
-
 # используем режим обычного пользователя для сборки проекта.
 sudo: false
 

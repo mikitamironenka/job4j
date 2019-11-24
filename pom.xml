@@ -54,6 +54,8 @@
         <module>chapter_006_IO</module>
         <module>chapter_007_SQL_JDBC</module>
         <module>testaskmagnit</module>
+        <module>parserrusql</module>
+
 
     </modules>
 
