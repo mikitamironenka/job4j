@@ -9,6 +9,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -19,6 +20,7 @@ public class JsoupParser {
     private Document document;
     private static final Logger LOG = LogManager.getLogger(JsoupParser.class);
     private final static String COLUMN_NAME = "table.forumTable";
+    private static final String DATE_FORMAT = "dd MMM yy, HH:mm";
 
     public JsoupParser() { }
 
@@ -26,7 +28,7 @@ public class JsoupParser {
         return this.document;
     }
 
-    public List<Vacancy> parse(String url) {
+    public List<Vacancy> parse(String url) throws IOException {
 
         List<Vacancy> result = new ArrayList<>();
 
@@ -45,11 +47,10 @@ public class JsoupParser {
 
             String position = cols.get(1).text(); //vacancy
             String link = cols.get(1).select("a").attr("href"); // link of vacancy
-            String day = cols.get(5).text(); //day of vacancy's creation
-
+            String text = parseVacancy(link);
             if (position.toLowerCase().contains("java")) {
                 if (!position.toLowerCase().contains("script")) {
-                    result.add(new Vacancy(position, link, day));
+                    result.add(new Vacancy(position, text, link));
                 }
             }
         }
@@ -77,14 +78,16 @@ public class JsoupParser {
                 String position = cols.get(1).text(); //vacancy
                 String link = cols.get(1).select("a").attr("href"); // link of vacancy
                 String day = cols.get(5).text(); //day of vacancy's creation
+                String text = parseVacancy(link);
                 if (position.toLowerCase().contains("java")) {
                     if (!position.toLowerCase().contains("script")) {
-//                        Date date = convertTodayOrYesterdayToDate(day);
-                        if (day.contains("дек")) {
+                        Date date = convertTodayOrYesterdayToDate(day);
+                        if (date.before(formatDate("01 янв 2019, 00:00"))) {
                             flag = false;
                             break;
                         } else {
-                            result.add(new Vacancy(position, link, day));
+//                            System.out.println(position + " " + text + " " + link);
+                            result.add(new Vacancy(position, text, link));
                         }
                     }
                 }
@@ -94,30 +97,13 @@ public class JsoupParser {
         return result;
     }
 
-    /**
-     * Checks is year begin
-     * @param dateInput
-     * @return true if year begin
-     */
-    private boolean isYearBegin(Date dateInput) {
-        boolean result = true;
-
-        SimpleDateFormat df = new SimpleDateFormat("yyyy");
-        String year = df.format(dateInput);
-        if (year.equals("2018")) {
-            result = false;
-        }
-        return result;
-    }
 
     public static void main(String[] args) throws ParseException, IOException {
         String url = "https://www.sql.ru/forum/job-offers";
+        String vacUrl = "https://www.sql.ru/forum/1319336/java-razrabotchik-junior-middle-senior-hadoop-hive-spark-100-220-t-r-m-tulskaya";
         JsoupParser jsoupParser = new JsoupParser();
-        String date = "13 ноя 19, 20:15";
-        System.out.println(jsoupParser.dateFormatter(date));
-//        for (Vacancy vacancy : jsoupParser.parseTableFromBeginingOfTheYear(url)) {
-//            System.out.println(vacancy);
-//        }
+
+        System.out.println(jsoupParser.parseVacancy(vacUrl));
     }
 
     private Date convertTodayOrYesterdayToDate(String line) throws ParseException {
@@ -126,7 +112,7 @@ public class JsoupParser {
         Date dateResult;
         String today = "сегодня";
         String yesterday = "вчера";
-        SimpleDateFormat formatter = new SimpleDateFormat("dd mmm YY, HH:mm");
+        SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
         DateFormat dateFormat = new SimpleDateFormat("dd MMM yy");
 
         if (line.contains(today)) {
@@ -140,7 +126,7 @@ public class JsoupParser {
             stringResult = dateFormat.format(date) + ", " + hhmm;
             dateResult = formatter.parse(stringResult);
         } else {
-            dateResult = formatter.parse(line);
+            dateResult = formatDate(line);
         }
         return dateResult;
     }
@@ -155,12 +141,28 @@ public class JsoupParser {
         return cal.getTime();
     }
 
-    private Date dateFormatter(String string) throws ParseException {
 
-        String pattern = "dd MMM yy, HH:mm";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    public Date formatDate(String date) throws ParseException {
+        Locale locale = new Locale("ru", "RU");
+        DateFormatSymbols dfs = DateFormatSymbols.getInstance(locale);
+        String[] shortMonths = {
+                "янв", "фев", "мар", "апр", "май", "июн",
+                "июл", "авг", "сен", "окт", "ноя", "дек"};
+        dfs.setShortMonths(shortMonths);
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT, locale);
+        sdf.setDateFormatSymbols(dfs);
+        Date date1 = sdf.parse(date);
+        return date1;
+    }
 
-        return simpleDateFormat.parse(string);
+
+    public String parseVacancy(String url) throws IOException {
+        Document doc = Jsoup.connect(url).get();
+        Element table = doc.select("table.msgTable").first();
+        Elements rows = table.select("tr");
+        Element row = rows.get(1);
+        Elements cols = row.select("td");
+        return cols.get(1).text(); //text
     }
 
 }

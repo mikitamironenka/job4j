@@ -1,15 +1,35 @@
 package ru.job4j.quartzstarter;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
+import ru.job4j.database.DBConnect;
+
+import java.io.InputStream;
+import java.util.Properties;
 
 public class CronTrigger {
 
+    private static final Logger LOG = LogManager.getLogger(CronTrigger.class);
+
     private String cronScheduler;
 
-    public CronTrigger(String cronScheduler) {
-        this.cronScheduler = cronScheduler;
+    public CronTrigger() {
+        init();
     }
+
+    public void init() {
+        try (InputStream in = DBConnect.class.getClassLoader().getResourceAsStream("app.properties")) {
+            Properties properties = new Properties();
+            properties.load(in);
+            this.cronScheduler = properties.getProperty("cron.time");
+//            this.cronScheduler = properties.getProperty("cron.timefirst");
+        } catch (Exception e) {
+            LOG.info(e);
+        }
+    }
+
 
     public void startSchedule() throws SchedulerException {
 
