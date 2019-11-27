@@ -6,7 +6,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.logging.SocketHandler;
 
 public class ServerSide {
 
@@ -69,8 +68,10 @@ public class ServerSide {
     public static void main(String[] args) throws IOException {
 
         int port = 5000; //1025-65535
-        String file = "C:/projects/job4j/chapter_006_IO/src/main/java/ru/job4j/socket/file.txt";
-        new ServerSide(port, file).init();
+        String file = "src/main/java/ru/job4j/socket/file.txt";
+        File sourceFile = new File(file);
+        String filePath = sourceFile.getAbsolutePath();
+        new ServerSide(port, filePath).init();
 
 //        try {
 //            ServerSocket serverSocket = new ServerSocket(port);
