@@ -15,11 +15,11 @@ import static org.junit.Assert.assertThat;
 
 public class TrackerSQLTest {
 
-    @Test
-    public void checkConnection() {
-        TrackerSQL sql = new TrackerSQL();
-        assertThat(sql.init(), is(true));
-    }
+//    @Test
+//    public void checkConnection() {
+//        TrackerSQL sql = new TrackerSQL();
+//        assertThat(sql.init(), is(true));
+//    }
 
     public static Connection init() {
         try (InputStream in = TrackerSQL.class.getClassLoader().getResourceAsStream("db.properties")) {
@@ -73,7 +73,7 @@ public class TrackerSQLTest {
 
             List<Item> checked = List.of(item, item2, item3);
             List<Item> result = tracker.findAll();
-
+            System.out.println(result);
             assertThat(result, is(checked));
         }
     }
