@@ -53,8 +53,10 @@
         <module>chapter_005_ Collections_Pro</module>
         <module>chapter_006_IO</module>
         <module>chapter_007_SQL_JDBC</module>
+        <module>chapter_012_SPRING</module>
         <module>testaskmagnit</module>
         <module>parserrusql</module>
+        <module>springlessons</module>
 
 
     </modules>

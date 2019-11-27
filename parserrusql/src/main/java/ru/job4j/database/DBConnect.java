@@ -72,7 +72,7 @@ public class DBConnect {
 //                ps.executeUpdate();
             }
             int[] count = ps.executeBatch();
-            System.out.println(count);
+            System.out.println(count.length);
             this.conn.commit();
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
@@ -98,17 +98,12 @@ public class DBConnect {
     public void insertOneVacancy(Vacancy vacancy) {
 
         final String insert = "INSERT INTO vacanciesThree(name, text, link) VALUES(?, ?, ?);";
-        //create batch of sql queries
         try (PreparedStatement ps = this.conn.prepareStatement(insert)) {
 
             ps.setString(1, vacancy.getName());
             ps.setString(2, vacancy.getText());
             ps.setString(3, vacancy.getLink());
-//                ps.addBatch();
             ps.executeUpdate();
-//            int[] count = ps.executeBatch();
-//            System.out.println(count);
-//            this.conn.commit();
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
         }

@@ -30,7 +30,6 @@ public class Vacancy {
     public String toString() {
         return "vacancy = " + name
                 + ", text = " + text
-                + ", link= " + link
-                ;
+                + ", link= " + link;
     }
 }
