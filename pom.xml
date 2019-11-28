@@ -56,8 +56,6 @@
         <module>chapter_012_SPRING</module>
         <module>testaskmagnit</module>
         <module>parserrusql</module>
-
-
     </modules>
 
     <properties>
