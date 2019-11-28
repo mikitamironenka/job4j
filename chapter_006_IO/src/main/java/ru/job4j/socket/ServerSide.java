@@ -65,13 +65,13 @@ public class ServerSide {
         } while (!("exit".equals(ask)));
     }
 
-    public static void main(String[] args) throws IOException {
+//    public static void main(String[] args) throws IOException {
 
-        int port = 5000; //1025-65535
-        String file = "src/main/java/ru/job4j/socket/file.txt";
-        File sourceFile = new File(file);
-        String filePath = sourceFile.getAbsolutePath();
-        new ServerSide(port, filePath).init();
+//        int port = 5000; //1025-65535
+//        String file = "src/main/java/ru/job4j/socket/file.txt";
+//        File sourceFile = new File(file);
+//        String filePath = sourceFile.getAbsolutePath();
+//        new ServerSide(port, filePath).init();
 
 //        try {
 //            ServerSocket serverSocket = new ServerSocket(port);
@@ -97,5 +97,5 @@ public class ServerSide {
 //            e.printStackTrace();
 //        }
 
-    }
+//    }
 }
