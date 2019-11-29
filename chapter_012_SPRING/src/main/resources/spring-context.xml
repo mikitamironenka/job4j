@@ -2,17 +2,93 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context.xsd">
+<!--        <context:property-placeholder location="classpath:musicPlayer.properties"/>-->
+
+        <context:property-placeholder location="classpath*:db.properties"/>
+        <context:annotation-config/>
+        <!--включаем сканирование компонентов в этом пакете, чтобы использовать аннотации-->
+        <context:component-scan base-package="ru.job4j"/>
 
 <!--    <bean id="memory" class="ru.job4j.ru.job4j.lesson.MemoryStoragy"/>-->
 <!--    <bean id="storage" class="ru.job4j.ru.job4j.lesson.UserStorage">-->
 <!--        <constructor-arg name="storage" ref="memory"></constructor-arg>-->
 <!--    </bean>-->
-        <context:component-scan base-package="ru.job4j.ioc"/>
-        <context:component-scan base-package="ru.job4j.lesson"/>
+
+<!--        тег хранения пропертей-->
+
+        <!--созднание бинов-->
+<!--        <bean id="modernMusicBean" class="ru.job4j.musicplayer.ModernMusic"/>-->
+<!--        <bean id="classicMusicBean" class="ru.job4j.musicplayer.ClassicalMusic"-->
+<!--              init-method="doMyInit"-->
+<!--              destroy-method="doMyDestroy"-->
+<!--              factory-method="getClassicalMusic"/>-->
+<!--        <bean id="doomMusicBean" class="ru.job4j.musicplayer.DoomMusic"/>-->
+<!--        <bean id="metalMusicBean" class="ru.job4j.musicplayer.MetalMusic"/>-->
+<!--        <bean id="rockMusicBean" class="ru.job4j.musicplayer.RockMusic"/>-->
+<!--1-->
+<!--        <bean id="musicPlayer" class="ru.job4j.musicplayer.MusicPlayer">-->
+<!--                <constructor-arg ref="classicMusicBean"/>-->
+<!--        </bean>-->
 
 
+<!--        <bean id="musicPlayer" class="ru.job4j.musicplayer.MusicPlayer"-->
+<!--                init-method="doMyInit"-->
+<!--                destroy-method="doMyDestroy">-->
+<!--        </bean>-->
+
+
+<!--        3 задаём значения полей в сразу в xml-->
+<!--        <bean id="musicPlayer" class="ru.job4j.musicplayer.MusicPlayer">-->
+<!--                <property name="music" ref="modernMusicBean"/>-->
+<!--                <property name="name" value="Some name"/>-->
+<!--                <property name="volume" value="60"/>-->
+<!--        </bean>-->
+
+<!--        читаем значения из файла настроек-->
+<!--        <bean id="musicPlayer" class="ru.job4j.musicplayer.MusicPlayer">-->
+<!--&lt;!&ndash;                <property name="music" ref="modernMusicBean"/>  &lt;!&ndash;ссылка на бин в этом файле&ndash;&gt;&ndash;&gt;-->
+
+<!--                <property name="name" value="${musicPlayer.name}"/>-->
+<!--                <property name="volume" value="${musicPlayer.volume}"/>-->
+<!--        </bean>-->
+
+        <!--создаём список музыки, со ссылками на бины по умолчанию ArrayList-->
+<!--        <util:list id="musicList" value-type="ru.job4j.musicplayer.Music">-->
+<!--                <ref bean="modernMusicBean"/>-->
+<!--                <ref bean="classicMusicBean"/>-->
+<!--                <ref bean="doomMusicBean"/>-->
+<!--                <ref bean="metalMusicBean"/>-->
+<!--                <ref bean="rockMusicBean"/>-->
+<!--        </util:list>-->
+
+        <!--объявляем новый бин мьюзикплеер и инициализируем лист через сеттер созданными ранее бинами музыкальных жанров-->
+<!--        <bean id="musicPlayer" class="ru.job4j.musicplayer.MusicPlayer"-->
+<!--              init-method="doMyInit"-->
+<!--              destroy-method="doMyDestroy">-->
+<!--                <property name="musicList">-->
+<!--                        <list>-->
+<!--                                <ref bean="modernMusicBean"/>-->
+<!--                                <ref bean="classicMusicBean"/>-->
+<!--                                <ref bean="doomMusicBean"/>-->
+<!--                                <ref bean="metalMusicBean"/>-->
+<!--                                <ref bean="rockMusicBean"/>-->
+<!--                        </list>-->
+<!--                </property>-->
+<!--        </bean>-->
+
+        <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+            <property name="driverClassName" value="${jdbc.driver}"/>
+            <property name="url" value="${jdbc.url}"/>
+            <property name="username" value="${jdbc.username}"/>
+            <property name="password" value="${jdbc.password}"/>
+        </bean>
+
+        <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+            <property name="dataSource" ref="dataSource"/>
+        </bean>
 </beans>
