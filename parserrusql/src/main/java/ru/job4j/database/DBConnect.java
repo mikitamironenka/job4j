@@ -48,10 +48,10 @@ public class DBConnect {
     private void createTableIfNotExist() {
         try (PreparedStatement pr = this.conn.prepareStatement(
                 "CREATE TABLE IF NOT EXISTS vacanciesThree("
-                        + "id serial primary key,"
-                        + "name varchar(1000),"
-                        + "text varchar(5000),"
-                        + "link varchar(1000)"
+                        + "id serial PRIMARY KEY,"
+                        + "name VARCHAR(1000) UNIQUE,"
+                        + "text VARCHAR(5000),"
+                        + "link VARCHAR(1000)"
                         + ");")) {
             pr.execute();
         } catch (SQLException e) {
@@ -61,7 +61,8 @@ public class DBConnect {
 
     public void insert(List<Vacancy> list) {
 
-        final String insert = "INSERT INTO vacanciesThree(name, text, link) VALUES(?, ?, ?);";
+        final String insert = "INSERT INTO vacanciesThree(name, text, link) VALUES(?, ?, ?) ON CONFLICT (name) " +
+                "DO NOTHING;";
         //create batch of sql queries
         try (PreparedStatement ps = this.conn.prepareStatement(insert)) {
             for (int i = 0; i < list.size(); i++) {
@@ -97,7 +98,8 @@ public class DBConnect {
 
     public void insertOneVacancy(Vacancy vacancy) {
 
-        final String insert = "INSERT INTO vacanciesThree(name, text, link) VALUES(?, ?, ?);";
+        final String insert = "INSERT INTO vacanciesThree(name, text, link) VALUES(?, ?, ?) ON CONFLICT (name) " +
+                "DO NOTHING;";
         try (PreparedStatement ps = this.conn.prepareStatement(insert)) {
 
             ps.setString(1, vacancy.getName());
