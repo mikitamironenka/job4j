@@ -89,9 +89,8 @@ public class InteractCalc {
         double numOne = getNum();
         double numTwo = getNum();
         char operation = getOperation();
-
+        double result = calc(numOne, numTwo, operation);
         while (isOperate) {
-            double result = calc(numOne, numTwo, operation);
             System.out.println("The answer is " + result);
             System.out.println("Want some more operation y/n?");
             String answer = scanner.next();
@@ -100,7 +99,7 @@ public class InteractCalc {
             } else {
                operation = getOperation();
                numTwo = getNum();
-               calc(result, numTwo, operation);
+               result = calc(result, numTwo, operation);
             }
         }
     }
