@@ -6,6 +6,8 @@ package ru.job4j.srp;
 //3. Повторный выбор операции и переиспользование предыдущего вычисления.
 //4. Проект должен следовать SRP.
 
+import ru.job4j.srp.operations.*;
+
 import java.util.Scanner;
 
 public class InteractCalc {
@@ -58,28 +60,49 @@ public class InteractCalc {
     /**
      * Chose operation and make calculation
      */
-    public double calc(double numOne, double numTwo, char operation){
-        double result;
+//    public double calc(double numOne, double numTwo, char operation){
+//        double result;
+//        switch (operation) {
+//            case '+':
+//                result = calc.add(numOne, numTwo);
+//                break;
+//            case '-':
+//                result = calc.subTrack(numOne, numTwo);
+//                break;
+//            case '*':
+//                result = calc.sub(numOne, numTwo);
+//                break;
+//            case '/':
+//                result = calc.div(numOne, numTwo);
+//                break;
+//            default:
+//                System.out.println("Operation is wrong. Type the operation.");
+//                result = calc(numOne, numTwo, getOperation());
+//        }
+//        return result;
+//    }
+
+    public Operation calculate(char operation){
+        Operation result = null;
         switch (operation) {
             case '+':
-                result = calc.add(numOne, numTwo);
+                result = new Addition();
                 break;
             case '-':
-                result = calc.subTrack(numOne, numTwo);
+                result = new Subtraction();
                 break;
             case '*':
-                result = calc.sub(numOne, numTwo);
+                result = new Multiplication();
                 break;
             case '/':
-                result = calc.div(numOne, numTwo);
+                result = new Division();
                 break;
             default:
                 System.out.println("Operation is wrong. Type the operation.");
-                result = calc(numOne, numTwo, getOperation());
+                result = calculate(getOperation());
         }
         return result;
     }
-
     /**
      * Main functionality of calculation
      */
@@ -89,7 +112,7 @@ public class InteractCalc {
         double numOne = getNum();
         double numTwo = getNum();
         char operation = getOperation();
-        double result = calc(numOne, numTwo, operation);
+        double result = calculate(operation).operate(numOne, numTwo);
         while (isOperate) {
             System.out.println("The answer is " + result);
             System.out.println("Want some more operation y/n?");
@@ -99,7 +122,7 @@ public class InteractCalc {
             } else {
                operation = getOperation();
                numTwo = getNum();
-               result = calc(result, numTwo, operation);
+               result = calculate(operation).operate(result, numTwo);
             }
         }
     }
