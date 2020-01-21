@@ -9,6 +9,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Date;
 
 @Data
@@ -21,5 +23,4 @@ public abstract class Food {
     private LocalDate expirationDate;
     private double price;
     private double discount;
-
 }

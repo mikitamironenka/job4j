@@ -6,57 +6,25 @@ package ru.job4j.lsp;
 //3.3. Если срок годности больше 75% то выставить скидку на продукт и отправить в Shop
 //3.4. Если срок годности вышел. Отправить продукт в мусорку.
 
-import lombok.Data;
 import lombok.Getter;
-import ru.job4j.lsp.models.Beer;
 import ru.job4j.lsp.models.Food;
 import ru.job4j.lsp.storage.*;
-
-import java.time.*;
-import java.util.Date;
+import java.util.List;
 
 @Getter
 public class ControlQuality {
 
-    private Context context;
-    private ZoneId defaultZoneId;
-    private Warehouse warehouse = new Warehouse();
-    private Shop shop = new Shop();
-    private Trash trash = new Trash();
-
-    private LocalDate today;
-
-    public ControlQuality() {
-        this.context = new Context();
-        this.defaultZoneId = ZoneId.systemDefault();
-        this.today = new Date().toInstant().atZone(defaultZoneId).toLocalDate();
-    }
-
-    public void setToday(LocalDate today) {
-        this.today = today;
+    private List<Storage> storages;
+    public ControlQuality(List<Storage> storages) {
+        this.storages = storages;
     }
 
     public void separateFood(Food food) {
-        int percentOfExpiration = calculatePercentOfDays(food);
-        System.out.println(percentOfExpiration);
-        if (percentOfExpiration < 25) {
-            this.context.setStorage(warehouse);
-        } else if (25 < percentOfExpiration && percentOfExpiration < 75) {
-            this.context.setStorage(shop);
-        } else if (percentOfExpiration > 75 && percentOfExpiration < 100) {
-            food.setDiscount(30);
-            this.context.setStorage(shop);
-        } else if (percentOfExpiration >= 100) {
-            this.context.setStorage(trash);
+        for (Storage storage : this.storages) {
+            if (storage.accept(food)) {
+                storage.addFood(food);
+            }
         }
-        this.context.addFoodToStorage(food);
     }
 
-    private int calculatePercentOfDays(Food food) {
-        Period createToExpiration = Period.between(food.getCreateDate(), food.getExpirationDate());
-        Period createToToday = Period.between(food.getCreateDate(), this.today);
-        int expirationDays = createToExpiration.getDays();
-        int passedDays = createToToday.getDays();
-        return 100 * passedDays / expirationDays;
-    }
 }
