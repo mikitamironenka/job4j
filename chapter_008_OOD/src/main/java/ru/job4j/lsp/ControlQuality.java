@@ -14,6 +14,10 @@ import java.util.List;
 @Getter
 public class ControlQuality {
 
+    private Warehouse warehouse = new Warehouse();
+    private Shop shop = new Shop();
+    private Trash trash = new Trash();
+
     private List<Storage> storages;
     public ControlQuality(List<Storage> storages) {
         this.storages = storages;
@@ -23,6 +27,7 @@ public class ControlQuality {
         for (Storage storage : this.storages) {
             if (storage.accept(food)) {
                 storage.addFood(food);
+                break;
             }
         }
     }

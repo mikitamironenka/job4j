@@ -6,11 +6,8 @@ import ru.job4j.lsp.storage.Shop;
 import ru.job4j.lsp.storage.Storage;
 import ru.job4j.lsp.storage.Trash;
 import ru.job4j.lsp.storage.Warehouse;
-
-import javax.sql.rowset.BaseRowSet;
 import java.time.LocalDate;
 import java.util.List;
-
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
