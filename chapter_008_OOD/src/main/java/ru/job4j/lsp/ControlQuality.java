@@ -9,6 +9,7 @@ package ru.job4j.lsp;
 import lombok.Getter;
 import ru.job4j.lsp.models.Food;
 import ru.job4j.lsp.storage.*;
+
 import java.util.List;
 
 @Getter
@@ -31,5 +32,4 @@ public class ControlQuality {
             }
         }
     }
-
 }
