@@ -1,5 +1,6 @@
 package ru.job4j.lspparkingtask.service;
 
+import jdk.jfr.Description;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -51,4 +52,38 @@ public class ParkingServiceTest {
 
         assertTrue(parkingService.parkVehicle(truck));
     }
+
+    @Test
+    public void whenTruckCantParkThenShouldReturnFalse() {
+        ParkingService parkingService = new ParkingService(10, 0);
+        Truck truck = new Truck();
+
+        assertFalse(parkingService.parkVehicle(truck));
+    }
+
+    @Description("Если легковая машина будет парковаться на место грузовой, то метод должен вернуть false.")
+    @Test
+    public void whenCarParkOnTruckPlaceThenShouldReturnFalse() {
+        ParkingService parkingService = new ParkingService(10, 1);
+        Car car = new Car();
+
+        assertFalse(parkingService.parkVehicle(car));
+    }
+
+    @Test
+    public void whenNoFreeParkingPlacesForTruckThenFalse() {
+        ParkingService parkingService = new ParkingService(10, 1);
+        Truck truck = new Truck();
+
+        assertFalse(parkingService.parkVehicle(truck));
+    }
+
+    @Test
+    public void whenNoFreeParkingPlacesForCarThenFalse() {
+        ParkingService parkingService = new ParkingService(10, 1);
+        Car car = new Car();
+
+        assertFalse(parkingService.parkVehicle(car));
+    }
+
 }
