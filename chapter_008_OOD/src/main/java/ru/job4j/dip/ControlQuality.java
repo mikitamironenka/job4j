@@ -48,6 +48,7 @@ public class ControlQuality {
         for (Storage storage : this.storageList) {
             if(storage.accept(food, percentOfExpiration)) {
                 storage.addFood(food);
+                break;
             }
         }
     }
