@@ -18,8 +18,8 @@ public class GeneratorTest {
     @Test
     public void whenOk() {
 
-        String template = "I am a %s, Who are %s? ";
-        Map<String, String> map = new TreeMap<>();
+        String template = "I am a %s, Who are %s?";
+        Map<String, String> map = new HashMap<>();
         map.put("John Wick", "you");
         GeneratorImpl generator = new GeneratorImpl();
         String result = generator.produce(template, map);
@@ -30,9 +30,9 @@ public class GeneratorTest {
         "Ожидаем исключение WrongKeyException")
     @Test(expected = WrongKeyException.class)
     public void whenWrongKeys() {
-        String template = "I am a %s, Who are %s? ";
+        String template = "I am a %s, Who are %s?";
         Map<String, String> map = new TreeMap<>();
-        map.put("John Bohn", "you");
+        map.put("John Bohn", "me");
         GeneratorImpl generator = new GeneratorImpl();
         generator.produce(template, map);
     }
