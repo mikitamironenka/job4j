@@ -7,18 +7,10 @@ import java.util.Scanner;
 
 public class HumanPl extends PlayerImpl {
 
-    /**
-     * Constructor
-     * @param mark player mark
-     * @param logic Logic
-     */
     public HumanPl(Mark mark, Logic logic) {
         super(mark, logic);
     }
 
-    /**
-     * Player turn
-     */
     @Override
     public void turn() {
         boolean makeTurn = false;

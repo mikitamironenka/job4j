@@ -18,9 +18,5 @@ public interface Field {
 
     boolean isEmpty(int x, int y);
 
-    /**
-     * String representation of board
-     * @return string representation
-     */
     String getGridWithValues();
 }

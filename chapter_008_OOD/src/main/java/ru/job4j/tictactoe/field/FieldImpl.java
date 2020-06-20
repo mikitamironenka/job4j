@@ -4,7 +4,7 @@ import ru.job4j.tictactoe.models.Mark;
 
 public class FieldImpl implements Field {
 
-    private static final String LN = System.getProperty("line.separator");
+    private static final String LN = System.lineSeparator();
     private static final int DEFAULT_SIZE = 3;
     private Mark[][] values;
     private final Symbols symbols;
