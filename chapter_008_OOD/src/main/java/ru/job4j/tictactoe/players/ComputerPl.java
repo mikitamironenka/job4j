@@ -1,16 +1,19 @@
 package ru.job4j.tictactoe.players;
 
-import ru.job4j.tictactoe.logic.Logic;
+import ru.job4j.tictactoe.logic.Actions;
 import ru.job4j.tictactoe.models.Mark;
 
 import java.util.Random;
 
-public class ComputerPl extends PlayerImpl {
+public class ComputerPl implements Turn {
 
     private Random random = new Random();
+    private final Mark mark;
+    private final Actions logic;
 
-    public ComputerPl(Mark mark, Logic logic) {
-        super(mark, logic);
+    public ComputerPl(Mark mark, Actions logic) {
+        this.mark = mark;
+        this.logic = logic;
     }
 
     @Override

@@ -1,7 +1,7 @@
 package ru.job4j.tictactoe;
 
+import ru.job4j.tictactoe.logic.Actions;
 import ru.job4j.tictactoe.logic.Logic;
-import ru.job4j.tictactoe.logic.LogicImpl;
 import ru.job4j.tictactoe.models.Status;
 
 import java.util.HashMap;
@@ -12,7 +12,7 @@ import java.util.function.Consumer;
 public class Game {
 
     private Map<Status, Consumer<Status>> dispatch = new HashMap<>();
-    private Logic logic = new LogicImpl();
+    private Actions logic = new Logic();
 
     public Game() {
         this.init();

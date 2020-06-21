@@ -1,28 +1,110 @@
 package ru.job4j.tictactoe.logic;
 
+import ru.job4j.tictactoe.field.FieldActions;
+import ru.job4j.tictactoe.field.Field;
+import ru.job4j.tictactoe.field.SingleSymbols;
 import ru.job4j.tictactoe.models.Mark;
+import ru.job4j.tictactoe.players.ComputerPl;
+import ru.job4j.tictactoe.players.HumanPl;
+import ru.job4j.tictactoe.players.Turn;
 
-public interface Logic {
+public class Logic implements Actions {
 
-    boolean isWinX();
+    private FieldActions board = new Field(new SingleSymbols());
+    private boolean exit = false;
+    private Turn[] players = new Turn[2];
+    private int currentPlayer;
 
-    boolean isWinO();
+    public Logic() {
+        this.restart();
+        players[0] = new HumanPl(Mark.X, this);
+        players[1] = new ComputerPl(Mark.O, this);
+    }
 
-    boolean turn(Mark mark, int x, int y);
+    @Override
+    public boolean isWinX() {
+        return isWin(Mark.X);
+    }
 
-    void restart();
 
-    void end();
+    @Override
+    public boolean isWinO() {
+        return isWin(Mark.O);
+    }
 
-    boolean isEnded();
+    @Override
+    public void restart() {
+        this.currentPlayer = 0;
+        this.board.clear();
+    }
 
-    int width();
+    @Override
+    public boolean turn(Mark mark, int x, int y) {
+        boolean result = false;
+        if (this.board.isEmpty(x, y)) {
+            result = true;
+            this.board.markCellAs(mark, x, y);
+        }
+        return result;
+    }
 
-    int height();
+    @Override
+    public void end() {
+        this.exit = true;
+    }
 
-    boolean noMove();
+    @Override
+    public boolean isEnded() {
+        return this.exit;
+    }
 
-    void draw();
+    @Override
+    public int height() {
+        return this.board.getHeight();
+    }
 
-    void nextTurn();
+    @Override
+    public boolean noMove() {
+        return false;
+    }
+
+    @Override
+    public void draw() {
+        this.board.draw();
+    }
+
+
+    @Override
+    public void nextTurn() {
+        players[this.currentPlayer].turn();
+        this.currentPlayer = (this.currentPlayer + 1) % players.length;
+    }
+
+    @Override
+    public int width() {
+        return this.board.getWidth();
+    }
+
+    private boolean isWin(Mark mark) {
+        boolean result = false;
+        for (int i = 0; i < this.board.getWidth(); i++) {
+            result = result
+                | (this.board.getSymbol(i, 0) == mark
+                && this.board.getSymbol(i, 1) == mark
+                && this.board.getSymbol(i, 2) == mark)
+                | (this.board.getSymbol(0, i) == mark
+                && this.board.getSymbol(1, i) == mark
+                && this.board.getSymbol(2, i) == mark);
+        }
+        result = (
+            result
+                | (this.board.getSymbol(0, 0) == mark
+                && this.board.getSymbol(1, 1) == mark
+                && this.board.getSymbol(2, 2) == mark)
+                | (this.board.getSymbol(0, 2) == mark
+                && this.board.getSymbol(1, 1) == mark
+                && this.board.getSymbol(2, 0) == mark)
+        );
+        return result;
+    }
 }

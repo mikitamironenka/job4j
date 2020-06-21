@@ -1,14 +1,19 @@
 package ru.job4j.tictactoe.players;
 
-import ru.job4j.tictactoe.logic.Logic;
+import ru.job4j.tictactoe.logic.Actions;
 import ru.job4j.tictactoe.models.Mark;
 
 import java.util.Scanner;
 
-public class HumanPl extends PlayerImpl {
 
-    public HumanPl(Mark mark, Logic logic) {
-        super(mark, logic);
+public class HumanPl implements Turn {
+
+    private final Mark mark;
+    private final Actions logic;
+
+    public HumanPl(Mark mark, Actions logic) {
+        this.mark = mark;
+        this.logic = logic;
     }
 
     @Override
