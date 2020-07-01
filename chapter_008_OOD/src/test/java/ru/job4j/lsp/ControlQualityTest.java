@@ -2,11 +2,12 @@ package ru.job4j.lsp;
 
 import org.junit.Test;
 import ru.job4j.lsp.models.*;
-
-import javax.sql.rowset.BaseRowSet;
+import ru.job4j.lsp.storage.Shop;
+import ru.job4j.lsp.storage.Storage;
+import ru.job4j.lsp.storage.Trash;
+import ru.job4j.lsp.storage.Warehouse;
 import java.time.LocalDate;
 import java.util.List;
-
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
@@ -19,9 +20,15 @@ public class ControlQualityTest {
         Meet meet = new Meet("Meet", LocalDate.parse("2020-01-01"), LocalDate.parse("2020-01-15"), 10.0, 50.0);
         Milk milk = new Milk("Milk", LocalDate.parse("2020-01-01"), LocalDate.parse("2020-01-06"), 10.0, 10.0);
         Potato potato = new Potato("Potato", LocalDate.parse("2020-01-01"), LocalDate.parse("2020-01-30"), 10.0, 35.0);
+        Shop shop = new Shop();
+        Warehouse warehouse = new Warehouse();
+        Trash trash = new Trash();
 
-        ControlQuality controlQuality = new ControlQuality();
-        controlQuality.setToday(LocalDate.parse("2020-01-07"));
+        List<Storage> storages = List.of(shop, warehouse, trash);
+
+        ControlQuality controlQuality = new ControlQuality(storages);
+
+        CalculateDate.today = LocalDate.parse("2020-01-07");
 
         controlQuality.separateFood(beer);
         controlQuality.separateFood(bread);
@@ -29,12 +36,12 @@ public class ControlQualityTest {
         controlQuality.separateFood(milk);
         controlQuality.separateFood(potato);
 
-        List<Food> shop = List.of(beer, meet);
-        List<Food> warehouse = List.of(potato);
-        List<Food> trash = List.of(bread, milk);
+        List<Food> shops = List.of(beer, meet);
+        List<Food> warehouses = List.of(potato);
+        List<Food> trashs = List.of(bread, milk);
 
-        assertThat(controlQuality.getShop().getFoods(), is(shop));
-        assertThat(controlQuality.getWarehouse().getFoods(), is(warehouse));
-        assertThat(controlQuality.getTrash().getFoods(), is(trash));
+        assertThat(shop.getFoods(), is(shops));
+        assertThat(warehouse.getFoods(), is(warehouses));
+        assertThat(trash.getFoods(), is(trashs));
     }
 }
