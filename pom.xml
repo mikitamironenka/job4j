@@ -58,6 +58,7 @@
         <module>testaskmagnit</module>
         <module>parserrusql</module>
         <module>springcrud</module>
+        <module>chapter_009_Garbage_Collector</module>
     </modules>
 
     <properties>
