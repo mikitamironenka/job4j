@@ -18,8 +18,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
-
 //Взять код из проекта Хранилище продуктов.
 //    1. Необходимо добавить динамическое распределение продуктов.
 //    2. В классе ControlQuality добавить метод resort();
@@ -28,16 +26,15 @@ import static java.util.stream.Collectors.toList;
 @Getter
 public class ControlQuality {
 
-    private Context context;
     private ZoneId defaultZoneId;
-    private Warehouse warehouse = new Warehouse();
-    private Shop shop = new Shop();
-    private Trash trash = new Trash();
-
+    private List<Storage> storageList;
     private LocalDate today;
 
     public ControlQuality() {
-        this.context = new Context();
+        storageList = new ArrayList<>();
+        this.storageList.add(new Warehouse());
+        this.storageList.add(new Shop());
+        this.storageList.add(new Trash());
         this.defaultZoneId = ZoneId.systemDefault();
         this.today = new Date().toInstant().atZone(defaultZoneId).toLocalDate();
     }
@@ -48,17 +45,12 @@ public class ControlQuality {
 
     public void separateFood(Food food) {
         int percentOfExpiration = calculatePercentOfDays(food);
-        if (percentOfExpiration < 25) {
-            this.context.setStorage(warehouse);
-        } else if (25 < percentOfExpiration && percentOfExpiration < 75) {
-            this.context.setStorage(shop);
-        } else if (percentOfExpiration > 75 && percentOfExpiration < 100) {
-            food.setDiscount(30);
-            this.context.setStorage(shop);
-        } else if (percentOfExpiration >= 100) {
-            this.context.setStorage(trash);
+        for (Storage storage : this.storageList) {
+            if(storage.accept(food, percentOfExpiration)) {
+                storage.addFood(food);
+                break;
+            }
         }
-        this.context.addFoodToStorage(food);
     }
 
     private int calculatePercentOfDays(Food food) {

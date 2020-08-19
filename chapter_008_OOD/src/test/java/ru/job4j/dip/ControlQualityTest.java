@@ -39,20 +39,20 @@ public class ControlQualityTest {
         List<Food> warehouse = List.of(potato);
         List<Food> trash = List.of(bread, milk);
 
-        assertThat(controlQuality.getShop().getFood(), is(shop));
-        assertThat(controlQuality.getWarehouse().getFood(), is(warehouse));
-        assertThat(controlQuality.getTrash().getFood(), is(trash));
+        assertThat(controlQuality.getStorageList().get(1).getFood(), is(shop));
+        assertThat(controlQuality.getStorageList().get(0).getFood(), is(warehouse));
+        assertThat(controlQuality.getStorageList().get(2).getFood(), is(trash));
 
         //меняем дату и делаем ресорт, достаём продукты и пересортируем.
         controlQuality.setToday(LocalDate.parse("2020-01-15"));
-        controlQuality.resort(List.of(controlQuality.getWarehouse(),
-            controlQuality.getShop(), controlQuality.getTrash()));
+        controlQuality.resort(List.of(controlQuality.getStorageList().get(0),
+            controlQuality.getStorageList().get(1), controlQuality.getStorageList().get(2)));
 
         shop = List.of(potato, beer);
         trash = List.of(bread, milk, meet);
 
-        assertThat(shop, containsInAnyOrder(controlQuality.getShop().getFood().toArray()));
-        assertThat(trash, containsInAnyOrder(controlQuality.getTrash().getFood().toArray()));
+        assertThat(shop, containsInAnyOrder(controlQuality.getStorageList().get(1).getFood().toArray()));
+        assertThat(trash, containsInAnyOrder(controlQuality.getStorageList().get(2).getFood().toArray()));
     }
 
 }
