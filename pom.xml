@@ -59,6 +59,7 @@
         <module>parserrusql</module>
         <module>springcrud</module>
         <module>chapter_009_Garbage_Collector</module>
+        <module>chapter_010_MultiThreading</module>
     </modules>
 
     <properties>
