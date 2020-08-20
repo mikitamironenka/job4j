@@ -2,21 +2,23 @@ package ru.job4j.threads_1;
 
 public class Wget {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         Thread thread = new Thread(
             () -> {
-                try {
-                    for (int i = 0; i <= 100; i++) {
-                        System.out.print("\rLoading : " + i  + "%");
-                        Thread.sleep(1000);
+                while (!Thread.currentThread().isInterrupted()) {
+                    try {
+                        System.out.println("start ...");
+                        Thread.sleep(10000);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
                     }
-                    System.out.println("Loaded.");
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
             }
         );
         thread.start();
+        Thread.sleep(1000);
+        thread.interrupt();
+        thread.join();
     }
 }
