@@ -1,0 +1,10 @@
+package ru.job4j.commonresourses_2.immutable;
+
+public class Node<T> {
+    private Node next;
+    private T value;
+
+    public Node(T value) {
+        this.value = value;
+    }
+}
