@@ -1,4 +1,4 @@
-package ru.job4j.threads_1;
+package ru.job4j.threads_1.filedownloadtask;
 
 public class ThreadState {
 

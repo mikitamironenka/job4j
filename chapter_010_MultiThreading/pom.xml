@@ -14,12 +14,23 @@
     <artifactId>chapter_010_MultiThreading</artifactId>
     <version>3.0</version>
 
+    <properties>
+        <lombokVersion>1.18.10</lombokVersion>
+        <jcipAnnotationsVersion>1.0</jcipAnnotationsVersion>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.10</version>
+            <version>${lombokVersion}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>net.jcip</groupId>
+            <artifactId>jcip-annotations</artifactId>
+            <version>${jcipAnnotationsVersion}</version>
+        </dependency>
+
     </dependencies>
 </project>
