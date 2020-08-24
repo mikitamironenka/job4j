@@ -1,6 +1,10 @@
 package ru.job4j.synchronization_3.userstorage;
 
 import org.junit.Test;
+import ru.job4j.synchronization_3.threadsafelist.SingleLockList;
+
+import java.util.Set;
+import java.util.TreeSet;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
@@ -8,13 +12,18 @@ import static org.junit.Assert.*;
 public class UserStorageTest {
 
     @Test
-    public void whenAddTwoUserThenReturnTwo() {
+    public void whenAddTwoUserThenReturnTwo() throws InterruptedException {
         User userOne = new User(1, 50);
         User userTwo = new User(2, 100);
 
         UserStorage userStorage = new UserStorage();
-        assertTrue(userStorage.add(userOne));
-        assertTrue(userStorage.add(userTwo));
+
+        Thread first = new Thread(() -> userStorage.add(userOne));
+        Thread second = new Thread(() -> userStorage.add(userTwo));
+        first.start();
+        second.start();
+        first.join();
+        second.join();
         assertThat(userStorage.getUserList().size(), is(2));
     }
 

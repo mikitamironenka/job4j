@@ -1,9 +1,7 @@
 package ru.job4j.synchronization_3.userstorage;
 
 import net.jcip.annotations.ThreadSafe;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 //1. Создать класс - структуру данных для хранение пользователей UserStorage.
@@ -22,11 +20,7 @@ import java.util.List;
 @ThreadSafe
 public class UserStorage {
 
-    private List<User> userList;
-
-    public UserStorage() {
-        this.userList = new ArrayList<>();
-    }
+    private final List<User> userList = new ArrayList<>();
 
     public synchronized boolean add (User user) {
         return this.userList.add(user);
