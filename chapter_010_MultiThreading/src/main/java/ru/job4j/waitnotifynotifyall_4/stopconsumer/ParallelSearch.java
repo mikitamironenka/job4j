@@ -4,7 +4,8 @@ import ru.job4j.waitnotifynotifyall_4.producerconsumerpattern.SimpleBlockingQueu
 
 public class ParallelSearch {
 
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws InterruptedException {
 
         SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<Integer>(5);
         final Thread consumer = new Thread(
@@ -13,7 +14,8 @@ public class ParallelSearch {
                     try {
                         Integer el = queue.poll();
                         System.out.println(el);
-                        if (el == -1) {
+                        Thread.sleep(1000);
+                        if (queue.isEmpty() ) {
                             break;
                         }
                     } catch (InterruptedException e) {
@@ -33,11 +35,6 @@ public class ParallelSearch {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                }
-                try {
-                    queue.offer(-1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
             }
         ).start();

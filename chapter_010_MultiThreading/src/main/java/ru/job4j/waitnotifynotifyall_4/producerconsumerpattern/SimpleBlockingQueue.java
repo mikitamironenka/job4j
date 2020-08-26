@@ -19,7 +19,7 @@ public class SimpleBlockingQueue<T> {
     private Queue<T> queue = new LinkedList<>();
     private final int limit;
 
-    public SimpleBlockingQueue(int limit) {
+    public  SimpleBlockingQueue(int limit) {
         this.limit = limit;
     }
 
@@ -44,5 +44,13 @@ public class SimpleBlockingQueue<T> {
         T value = this.queue.poll();
         System.out.println("consume :" + value);
         return value;
+    }
+
+    public Queue<T> getQueue() {
+        return queue;
+    }
+
+    public boolean isEmpty() {
+        return this.queue.isEmpty();
     }
 }
