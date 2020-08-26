@@ -1,11 +1,6 @@
 package ru.job4j.synchronization_3.userstorage;
 
 import org.junit.Test;
-import ru.job4j.synchronization_3.threadsafelist.SingleLockList;
-
-import java.util.Set;
-import java.util.TreeSet;
-
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
