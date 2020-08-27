@@ -1,10 +1,6 @@
 package ru.job4j.waitnotifynotifyall_4.producerconsumerpattern;
 
-import lombok.extern.java.Log;
 import net.jcip.annotations.GuardedBy;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -23,9 +19,13 @@ public class SimpleBlockingQueue<T> {
         this.limit = limit;
     }
 
-    public synchronized void offer(T value) throws InterruptedException {
+    public synchronized void offer(T value) {
         while(this.queue.size() == this.limit) {
-            wait();
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         this.queue.add(value);
         System.out.println("produce :" + value);
@@ -44,5 +44,9 @@ public class SimpleBlockingQueue<T> {
         T value = this.queue.poll();
         System.out.println("consume :" + value);
         return value;
+    }
+
+    public boolean isEmpty() {
+        return this.queue.isEmpty();
     }
 }

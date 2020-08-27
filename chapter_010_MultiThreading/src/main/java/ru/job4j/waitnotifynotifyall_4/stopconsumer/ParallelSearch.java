@@ -34,11 +34,7 @@ public class ParallelSearch {
                         e.printStackTrace();
                     }
                 }
-                try {
-                    queue.offer(-1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                queue.offer(-1);
             }
         ).start();
     }

@@ -11,11 +11,7 @@ public class SimpleBlockingQueueTest {
         Thread producer = new Thread(
             () -> {
                 for (int i = 1; i <= 10; i++) {
-                    try {
-                        queue.offer(i);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    queue.offer(i);
                 }
             }
         );
