@@ -1,9 +1,11 @@
 package ru.job4j.waitnotifynotifyall_4.stopconsumer;
 
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
 import ru.job4j.waitnotifynotifyall_4.producerconsumerpattern.SimpleBlockingQueue;
 
+@ThreadSafe
 public class ParallelSearch {
-
 
     public static void main(String[] args) throws InterruptedException {
 

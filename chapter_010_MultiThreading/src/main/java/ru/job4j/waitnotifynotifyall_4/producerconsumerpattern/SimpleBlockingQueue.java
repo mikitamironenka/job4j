@@ -46,11 +46,11 @@ public class SimpleBlockingQueue<T> {
         return value;
     }
 
-    public Queue<T> getQueue() {
-        return queue;
+    public synchronized Queue<T> getQueue() {
+        return this.queue;
     }
 
-    public boolean isEmpty() {
+    public synchronized boolean isEmpty() {
         return this.queue.isEmpty();
     }
 }
