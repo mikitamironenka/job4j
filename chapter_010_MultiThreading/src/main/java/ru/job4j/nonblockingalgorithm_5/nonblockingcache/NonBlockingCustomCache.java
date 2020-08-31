@@ -33,6 +33,7 @@ public class NonBlockingCustomCache {
             (k, oldModel) -> {
                 int old = oldModel.getVersion().get();
                 model.getVersion().set(old + 1);
+
                 if (!oldModel.getVersion().compareAndSet(old, old + 1)) {
                     throw new OptimisticException();
                 }
