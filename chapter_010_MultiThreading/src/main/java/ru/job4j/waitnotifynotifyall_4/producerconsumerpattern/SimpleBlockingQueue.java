@@ -23,9 +23,13 @@ public class SimpleBlockingQueue<T> {
         this.limit = limit;
     }
 
-    public synchronized void offer(T value) throws InterruptedException {
+    public synchronized void offer(T value) {
         while(this.queue.size() == this.limit) {
-            wait();
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         this.queue.add(value);
         System.out.println("produce :" + value);
@@ -44,5 +48,9 @@ public class SimpleBlockingQueue<T> {
         T value = this.queue.poll();
         System.out.println("consume :" + value);
         return value;
+    }
+
+    public boolean isEmpty() {
+        return this.queue.isEmpty();
     }
 }
