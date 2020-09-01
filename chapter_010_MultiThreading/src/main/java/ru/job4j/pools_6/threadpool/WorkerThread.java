@@ -15,12 +15,11 @@ public class WorkerThread extends Thread {
     @Override
     public void run() {
         try {
-            while (!threadPool.getIsThreadPoolShutDownInitiated().get() || !tasks.isEmpty()) {
+            while (!Thread.currentThread().isInterrupted() || !tasks.isEmpty()) {
                 Runnable task;
                 if ((task = tasks.poll()) != null) {
                     task.run();
                 }
-                Thread.sleep(1);
             }
         } catch (RuntimeException | InterruptedException e) {
             throw new CustomThreadPoolException(e);
