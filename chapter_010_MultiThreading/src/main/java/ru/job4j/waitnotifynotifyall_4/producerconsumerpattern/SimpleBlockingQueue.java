@@ -15,7 +15,7 @@ public class SimpleBlockingQueue<T> {
     private Queue<T> queue = new LinkedList<>();
     private final int limit;
 
-    public SimpleBlockingQueue(int limit) {
+    public  SimpleBlockingQueue(int limit) {
         this.limit = limit;
     }
 
@@ -46,7 +46,12 @@ public class SimpleBlockingQueue<T> {
         return value;
     }
 
-    public boolean isEmpty() {
+    public synchronized boolean isEmpty() {
         return this.queue.isEmpty();
     }
+
+    public synchronized Queue<T> getQueue() {
+        return this.queue;
+    }
+
 }
