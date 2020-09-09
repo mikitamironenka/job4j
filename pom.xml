@@ -60,6 +60,7 @@
         <module>springcrud</module>
         <module>chapter_009_Garbage_Collector</module>
         <module>chapter_010_MultiThreading</module>
+        <module>chapter_011_Servlet_JSP</module>
     </modules>
 
     <properties>
