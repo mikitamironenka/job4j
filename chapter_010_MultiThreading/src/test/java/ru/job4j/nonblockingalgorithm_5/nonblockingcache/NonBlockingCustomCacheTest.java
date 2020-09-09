@@ -24,21 +24,44 @@ public class NonBlockingCustomCacheTest {
     @Test
     public void whenThrowException() throws InterruptedException {
         Base model = new Base(1, "model");
+        Base model2 = new Base(1, "model");
+        Base model3 = new Base(1, "model");
         NonBlockingCustomCache cache = new NonBlockingCustomCache();
         AtomicReference<Exception> ex = new AtomicReference<>();
         cache.add(model);
-        Thread first = new Thread(() -> {
-            try {
-                Thread.sleep(50);
-                model.getVersion().set(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        cache.add(model2);
+        cache.add(model3);
+        Thread first = new Thread(
+            () -> {
+                try {
+                    cache.update(model);
+                } catch (OptimisticException e) {
+                    ex.set(e);
+                }
             }
-        });
+        );
         Thread second = new Thread(
             () -> {
                 try {
-                    cache.update(new Base(1, "newModel"));
+                    cache.update(model2);
+                } catch (OptimisticException e) {
+                    ex.set(e);
+                }
+            }
+        );
+        Thread third = new Thread(
+            () -> {
+                try {
+                    cache.update(model);
+                } catch (OptimisticException e) {
+                    ex.set(e);
+                }
+            }
+        );
+        Thread forth = new Thread(
+            () -> {
+                try {
+                    cache.update(model);
                 } catch (OptimisticException e) {
                     ex.set(e);
                 }
@@ -46,8 +69,12 @@ public class NonBlockingCustomCacheTest {
         );
         first.start();
         second.start();
+        third.start();
+        forth.start();
         first.join();
         second.join();
+        third.join();
+        forth.join();
         assertThat(ex.get().getMessage(), is("OptimisticException"));
     }
 }

@@ -18,6 +18,7 @@ import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.BiFunction;
 
 @ThreadSafe
 public class NonBlockingCustomCache {
@@ -29,13 +30,13 @@ public class NonBlockingCustomCache {
     }
 
     public synchronized boolean update(Base model){
-        return cache.computeIfPresent(model.getId(),
-            (k, oldModel) -> {
-                int old = oldModel.getVersion().get();
-                model.getVersion().set(old + 1);
-
-                if (!oldModel.getVersion().compareAndSet(old, old + 1)) {
+        return cache.computeIfPresent(model.getId(), (key, oldModel) ->
+            {
+                int oldVersion = oldModel.getVersion().get();
+                if (model.getVersion().get() != oldModel.getVersion().get()) {
                     throw new OptimisticException();
+                } else {
+                    model.getVersion().set(oldVersion + 1);
                 }
                 return model;
             }) != null;
