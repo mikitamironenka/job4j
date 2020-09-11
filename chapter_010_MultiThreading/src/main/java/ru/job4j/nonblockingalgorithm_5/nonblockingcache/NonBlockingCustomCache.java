@@ -16,20 +16,18 @@ package ru.job4j.nonblockingalgorithm_5.nonblockingcache;
 
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
-
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.BiFunction;
 
 @ThreadSafe
 public class NonBlockingCustomCache {
     @GuardedBy("this")
     private ConcurrentHashMap<Integer, Base> cache = new ConcurrentHashMap<>();
 
-    public synchronized boolean add(Base model) {
+    public boolean add(Base model) {
         return this.cache.put(model.getId(), model) != null;
     }
 
-    public synchronized boolean update(Base model){
+    public boolean update(Base model){
         return cache.computeIfPresent(model.getId(), (key, oldModel) ->
             {
                 int oldVersion = oldModel.getVersion().get();
@@ -42,11 +40,11 @@ public class NonBlockingCustomCache {
             }) != null;
     }
 
-    public synchronized boolean delete(Base model){
+    public boolean delete(Base model){
         return this.cache.remove(model.getId()) != null;
     }
 
-    public synchronized Base get(int id) {
+    public Base get(int id) {
         return this.cache.get(id);
     }
 
