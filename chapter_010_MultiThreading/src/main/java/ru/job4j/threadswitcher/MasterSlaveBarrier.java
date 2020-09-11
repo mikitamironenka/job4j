@@ -1,9 +1,11 @@
 package ru.job4j.threadswitcher;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class MasterSlaveBarrier {
 
     private final Object monitor = this;
-    private static boolean writeA = true;
+    private static AtomicBoolean writeA = new AtomicBoolean(true);
 
     /**
      * While condition writeA for master thread is false - the thread wait for better times
@@ -11,10 +13,10 @@ public class MasterSlaveBarrier {
      */
     public void tryMaster() throws InterruptedException {
         synchronized (monitor) {
-            while (!writeA) {
+            while (!writeA.get()) {
                 wait();
             }
-            writeA = false;
+            writeA.set(false);
             System.out.println("Thread A");
             Thread.sleep(1000);
             notify();
@@ -23,10 +25,10 @@ public class MasterSlaveBarrier {
 
     public void trySlave() throws InterruptedException {
         synchronized (monitor) {
-            while (writeA) {
+            while (writeA.get()) {
                 wait();
             }
-            writeA = true;
+            writeA.set(true);
             System.out.println("Thread B");
             Thread.sleep(1000);
             notify();
