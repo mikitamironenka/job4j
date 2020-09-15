@@ -3,43 +3,50 @@ package ru.job4j.threadswitcher;
 import net.jcip.annotations.ThreadSafe;
 
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @ThreadSafe
 public class Switcher {
 
-    private static final int threadA = 0;
-    private static final int threadB = 1;
-
-    private static final AtomicBoolean ref = new AtomicBoolean(false);
+    private static final AtomicBoolean writeA = new AtomicBoolean(true);
 
     public static void main(String[] args) throws InterruptedException {
+
         Thread first = new Thread(
             () -> {
-                synchronized (Switcher.class) {
-                    while (true) {
-                        try {
-                            if (!ref.get()) {
-                                ref.set(true);
+                while (true) {
+                    synchronized (Thread.currentThread()) {
+                        while(!writeA.get()) {
+                            try {
+                                Thread.currentThread().wait();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
                             }
-                            System.out.println("Thread A");
-                            Thread.currentThread().wait();
-                        } catch (InterruptedException e) {
-                            Thread.currentThread().interrupt();
                         }
+                    }
+                    System.out.println("Thread A");
+                    writeA.set(false);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
                 }
             }
         );
         Thread second = new Thread(
             () -> {
-                synchronized (Switcher.class) {
-                    while (true) {
-                        if (ref.get()) {
-                            ref.set(false);
+                while (true) {
+                    synchronized (Thread.currentThread()) {
+                        while (writeA.get()) {
+                            Thread.currentThread().notify();
                         }
-                        System.out.println("Thread B");
-                        Thread.currentThread().notify();
+                    }
+                    System.out.println("Thread B");
+                    writeA.set(true);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
                 }
             }
