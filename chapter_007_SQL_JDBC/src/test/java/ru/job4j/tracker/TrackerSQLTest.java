@@ -48,6 +48,8 @@ public class TrackerSQLTest {
             Item item = tracker.add(new Item("name", "desc"));
             assertThat(tracker.findById(item.getId()), is(item));
         }
+
+
     }
 
     @Test
@@ -77,5 +79,6 @@ public class TrackerSQLTest {
             assertThat(result, is(checked));
         }
     }
+
 
 }

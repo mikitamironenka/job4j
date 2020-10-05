@@ -61,6 +61,7 @@
         <module>chapter_009_Garbage_Collector</module>
         <module>chapter_010_MultiThreading</module>
         <module>chapter_011_Servlet_JSP</module>
+        <module>servlets</module>
     </modules>
 
     <properties>
@@ -72,10 +73,17 @@
         <javafxVersion>11</javafxVersion>
         <postgreSQLVersion>9.1-901-1.jdbc4</postgreSQLVersion>
         <log4jVersion>2.11.1</log4jVersion>
+        <mockitoVerson>3.5.13</mockitoVerson>
 
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockitoVerson}</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-all</artifactId>
