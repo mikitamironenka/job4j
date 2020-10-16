@@ -1,5 +1,6 @@
 package ru.job4j.tracker.di;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.job4j.tracker.input.ConsoleInput;
 
@@ -9,13 +10,15 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class StartUI {
 
+    @Autowired
     private Store store;
-    private ConsoleInput consoleInput;
 
-    public StartUI(Store store, ConsoleInput consoleInput) {
-        this.store = store;
+    @Autowired
+    public void setConsoleInput(ConsoleInput consoleInput) {
         this.consoleInput = consoleInput;
     }
+
+    private ConsoleInput consoleInput;
 
     public void add(String value) {
         store.add(value);
