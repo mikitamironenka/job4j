@@ -1,6 +1,7 @@
 package ru.job4j.tracker.di;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import ru.job4j.tracker.input.ConsoleInput;
 
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
+@Scope("prototype")
 public class StartUI {
 
     @Autowired
