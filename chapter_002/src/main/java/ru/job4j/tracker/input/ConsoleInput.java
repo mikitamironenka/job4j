@@ -1,10 +1,13 @@
 package ru.job4j.tracker.input;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import ru.job4j.tracker.exception.MenuOutException;
 
 import java.util.List;
 import java.util.Scanner;
 
+@Component
 public class ConsoleInput implements Input {
 
     @Override
