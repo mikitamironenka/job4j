@@ -41,7 +41,9 @@ public class StartUI {
     /**
      * Хранилище заявок.
      */
-    private final ITracker tracker;
+//    private final ITracker tracker;
+
+    private final HbnTracker hbnTracker;
 
     private boolean working = true;
 
@@ -49,11 +51,17 @@ public class StartUI {
      * Конструтор инициализирующий поля.
      * @param input ввод данных.
      * @param output
-     * @param tracker хранилище заявок.
+//     * @param tracker хранилище заявок.
      */
-    public StartUI(Input input, ITracker tracker, Consumer<String> output) {
+//    public StartUI(Input input, ITracker tracker, Consumer<String> output) {
+//        this.input = input;
+//        this.tracker = tracker;
+//        this.output = output;
+//    }
+
+    public StartUI(Input input, HbnTracker hbnTracker, Consumer<String> output) {
         this.input = input;
-        this.tracker = tracker;
+        this.hbnTracker = hbnTracker;
         this.output = output;
     }
 
@@ -65,10 +73,10 @@ public class StartUI {
      * Основой цикл программы.
      */
     public void init() {
-        MenuTracker menu = new MenuTracker(this.input, this.tracker, this.output);
+        MenuTracker menu = new MenuTracker(this.input, this.hbnTracker, this.output);
         List<Integer> ranges = new ArrayList<>();
         menu.fillActions(this);
-        for (int i = 0; i <= menu.getActionsLength(); i++) {
+        for (int i = 0; i < menu.getActionsLength(); i++) {
             ranges.add(i);
         }
         do {
@@ -83,6 +91,7 @@ public class StartUI {
      * @param args
      */
     public static void main(String[] args) {
-        new StartUI(new ValidateInput(new ConsoleInput()), new Tracker(), System.out::println).init();
+//        new StartUI(new ValidateInput(new ConsoleInput()), new Tracker(), System.out::println).init();
+        new StartUI(new ValidateInput(new ConsoleInput()), new HbnTracker(), System.out::println).init();
     }
 }

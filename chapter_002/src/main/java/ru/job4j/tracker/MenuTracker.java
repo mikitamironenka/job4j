@@ -19,7 +19,8 @@ public class MenuTracker {
     /**
      * @param хранит ссылку на объект .
      */
-    private ITracker tracker;
+//    private ITracker tracker;
+    private HbnTracker hbnTracker;
     /**
      * @param хранит ссылку на массив типа UserAction.
      */
@@ -31,9 +32,9 @@ public class MenuTracker {
      * @param tracker объект типа Tracker
      * @param output
      */
-    public MenuTracker(Input input, ITracker tracker, Consumer<String> output) {
+    public MenuTracker(Input input, Store tracker, Consumer<String> output) {
         this.input = input;
-        this.tracker = tracker;
+        this.hbnTracker = (HbnTracker) tracker;
         this.output = output;
     }
 
@@ -65,7 +66,7 @@ public class MenuTracker {
      * @param key ключ операции
      */
     public void select(int key) {
-        this.actions.get(key).execute(this.input, this.tracker, this.output);
+        this.actions.get(key).execute(this.input, this.hbnTracker, this.output);
     }
 
     /**
@@ -79,6 +80,4 @@ public class MenuTracker {
             }
         }
     }
-
-
 }

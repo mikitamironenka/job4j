@@ -1,6 +1,8 @@
 package ru.job4j.tracker.useraction;
 
+import ru.job4j.tracker.HbnTracker;
 import ru.job4j.tracker.ITracker;
+import ru.job4j.tracker.Store;
 import ru.job4j.tracker.input.Input;
 import ru.job4j.tracker.model.Item;
 
@@ -13,7 +15,7 @@ public class ShowItems extends BaseAction {
     }
 
     @Override
-    public void execute(Input input, ITracker tracker, Consumer output) {
+    public void execute(Input input, Store tracker, Consumer output) {
         System.out.println("------------ Все созданые заявки --------------");
         for (Item item : tracker.findAll()) {
 //            System.out.println(item.toString());

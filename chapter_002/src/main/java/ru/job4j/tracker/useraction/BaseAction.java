@@ -1,7 +1,5 @@
 package ru.job4j.tracker.useraction;
 
-import java.util.function.Consumer;
-
 public abstract class BaseAction implements UserAction {
 
     private final int key;
@@ -19,6 +17,6 @@ public abstract class BaseAction implements UserAction {
 
     @Override
     public String info() {
-        return String.format("%s. %s", this.key + 1, this.name);
+        return String.format("%s. %s", this.key, this.name);
     }
 }

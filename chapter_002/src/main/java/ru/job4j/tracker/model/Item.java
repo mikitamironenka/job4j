@@ -22,6 +22,10 @@ public class Item {
         this.desc = desc;
     }
 
+    public Item() {
+
+    }
+
     public Integer getId() {
         return id;
     }
