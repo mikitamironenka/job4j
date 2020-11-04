@@ -16,7 +16,7 @@ public class HibernateRun {
             .configure().build();
         try {
             SessionFactory sf = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-            Item item = create(new Item("Learn Hibernate"), sf);
+            Item item = create(new Item("Learn Hibernate", "description one"), sf);
             System.out.println(item);
             item.setName("Learn Hibernate 5.");
             update(item, sf);
@@ -65,7 +65,7 @@ public class HibernateRun {
     public static List<Item> findAll(SessionFactory sf) {
         Session session = sf.openSession();
         session.beginTransaction();
-        List result = session.createQuery("from ru.job4j.tracker.Item").list();
+        List result = session.createQuery("from ru.job4j.tracker.model.Item").list();
         session.getTransaction().commit();
         session.close();
         return result;

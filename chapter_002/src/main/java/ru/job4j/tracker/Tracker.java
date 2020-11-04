@@ -45,7 +45,7 @@ public class Tracker implements ITracker {
      * @param item new item
      */
     public Item add(Item item) {
-        item.setId(this.generateId());
+//        item.setId(this.generateId());
         this.items.add(item);
         return item;
     }
@@ -58,12 +58,12 @@ public class Tracker implements ITracker {
      */
     public Item findById(String id) {
         Item result = null;
-        for (Item item : this.items) {
-            if (item != null && item.getId().equals(id)) {
-                result = item;
-                break;
-            }
-        }
+//        for (Item item : this.items) {
+//            if (item != null && item.getId().equals(id)) {
+//                result = item;
+//                break;
+//            }
+//        }
         return result;
     }
 
@@ -75,12 +75,12 @@ public class Tracker implements ITracker {
      */
     public boolean replace(String id, Item item) {
         boolean result = false;
-        for (int i = 0; i < this.items.size(); i++) {
-            if (this.items.get(i).getId().equals(id)) {
-                this.items.set(i, item);
-                result = true;
-            }
-        }
+//        for (int i = 0; i < this.items.size(); i++) {
+//            if (this.items.get(i).getId().equals(id)) {
+//                this.items.set(i, item);
+//                result = true;
+//            }
+//        }
         return result;
     }
 
@@ -91,13 +91,13 @@ public class Tracker implements ITracker {
      */
     public boolean delete(String id) {
         boolean result = false;
-        for (int i = 0; i < this.items.size(); i++) {
-            if (this.items.get(i).getId().equals(id)) {
-                this.items.remove(i);
-                result = true;
-                break;
-            }
-        }
+//        for (int i = 0; i < this.items.size(); i++) {
+//            if (this.items.get(i).getId().equals(id)) {
+//                this.items.remove(i);
+//                result = true;
+//                break;
+//            }
+//        }
         return result;
     }
 
