@@ -1,7 +1,11 @@
 package ru.job4j.tracker.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Objects;
 
+@Entity
+@Table(name = "items")
 public class Item {
 
     private String id;
@@ -9,6 +13,9 @@ public class Item {
     private String decs;
     private long time;
 
+    public Item(String name) {
+        this.name = name;
+    }
 
     public Item(String name, String decs, long time) {
         this.name = name;
