@@ -12,7 +12,7 @@
     <artifactId>parserrusql</artifactId>
 
     <properties>
-        <quartzversion>2.3.0</quartzversion>
+        <quartzversion>2.3.2</quartzversion>
         <jsoupVersion>1.11.3</jsoupVersion>
     </properties>
 
