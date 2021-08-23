@@ -13,7 +13,7 @@
 
     <properties>
         <quartzversion>2.3.0</quartzversion>
-        <jsoupVersion>1.11.3</jsoupVersion>
+        <jsoupVersion>1.14.2</jsoupVersion>
     </properties>
 
     <dependencies>
